@@ -20,6 +20,10 @@ run:
 mongo:
 	docker-compose -f ./docker-compose-mongo.yaml up -d
 
+## Up mysql using docker.
+sql:
+	docker-compose -f ./docker-compose-mysql.yaml up -d
+
 ## Shows help. | Help
 help:
 	@echo ''
