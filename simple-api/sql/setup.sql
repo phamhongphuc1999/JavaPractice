@@ -1,41 +1,102 @@
-CREATE DATABASE sanic_app;
-GO
+CREATE DATABASE IF NOT EXISTS java_app;
+GO;
 
 USE java_app;
-GO
+GO;
 
-CREATE TABLE Employees (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(30) NOT NULL,
-    password VARCHAR(100) NOT NULL,
-    email VARCHAR(50)
+CREATE TABLE Unit (
+  id INT NOT NULL AUTO_INCREMENT,
+  displayName VARCHAR(50),
+  PRIMARY KEY (id)
 );
-GO
+GO;
 
-INSERT INTO Employees (username, password, email)
-VALUES ('Peter', '123456789', 'php@gmail.com'),
-        ('Peter1', '123456789', 'php1@gmail.com'),
-        ('Peter2', '123456789', 'php2@gmail.com'),
-        ('Peter3', '123456789', 'php3@gmail.com'),
-        ('Peter4', '123456789', 'php4@gmail.com'),
-        ('Peter5', '123456789', 'php5@gmail.com'),
-        ('Peter6', '123456789', 'php6@gmail.com'),
-        ('Peter7', '123456789', 'php7@gmail.com'),
-        ('Peter8', '123456789', 'php8@gmail.com'),
-        ('Peter9', '123456789', 'php9@gmail.com'),
-        ('Peter10', '123456789', 'php10@gmail.com');
-GO
-
-CREATE TABLE Productions (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(30) NOT NULL,
-    amount INT NOT NULL,
-    employeeId INT,
-    FOREIGN KEY (employeeId) REFERENCES Employees(id)
+CREATE TABLE Supplier (
+  id INT NOT NULL AUTO_INCREMENT,
+  displayName VARCHAR(50),
+  address VARCHAR(100),
+  phone VARCHAR(20),
+  email VARCHAR(100),
+  moreInfo VARCHAR(200),
+  contractDate DATETIME,
+  PRIMARY KEY (id)
 );
-GO
 
-INSERT INTO Productions (name, amount, employeeId)
-VALUES ('production1', 100, 1),
-        ('production2', 200, 2),
-        ('production3', 1000, 3);
+CREATE TABLE Customer (
+  id INT NOT NULL AUTO_INCREMENT,
+  displayName VARCHAR(50),
+  address VARCHAR(100),
+  phone VARCHAR(20),
+  email VARCHAR(100),
+  moreInfo VARCHAR(200),
+  contractDate DATETIME,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE Object (
+  id BINARY(16) NOT NULL,
+  displayName VARCHAR(50),
+  unitId INT NOT NULL,
+  supplierId INT NOT NULL,
+  qrCode VARCHAR(200),
+  barCode VARCHAR(200),
+  PRIMARY KEY (id),
+  FOREIGN KEY (unitId) REFERENCES Unit(id),
+  FOREIGN KEY (supplierId) REFERENCES Supplier(id)
+);
+
+CREATE TABLE UserRole (
+  id INT NOT NULL AUTO_INCREMENT,
+  displayName VARCHAR(50),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE Users (
+  id INT NOT NULL AUTO_INCREMENT,
+  displayName VARCHAR(50),
+  userName VARCHAR(100),
+  password VARCHAR(100),
+  roleId INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (roleId) REFERENCES UserRole(id)
+);
+
+CREATE TABLE Input (
+  id VARCHAR(128) NOT NULL,
+  inputDate DATETIME,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE InputInfo (
+  id VARCHAR(128) NOT NULL,
+  objectId BINARY(16) NOT NULL,
+  inputId VARCHAR(128) NOT NULL,
+  count INT,
+  inputPrice FLOAT DEFAULT 0,
+  outputPrice FLOAT DEFAULT 0,
+  status VARCHAR(10),
+  PRIMARY KEY (id),
+  FOREIGN KEY (objectId) REFERENCES Object(id),
+  FOREIGN KEY (inputId) REFERENCES Input(id)
+);
+
+CREATE TABLE Output (
+  id VARCHAR(128) NOT NULL,
+  outputDate DATETIME,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE OutputInfo (
+  id VARCHAR(128) NOT NULL,
+  objectId BINARY(16) NOT NULL,
+  inputInfoId VARCHAR(128) NOT NULL,
+  customerId INT NOT NULL,
+  count INT,
+  status VARCHAR(10),
+  PRIMARY KEY (id),
+  FOREIGN KEY (objectId) REFERENCES Object(id),
+  FOREIGN KEY (inputInfoId) REFERENCES InputInfo(id),
+  FOREIGN KEY (customerId) REFERENCES Customer(id)
+);
+
+GO
