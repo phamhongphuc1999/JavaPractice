@@ -10,18 +10,18 @@ TARGET_MAX_CHAR_NUM = 20
 
 ## Build. | Executed command line
 buildd:
-	gradle build
+	mvn clean install
 
 ## Run.
 run:
-	java -jar build/libs/simple-api-0.0.1-SNAPSHOT.jar
+	mvn spring-boot:run
 
 ## Up mongodb using docker.
 mongo:
 	docker-compose -f ./docker-compose-mongo.yaml up -d
 
 ## Up mysql using docker.
-sql:
+mysql:
 	docker-compose -f ./docker-compose-mysql.yaml up -d
 
 ## Shows help. | Help

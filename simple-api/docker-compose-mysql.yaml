@@ -1,12 +1,8 @@
-version: "3.9"
 services:
     mysql_container:
         image: mysql:latest
         container_name: "dev_java_sql_container"
         environment:
-            MYSQL_DATABASE: java_app
-            MYSQL_USER: java
-            MYSQL_PASSWORD: java
             MYSQL_ROOT_PASSWORD: java
         ports:
             - "3306:3306"
