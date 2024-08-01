@@ -33,3 +33,9 @@ mysql -u root -p
 ```shell
 use java_app;
 ```
+
+-   4. List tables
+
+```shell
+SHOW TABLES;
+```

@@ -1,15 +1,15 @@
 CREATE DATABASE IF NOT EXISTS java_app;
-GO;
+GO
 
 USE java_app;
-GO;
+GO
 
-CREATE TABLE Unit (
+CREATE TABLE IF NOT EXISTS Unit (
   id INT NOT NULL AUTO_INCREMENT,
   displayName VARCHAR(50),
   PRIMARY KEY (id)
 );
-GO;
+GO
 
 CREATE TABLE Supplier (
   id INT NOT NULL AUTO_INCREMENT,
@@ -21,6 +21,7 @@ CREATE TABLE Supplier (
   contractDate DATETIME,
   PRIMARY KEY (id)
 );
+GO
 
 CREATE TABLE Customer (
   id INT NOT NULL AUTO_INCREMENT,
@@ -32,6 +33,7 @@ CREATE TABLE Customer (
   contractDate DATETIME,
   PRIMARY KEY (id)
 );
+GO
 
 CREATE TABLE Object (
   id BINARY(16) NOT NULL,
@@ -44,12 +46,14 @@ CREATE TABLE Object (
   FOREIGN KEY (unitId) REFERENCES Unit(id),
   FOREIGN KEY (supplierId) REFERENCES Supplier(id)
 );
+GO
 
 CREATE TABLE UserRole (
   id INT NOT NULL AUTO_INCREMENT,
   displayName VARCHAR(50),
   PRIMARY KEY (id)
 );
+GO
 
 CREATE TABLE Users (
   id INT NOT NULL AUTO_INCREMENT,
@@ -60,12 +64,14 @@ CREATE TABLE Users (
   PRIMARY KEY (id),
   FOREIGN KEY (roleId) REFERENCES UserRole(id)
 );
+GO
 
 CREATE TABLE Input (
   id VARCHAR(128) NOT NULL,
   inputDate DATETIME,
   PRIMARY KEY (id)
 );
+GO
 
 CREATE TABLE InputInfo (
   id VARCHAR(128) NOT NULL,
@@ -79,12 +85,14 @@ CREATE TABLE InputInfo (
   FOREIGN KEY (objectId) REFERENCES Object(id),
   FOREIGN KEY (inputId) REFERENCES Input(id)
 );
+GO
 
 CREATE TABLE Output (
   id VARCHAR(128) NOT NULL,
   outputDate DATETIME,
   PRIMARY KEY (id)
 );
+GO
 
 CREATE TABLE OutputInfo (
   id VARCHAR(128) NOT NULL,
@@ -98,5 +106,4 @@ CREATE TABLE OutputInfo (
   FOREIGN KEY (inputInfoId) REFERENCES InputInfo(id),
   FOREIGN KEY (customerId) REFERENCES Customer(id)
 );
-
 GO
