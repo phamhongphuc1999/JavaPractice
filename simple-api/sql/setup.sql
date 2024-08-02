@@ -55,7 +55,7 @@ CREATE TABLE UserRole (
 );
 GO
 
-CREATE TABLE Users (
+CREATE TABLE User (
   id INT NOT NULL AUTO_INCREMENT,
   displayName VARCHAR(50),
   userName VARCHAR(100),
@@ -75,15 +75,15 @@ GO
 
 CREATE TABLE InputInfo (
   id VARCHAR(128) NOT NULL,
-  objectId BINARY(16) NOT NULL,
-  inputId VARCHAR(128) NOT NULL,
+  object_id BINARY(16) NOT NULL,
+  input_id VARCHAR(128) NOT NULL,
   count INT,
-  inputPrice FLOAT DEFAULT 0,
-  outputPrice FLOAT DEFAULT 0,
+  input_price FLOAT DEFAULT 0,
+  output_price FLOAT DEFAULT 0,
   status VARCHAR(10),
   PRIMARY KEY (id),
-  FOREIGN KEY (objectId) REFERENCES Object(id),
-  FOREIGN KEY (inputId) REFERENCES Input(id)
+  FOREIGN KEY (object_id) REFERENCES Object(id),
+  FOREIGN KEY (input_id) REFERENCES Input(id)
 );
 GO
 
@@ -96,14 +96,14 @@ GO
 
 CREATE TABLE OutputInfo (
   id VARCHAR(128) NOT NULL,
-  objectId BINARY(16) NOT NULL,
-  inputInfoId VARCHAR(128) NOT NULL,
-  customerId INT NOT NULL,
+  object_id BINARY(16) NOT NULL,
+  input_info_id VARCHAR(128) NOT NULL,
+  customer_id INT NOT NULL,
   count INT,
   status VARCHAR(10),
   PRIMARY KEY (id),
-  FOREIGN KEY (objectId) REFERENCES Object(id),
-  FOREIGN KEY (inputInfoId) REFERENCES InputInfo(id),
-  FOREIGN KEY (customerId) REFERENCES Customer(id)
+  FOREIGN KEY (object_id) REFERENCES Object(id),
+  FOREIGN KEY (input_info_id) REFERENCES InputInfo(id),
+  FOREIGN KEY (customer_id) REFERENCES Customer(id)
 );
 GO

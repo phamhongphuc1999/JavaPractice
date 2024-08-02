@@ -1,4 +1,4 @@
-package com.api.simple_api.entity;
+package com.api.simple_api.entity.dto;
 
 import jakarta.persistence.*;
 

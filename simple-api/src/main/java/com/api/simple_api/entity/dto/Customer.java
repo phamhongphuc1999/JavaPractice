@@ -1,4 +1,4 @@
-package com.api.simple_api.entity;
+package com.api.simple_api.entity.dto;
 
 import java.sql.Date;
 
@@ -7,8 +7,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Supplier")
-public class Supplier {
+@Table(name = "Customer")
+public class Customer {
   @Id 
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Integer id;
