@@ -1,14 +1,28 @@
 package com.api.simple_api.entity.dto;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Object")
-public class Object {
+public class ObjectDto {
   @Id 
   @GeneratedValue(strategy=GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
 
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  @Column(name = "displayName")
   private String displayName;
 
   public String getDisplayName() {
@@ -19,6 +33,7 @@ public class Object {
     this.displayName = displayName;
   }
 
+  @Column(name = "unitId")
   private Integer unitId;
 
   public Integer getUnitId() {
@@ -29,6 +44,7 @@ public class Object {
     this.unitId = unitId;
   }
 
+  @Column(name = "supplierId")
   private Integer supplierId;
 
   public Integer getSupplierId() {
@@ -39,6 +55,7 @@ public class Object {
     this.supplierId = supplierId;
   }
 
+  @Column(name = "qrCode")
   private String qrCode;
 
   public String getQrCode() {
@@ -49,6 +66,7 @@ public class Object {
     this.qrCode = qrCode;
   }
 
+  @Column(name = "barCode")
   private String barCode;
 
   public String getBarCode() {

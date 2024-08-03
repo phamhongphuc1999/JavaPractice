@@ -1,14 +1,28 @@
 package com.api.simple_api.entity.dto;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "User")
 public class User {
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
 
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  @Column(name = "displayName")
   private String displayName;
 
   public String getDisplayName() {
@@ -19,6 +33,7 @@ public class User {
     this.displayName = displayName;
   }
 
+  @Column(name = "userName")
   private String userName;
 
   public String getUserName() {
@@ -29,6 +44,7 @@ public class User {
     this.userName = userName;
   }
 
+  @Column(name = "password")
   private String password;
 
   public String getPassword() {
@@ -39,6 +55,7 @@ public class User {
     this.password = password;
   }
 
+  @Column(name = "roleId")
   private Integer roleId;
 
   public Integer getRoleId() {

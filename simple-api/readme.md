@@ -39,3 +39,10 @@ use java_app;
 ```shell
 SHOW TABLES;
 ```
+
+## Issues
+
+#### can't import packages on VSCode
+
+-   1. Open search box
+-   2. Search: Java: clean Java Language Server Workspace
