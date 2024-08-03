@@ -16,4 +16,8 @@ public class UnitService {
   public List<Unit> getAll() {
     return uintRepository.findAll();
   }
+
+  public void save(Unit entity) {
+    uintRepository.save(entity);
+  }
 }

@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Unit")
 public class Unit {
-  @Id 
+  @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
 

@@ -1,15 +1,17 @@
 package com.api.simple_api.entity.common;
 
-public class Responder {
-  private String status;
-  private Object data;
+import org.springframework.http.HttpStatus;
 
-  public Responder(String status, Object data) {
+public class Responder {
+  protected HttpStatus status;
+  protected Object data;
+
+  public Responder(HttpStatus status, Object data) {
     this.status = status;
     this.data = data;
   }
 
-  public String getStatus() {
+  public HttpStatus getStatus() {
     return this.status;
   }
 

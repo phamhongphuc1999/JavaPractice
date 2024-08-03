@@ -14,29 +14,29 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.simple_api.entity.common.BadRequestResponder;
 import com.api.simple_api.entity.common.Responder;
 import com.api.simple_api.entity.common.SuccessResponder;
-import com.api.simple_api.entity.dto.Unit;
-import com.api.simple_api.service.UnitService;
+import com.api.simple_api.entity.dto.Supplier;
+import com.api.simple_api.service.SupplierService;
 
 @RestController
-@RequestMapping("/unit")
-public class UnitController {
+@RequestMapping("/supplier")
+public class SupplierController {
   @Autowired
-  private UnitService unitService;
+  public SupplierService supplierService;
 
   @GetMapping("")
   public ResponseEntity<Responder> getAll() {
     try {
-      List<Unit> units = unitService.getAll();
-      return ResponseEntity.ok().body(new SuccessResponder(units));
+      List<Supplier> suppliers = supplierService.getAll();
+      return ResponseEntity.ok().body(new SuccessResponder(suppliers));
     } catch(Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));
     }
   }
 
   @PostMapping("")
-  public ResponseEntity<Responder> save(@RequestBody Unit entity) {
+  public ResponseEntity<Responder> save(@RequestBody Supplier entity) {
     try {
-      unitService.save(entity);
+      supplierService.save(entity);
       return ResponseEntity.ok().body(new SuccessResponder());
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));

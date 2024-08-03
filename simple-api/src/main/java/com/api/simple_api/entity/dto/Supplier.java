@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Supplier")
 public class Supplier {
-  @Id 
+  @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
 
