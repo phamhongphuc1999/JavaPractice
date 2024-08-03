@@ -14,6 +14,12 @@ mvn clean install
 mvn spring-boot:run
 ```
 
+-   3. Access
+
+```shell
+http://localhost:9090/swagger-ui/index.html
+```
+
 ## Database mysql testing
 
 -   1. Execute database docker container

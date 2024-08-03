@@ -23,7 +23,7 @@ public class SupplierController {
   @Autowired
   public SupplierService supplierService;
 
-  @GetMapping("")
+  @GetMapping("/all")
   public ResponseEntity<Responder> getAll() {
     try {
       List<Supplier> suppliers = supplierService.getAll();

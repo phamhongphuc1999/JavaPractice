@@ -11,6 +11,11 @@ CREATE TABLE IF NOT EXISTS Unit (
 );
 GO
 
+INSERT INTO Unit (displayName)
+VALUES ("kilogram"),
+        ("unit"),
+        ("m");
+
 CREATE TABLE Supplier (
   id INT NOT NULL AUTO_INCREMENT,
   displayName VARCHAR(50),

@@ -32,4 +32,12 @@ public class Unit {
   public void setDisplayName(String displayName) {
     this.displayName = displayName;
   }
+
+  public Unit() {
+
+  }
+
+  public Unit (String displayName) {
+    this.displayName = displayName;
+  }
 }
