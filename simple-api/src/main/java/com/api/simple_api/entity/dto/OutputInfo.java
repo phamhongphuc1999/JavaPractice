@@ -1,14 +1,25 @@
 package com.api.simple_api.entity.dto;
 
-import java.util.UUID;
-
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "OutputInfo")
 public class OutputInfo {
   @Id
-  private UUID id;
+  @GeneratedValue(generator = "UUID")
+  private String id;
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
 
   @Column(name = "object_id")
   private String objectId;
@@ -43,6 +54,7 @@ public class OutputInfo {
     this.customerId = customerId;
   }
 
+  @Column(name = "count")
   private Integer count;
 
   public Integer getCount() {
@@ -53,6 +65,7 @@ public class OutputInfo {
     this.count = count;
   }
 
+  @Column(name = "status")
   private String status;
 
   public String getStatus() {

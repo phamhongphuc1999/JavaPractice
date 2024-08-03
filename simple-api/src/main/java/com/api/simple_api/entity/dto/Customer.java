@@ -1,18 +1,32 @@
 package com.api.simple_api.entity.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Customer")
 public class Customer {
   @Id 
   @GeneratedValue(strategy=GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
 
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  @Column(name = "displayName")
   private String displayName;
 
   public String getDisplayName() {
@@ -23,6 +37,7 @@ public class Customer {
     this.displayName = displayName;
   }
 
+  @Column(name = "address")
   private String address;
 
   public String getAddress() {
@@ -33,6 +48,7 @@ public class Customer {
     this.address = address;
   }
 
+  @Column(name = "phone")
   private String phone;
 
   public String getPhone() {
@@ -43,6 +59,7 @@ public class Customer {
     this.phone = phone;
   }
 
+  @Column(name = "email")
   private String email;
 
   public String getEmail() {
@@ -53,6 +70,7 @@ public class Customer {
     this.email = email;
   }
 
+  @Column(name = "moreInfo")
   private String moreInfo;
 
   public String getMoreInfo() {
@@ -64,6 +82,7 @@ public class Customer {
   }
 
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+  @Column(name = "contractDate")
   private Date contractDate;
 
   public Date getContractDate() {

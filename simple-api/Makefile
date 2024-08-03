@@ -16,6 +16,11 @@ buildd:
 run:
 	mvn spring-boot:run
 
+## Dev.
+dev:
+	mvn clean install
+	mvn spring-boot:run
+
 ## Up mongodb using docker.
 mongo:
 	docker-compose -f ./docker-compose-mongo.yaml up -d
