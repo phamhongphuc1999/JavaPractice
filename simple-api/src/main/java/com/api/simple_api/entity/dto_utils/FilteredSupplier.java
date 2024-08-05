@@ -4,18 +4,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "supplier")
 public class FilteredSupplier {
-  @Id
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
 
   public Long getId() {
@@ -26,7 +15,6 @@ public class FilteredSupplier {
     this.id = id;
   }
 
-  @Column(name = "display_name")
   private String displayName;
 
   public String getDisplayName() {
@@ -37,7 +25,6 @@ public class FilteredSupplier {
     this.displayName = displayName;
   }
 
-  @Column(name = "address")
   private String address;
 
   public String getAddress() {
@@ -48,7 +35,6 @@ public class FilteredSupplier {
     this.address = address;
   }
 
-  @Column(name = "phone")
   private String phone;
 
   public String getPhone() {
@@ -59,7 +45,6 @@ public class FilteredSupplier {
     this.phone = phone;
   }
 
-  @Column(name = "email")
   private String email;
 
   public String getEmail() {
@@ -70,7 +55,6 @@ public class FilteredSupplier {
     this.email = email;
   }
 
-  @Column(name = "more_info")
   private String moreInfo;
 
   public String getMoreInfo() {

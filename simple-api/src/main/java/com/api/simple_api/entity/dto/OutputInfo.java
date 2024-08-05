@@ -1,23 +1,26 @@
 package com.api.simple_api.entity.dto;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "OutputInfo")
+@Table(name = "output_info")
 public class OutputInfo {
   @Id
-  @GeneratedValue(generator = "UUID")
-  private String id;
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID id;
 
-  public String getId() {
+  public UUID getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 
@@ -32,25 +35,14 @@ public class OutputInfo {
     this.objectId = objectId;
   }
 
-  @Column(name = "input_info_id")
-  private String inputInfoId;
-
-  public String getInputInfoId() {
-    return inputInfoId;
-  }
-
-  public void setInputInfoId(String inputInfoId) {
-    this.inputInfoId = inputInfoId;
-  }
-
   @Column(name = "customer_id")
-  private Integer customerId;
+  private Long customerId;
 
-  public Integer getCustomerId() {
+  public Long getCustomerId() {
     return customerId;
   }
 
-  public void setCustomerId(Integer customerId) {
+  public void setCustomerId(Long customerId) {
     this.customerId = customerId;
   }
 
@@ -65,6 +57,17 @@ public class OutputInfo {
     this.count = count;
   }
 
+  @Column(name = "output_price")
+  private Float outputPrice;
+
+  public Float getOutputPrice() {
+    return outputPrice;
+  }
+
+  public void setOutputPrice(Float outputPrice) {
+    this.outputPrice = outputPrice;
+  }
+
   @Column(name = "status")
   private String status;
 
@@ -75,4 +78,6 @@ public class OutputInfo {
   public void setStatus(String status) {
     this.status = status;
   }
+
+  public OutputInfo() {}
 }

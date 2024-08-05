@@ -12,7 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Customer")
+@Table(name = "customer")
 public class Customer {
   @Id 
   @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Customer {
     this.id = id;
   }
 
-  @Column(name = "displayName")
+  @Column(name = "display_name")
   private String displayName;
 
   public String getDisplayName() {
@@ -70,7 +70,7 @@ public class Customer {
     this.email = email;
   }
 
-  @Column(name = "moreInfo")
+  @Column(name = "more_info")
   private String moreInfo;
 
   public String getMoreInfo() {
@@ -82,7 +82,7 @@ public class Customer {
   }
 
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-  @Column(name = "contractDate")
+  @Column(name = "contract_date")
   private Date contractDate;
 
   public Date getContractDate() {
@@ -92,4 +92,6 @@ public class Customer {
   public void setContractDate(Date contractDate) {
     this.contractDate = contractDate;
   }
+
+  public Customer() {}
 }

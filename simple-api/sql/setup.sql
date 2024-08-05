@@ -72,19 +72,18 @@ CREATE TABLE User (
 GO
 
 CREATE TABLE Input (
-  id VARCHAR(128) NOT NULL,
+  id UUID NOT NULL,
   inputDate DATETIME,
   PRIMARY KEY (id)
 );
 GO
 
 CREATE TABLE InputInfo (
-  id VARCHAR(128) NOT NULL,
+  id UUID NOT NULL,
   object_id BINARY(16) NOT NULL,
   input_id VARCHAR(128) NOT NULL,
   count INT,
   input_price FLOAT DEFAULT 0,
-  output_price FLOAT DEFAULT 0,
   status VARCHAR(10),
   PRIMARY KEY (id),
   FOREIGN KEY (object_id) REFERENCES Object(id),
@@ -93,18 +92,19 @@ CREATE TABLE InputInfo (
 GO
 
 CREATE TABLE Output (
-  id VARCHAR(128) NOT NULL,
+  id UUID NOT NULL,
   outputDate DATETIME,
   PRIMARY KEY (id)
 );
 GO
 
 CREATE TABLE OutputInfo (
-  id VARCHAR(128) NOT NULL,
+  id UUID NOT NULL,
   object_id BINARY(16) NOT NULL,
   output_id VARCHAR(128) NOT NULL,
   customer_id INT NOT NULL,
   count INT,
+  output_price FLOAT DEFAULT 0,
   status VARCHAR(10),
   PRIMARY KEY (id),
   FOREIGN KEY (object_id) REFERENCES Object(id),

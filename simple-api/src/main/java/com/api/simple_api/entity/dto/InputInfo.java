@@ -1,23 +1,28 @@
 package com.api.simple_api.entity.dto;
 
+import java.util.UUID;
+
+import com.api.simple_api.entity.dto_utils.NewInput;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "InputInfo")
+@Table(name = "input_info")
 public class InputInfo {
   @Id
-  @GeneratedValue(generator = "UUID")
-  private String id;
+  @GeneratedValue(strategy = GenerationType.UUID) 
+  private UUID id;
 
-  public String getId() {
+  public UUID getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 
@@ -33,13 +38,13 @@ public class InputInfo {
   }
 
   @Column(name = "input_id")
-  private String inputId;
+  private UUID inputId;
 
-  public String getInputId() {
+  public UUID getInputId() {
     return inputId;
   }
 
-  public void setInputId(String inputId) {
+  public void setInputId(UUID inputId) {
     this.inputId = inputId;
   }
 
@@ -65,17 +70,6 @@ public class InputInfo {
     this.inputPrice = inputPrice;
   }
 
-  @Column(name = "output_price")
-  private Float outputPrice;
-
-  public Float getOutputPrice() {
-    return outputPrice;
-  }
-
-  public void setOutputPrice(Float outputPrice) {
-    this.outputPrice = outputPrice;
-  }
-
   @Column(name = "status")
   private String status;
 
@@ -85,5 +79,15 @@ public class InputInfo {
 
   public void setStatus(String status) {
     this.status = status;
+  }
+
+  public InputInfo() {}
+
+  public InputInfo(NewInput entity, UUID inputId) {
+    this.objectId = entity.getObjectId();
+    this.inputId = inputId;
+    this.count = entity.getCount();
+    this.inputPrice = entity.getInputPrice();
+    this.status = entity.getStatus();
   }
 }

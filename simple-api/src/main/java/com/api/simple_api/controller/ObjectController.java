@@ -17,6 +17,7 @@ import com.api.simple_api.entity.common.BadRequestResponder;
 import com.api.simple_api.entity.common.Responder;
 import com.api.simple_api.entity.common.SuccessResponder;
 import com.api.simple_api.entity.dto.ObjectDto;
+import com.api.simple_api.entity.dto_utils.FilteredObjectDto;
 import com.api.simple_api.entity.dto_utils.NewObjectDto;
 import com.api.simple_api.service.ObjectService;
 
@@ -31,9 +32,9 @@ public class ObjectController {
   private ObjectService objectService;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false) String displayName, @RequestParam(required = false) Integer unitId, @RequestParam(required = false) Integer supplierId, @RequestParam(required = false) String qrCode, @RequestParam(required = false) String barCode) {
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false) String displayName, @RequestParam(required = false) Long unitId, @RequestParam(required = false) Long supplierId, @RequestParam(required = false) String qrCode, @RequestParam(required = false) String barCode) {
     try {
-      List<ObjectDto> objects = objectService.getByFilter(new ObjectDto(id, displayName, unitId, supplierId, qrCode, barCode));
+      List<ObjectDto> objects = objectService.getByFilter(new FilteredObjectDto(id, displayName, unitId, supplierId, qrCode, barCode));
       return ResponseEntity.ok().body(new SuccessResponder(objects));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));

@@ -7,10 +7,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Object")
+@Table(name = "object")
 public class ObjectDto {
   @Id 
   @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -24,7 +26,7 @@ public class ObjectDto {
     this.id = id;
   }
 
-  @Column(name = "displayName")
+  @Column(name = "display_name")
   private String displayName;
 
   public String getDisplayName() {
@@ -35,29 +37,31 @@ public class ObjectDto {
     this.displayName = displayName;
   }
 
-  @Column(name = "unitId")
-  private Integer unitId;
+  @ManyToOne
+  @JoinColumn(name =  "unit_id")
+  private Unit unit;
 
-  public Integer getUnitId() {
-    return unitId;
+  public Unit getUnit() {
+    return unit;
   }
 
-  public void setUnitId(Integer unitId) {
-    this.unitId = unitId;
+  public void setUnit(Unit unit) {
+    this.unit = unit;
   }
 
-  @Column(name = "supplierId")
-  private Integer supplierId;
+  @ManyToOne
+  @JoinColumn(name = "supplier_id")
+  private Supplier supplier;
 
-  public Integer getSupplierId() {
-    return supplierId;
+  public Supplier getSupplier() {
+    return supplier;
   }
 
-  public void setSupplierId(Integer supplierId) {
-    this.supplierId = supplierId;
+  public void setSupplier(Supplier supplier) {
+    this.supplier = supplier;
   }
 
-  @Column(name = "qrCode")
+  @Column(name = "qr_code")
   private String qrCode;
 
   public String getQrCode() {
@@ -68,7 +72,7 @@ public class ObjectDto {
     this.qrCode = qrCode;
   }
 
-  @Column(name = "barCode")
+  @Column(name = "bar_code")
   private String barCode;
 
   public String getBarCode() {
@@ -79,19 +83,22 @@ public class ObjectDto {
     this.barCode = barCode;
   }
 
-  public ObjectDto(Long id, String displayName, Integer unitId, Integer supplierId, String qrCode, String barCode) {
+  public ObjectDto() {}
+
+  public ObjectDto(Long id, String displayName, Unit unit, Supplier supplier, String qrCode, String barCode) {
     this.id = id;
     this.displayName = displayName;
-    this.unitId = unitId;
-    this.supplierId = supplierId;
+    this.unit = unit;
+    this.supplier = supplier;
     this.qrCode = qrCode;
     this.barCode = barCode;
   }
 
   public ObjectDto(NewObjectDto newObject) {
     this.displayName = newObject.getDisplayName();
-    this.unitId = newObject.getUnitId();
-    this.supplierId = newObject.getSupplierId();
+    this.unit = new Unit(newObject.getUnitId(), newObject.getDisplayName());
+    this.supplier = new Supplier();
+    this.supplier.setId(newObject.getSupplierId());
     this.qrCode = newObject.getQrCode();
     this.barCode = newObject.getBarCode();
   }

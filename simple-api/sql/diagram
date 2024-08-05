@@ -1,6 +1,5 @@
 // Use DBML to define your database structure
 // Docs: https://dbml.dbdiagram.io/docs
-// App: https://dbdiagram.io/
 
 Table unit {
   id int [pk, unique, not null]
@@ -30,7 +29,7 @@ Table customer {
 Table object {
   id binary(16) [pk, unique, not null]
   display_name varchar(50)
-  unit_id int [not null, ref: - unit.id]
+  unit_id int [not null, ref: > unit.id]
   supplier_id int [not null, ref: > supplier.id]
   qr_code varchar(200)
   bar_code varchar(200)
@@ -56,8 +55,10 @@ Table input {
 
 Table input_info {
   id varchar(128) [pk, not null]
-  object_id binary(16) [not null, ref: - object.id]
+  object_id binary(16) [not null, ref: < object.id]
   input_id varchar(128) [not null, ref: - input.id]
+  count int
+  input_price float
   status varchar(10)
 }
 
@@ -68,9 +69,10 @@ Table output {
 
 Table output_info {
   id varchar(128) [pk, not null]
-  object_id binary(16) [not null, ref: - object.id]
+  object_id binary(16) [not null, ref: < object.id]
   output_id varchar(128) [not null, ref: - output.id]
   customer_id int [not null, ref: - customer.id]
   count int
+  output_price float
   status varchar(10)
 }

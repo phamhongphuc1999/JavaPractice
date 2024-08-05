@@ -95,6 +95,8 @@ public class Supplier {
     this.contractDate = contractDate;
   }
 
+  public Supplier() {}
+
   public Supplier(String displayName, String address, String phone, String email, String moreInfo, Date contractDate) {
     this.displayName = displayName;
     this.address = address;
