@@ -102,13 +102,13 @@ GO
 CREATE TABLE OutputInfo (
   id VARCHAR(128) NOT NULL,
   object_id BINARY(16) NOT NULL,
-  input_info_id VARCHAR(128) NOT NULL,
+  output_id VARCHAR(128) NOT NULL,
   customer_id INT NOT NULL,
   count INT,
   status VARCHAR(10),
   PRIMARY KEY (id),
   FOREIGN KEY (object_id) REFERENCES Object(id),
-  FOREIGN KEY (input_info_id) REFERENCES InputInfo(id),
+  FOREIGN KEY (output_id) REFERENCES OutputInfo(id),
   FOREIGN KEY (customer_id) REFERENCES Customer(id)
 );
 GO

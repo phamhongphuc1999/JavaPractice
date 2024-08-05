@@ -1,7 +1,6 @@
 package com.api.simple_api.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,9 +11,6 @@ import com.api.simple_api.entity.dto.Unit;
 
 @Repository
 public interface UnitRepository extends JpaRepository<Unit, Long> {
-  @Query(value = "SELECT * FROM unit WHERE " +
-  "IF :id IS NOT NULL id = :id AND " +
-  "IF :display_name IS NOT NULL :display_name = display_name", 
-  nativeQuery = true)
-  public List<Unit> getByFilter(@Param("id") Optional<Long> id, @Param("display_name") Optional<String> displayName);
+  @Query("SELECT u FROM Unit u WHERE (1=1) AND (:id IS NOT NULL AND u.id=:id) OR (u.displayName LIKE :displayName)")
+    List<Unit> findByFilter(@Param("id") Long id, @Param("displayName") String displayName);
 }

@@ -1,0 +1,76 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+// App: https://dbdiagram.io/
+
+Table unit {
+  id int [pk, unique, not null]
+  display_name varchar(50)
+}
+
+Table supplier {
+  id int [pk, unique, not null]
+  display_name varchar(50)
+  address varchar(100)
+  phone varchar(20)
+  email varchar(100)
+  more_infor varchar(200)
+  contract_date datetime
+}
+
+Table customer {
+  id int [pk, unique, not null]
+  display_name varchar(50)
+  address varchar(100)
+  phone varchar(20)
+  email varchar(100)
+  more_infor varchar(200)
+  contract_date datetime
+}
+
+Table object {
+  id binary(16) [pk, unique, not null]
+  display_name varchar(50)
+  unit_id int [not null, ref: - unit.id]
+  supplier_id int [not null, ref: > supplier.id]
+  qr_code varchar(200)
+  bar_code varchar(200)
+}
+
+Table user_role {
+  id int [pk, unique, not null]
+  display_name varchar(50)
+}
+
+Table user {
+  id int [pk, unique, not null]
+  display_name varchar(50)
+  user_name varchar(100)
+  password varchar(100)
+  role_id int [not null, ref: - user_role.id]
+}
+
+Table input {
+  id varchar(128) [pk, not null]
+  input_date datetime
+}
+
+Table input_info {
+  id varchar(128) [pk, not null]
+  object_id binary(16) [not null, ref: - object.id]
+  input_id varchar(128) [not null, ref: - input.id]
+  status varchar(10)
+}
+
+Table output {
+  id varchar(128) [pk, not null]
+  output_date datetime
+}
+
+Table output_info {
+  id varchar(128) [pk, not null]
+  object_id binary(16) [not null, ref: - object.id]
+  output_id varchar(128) [not null, ref: - output.id]
+  customer_id int [not null, ref: - customer.id]
+  count int
+  status varchar(10)
+}
