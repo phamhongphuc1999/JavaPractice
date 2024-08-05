@@ -11,6 +11,8 @@ import com.api.simple_api.entity.dto.Unit;
 
 @Repository
 public interface UnitRepository extends JpaRepository<Unit, Long> {
-  @Query("SELECT u FROM Unit u WHERE (1=1) AND (:id IS NOT NULL AND u.id=:id) OR (u.displayName LIKE :displayName)")
-    List<Unit> findByFilter(@Param("id") Long id, @Param("displayName") String displayName);
+  @Query("SELECT u FROM Unit u WHERE " +
+  "(:#{#filteredUnit.id} IS NULL OR u.id=:#{#filteredUnit.id}) AND " +
+  "(:#{#filteredUnit.displayName} IS NULL OR u.displayName LIKE %:#{#filteredUnit.displayName}%)")
+    List<Unit> getByFilter(@Param("filteredUnit") Unit filteredUnit);
 }

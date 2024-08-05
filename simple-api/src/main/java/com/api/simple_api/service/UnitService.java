@@ -14,8 +14,8 @@ public class UnitService {
   private UnitRepository unitRepository;
 
 
-  public List<Unit> getByFilter(Long id, String displayName) {
-    return unitRepository.findByFilter(id, displayName);
+  public List<Unit> getByFilter(Unit filteredUnit) {
+    return unitRepository.getByFilter(filteredUnit);
   }
 
   public void save(Unit entity) {

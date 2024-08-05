@@ -5,13 +5,13 @@
 -   1. Build project
 
 ```shell
-mvn clean install
+make build
 ```
 
 -   2. Run
 
 ```shell
-mvn spring-boot:run
+make run
 ```
 
 -   3. Access

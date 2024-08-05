@@ -20,6 +20,9 @@ import com.api.simple_api.entity.dto.Unit;
 import com.api.simple_api.entity.dto_utils.NewUnit;
 import com.api.simple_api.service.UnitService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Unit", description = "unit description")
 @RestController
 @EnableAutoConfiguration
 @RequestMapping(value = "/unit")
@@ -27,10 +30,10 @@ public class UnitController {
   @Autowired
   private UnitService unitService;
 
-  @GetMapping("/filter")
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false) String displayName) {
+  @GetMapping("")
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false, name = "Display name") String displayName) {
     try {
-      List<Unit> units = unitService.getByFilter(id, displayName);
+      List<Unit> units = unitService.getByFilter(new Unit(id, displayName));
       return ResponseEntity.ok().body(new SuccessResponder(units));
     } catch(Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));

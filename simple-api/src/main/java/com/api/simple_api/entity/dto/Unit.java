@@ -38,4 +38,9 @@ public class Unit {
   public Unit (String displayName) {
     this.displayName = displayName;
   }
+
+  public Unit (Long id, String displayName) {
+    this.id = id;
+    this.displayName = displayName;
+  }
 }

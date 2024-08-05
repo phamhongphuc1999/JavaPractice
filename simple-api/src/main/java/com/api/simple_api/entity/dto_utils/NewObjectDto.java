@@ -1,29 +1,10 @@
-package com.api.simple_api.entity.dto;
-
-import com.api.simple_api.entity.dto_utils.NewObjectDto;
+package com.api.simple_api.entity.dto_utils;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "Object")
-public class ObjectDto {
-  @Id 
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
-  private Long id;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
+@Table(name = "object")
+public class NewObjectDto {
   @Column(name = "displayName")
   private String displayName;
 
@@ -77,22 +58,5 @@ public class ObjectDto {
 
   public void setBarCode(String barCode) {
     this.barCode = barCode;
-  }
-
-  public ObjectDto(Long id, String displayName, Integer unitId, Integer supplierId, String qrCode, String barCode) {
-    this.id = id;
-    this.displayName = displayName;
-    this.unitId = unitId;
-    this.supplierId = supplierId;
-    this.qrCode = qrCode;
-    this.barCode = barCode;
-  }
-
-  public ObjectDto(NewObjectDto newObject) {
-    this.displayName = newObject.getDisplayName();
-    this.unitId = newObject.getUnitId();
-    this.supplierId = newObject.getSupplierId();
-    this.qrCode = newObject.getQrCode();
-    this.barCode = newObject.getBarCode();
   }
 }

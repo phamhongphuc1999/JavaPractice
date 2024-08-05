@@ -1,6 +1,5 @@
 package com.api.simple_api.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,35 +16,34 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.simple_api.entity.common.BadRequestResponder;
 import com.api.simple_api.entity.common.Responder;
 import com.api.simple_api.entity.common.SuccessResponder;
-import com.api.simple_api.entity.dto.Supplier;
-import com.api.simple_api.entity.dto_utils.FilteredSupplier;
-import com.api.simple_api.entity.dto_utils.NewSupplier;
-import com.api.simple_api.service.SupplierService;
+import com.api.simple_api.entity.dto.ObjectDto;
+import com.api.simple_api.entity.dto_utils.NewObjectDto;
+import com.api.simple_api.service.ObjectService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Supplier", description = "supplier description")
+@Tag(name = "Object", description = "object description")
 @RestController
 @EnableAutoConfiguration
-@RequestMapping("/supplier")
-public class SupplierController {
+@RequestMapping("/object")
+public class ObjectController {
   @Autowired
-  public SupplierService supplierService;
+  private ObjectService objectService;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false) String displayName, @RequestParam(required = false) String address, @RequestParam(required = false) String phone, @RequestParam(required = false) String email, @RequestParam(required = false) String moreInfo, @RequestParam(required = false) Date fromContractDate, @RequestParam(required = false) Date toContractDate) {
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false) String displayName, @RequestParam(required = false) Integer unitId, @RequestParam(required = false) Integer supplierId, @RequestParam(required = false) String qrCode, @RequestParam(required = false) String barCode) {
     try {
-      List<Supplier> suppliers = supplierService.getByFilter(new FilteredSupplier(id, displayName, address, phone, email, moreInfo, fromContractDate, toContractDate));
-      return ResponseEntity.ok().body(new SuccessResponder(suppliers));
-    } catch(Exception exception) {
+      List<ObjectDto> objects = objectService.getByFilter(new ObjectDto(id, displayName, unitId, supplierId, qrCode, barCode));
+      return ResponseEntity.ok().body(new SuccessResponder(objects));
+    } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));
     }
   }
 
   @PostMapping("")
-  public ResponseEntity<Responder> save(@RequestBody NewSupplier entity) {
+  public ResponseEntity<Responder> save(@RequestBody NewObjectDto entity) {
     try {
-      supplierService.save(new Supplier(entity));
+      objectService.save(new ObjectDto(entity));
       return ResponseEntity.ok().body(new SuccessResponder());
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));

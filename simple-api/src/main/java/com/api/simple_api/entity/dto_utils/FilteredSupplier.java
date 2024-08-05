@@ -1,10 +1,8 @@
-package com.api.simple_api.entity.dto;
+package com.api.simple_api.entity.dto_utils;
 
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-import com.api.simple_api.entity.dto_utils.NewSupplier;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "supplier")
-public class Supplier {
+public class FilteredSupplier {
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
@@ -84,32 +82,35 @@ public class Supplier {
   }
 
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-  @Column(name = "contract_date")
-  private Date contractDate;
+  private Date fromContractDate;
 
-  public Date getContractDate() {
-    return this.contractDate;
+  public Date getFromContractDate() {
+    return fromContractDate;
   }
 
-  public void setContractDate(Date contractDate) {
-    this.contractDate = contractDate;
+  public void setFromContractDate(Date fromContractDate) {
+    this.fromContractDate = fromContractDate;
   }
 
-  public Supplier(String displayName, String address, String phone, String email, String moreInfo, Date contractDate) {
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+  private Date toContractDate;
+
+  public Date getToContractDate() {
+    return toContractDate;
+  }
+
+  public void setToContractDate(Date toContractDate) {
+    this.toContractDate = toContractDate;
+  }
+
+  public FilteredSupplier(Long id, String displayName, String address, String phone, String email, String moreInfo, Date fromContractDate, Date toContractDate) {
+    this.id = id;
     this.displayName = displayName;
     this.address = address;
     this.phone = phone;
     this.email = email;
     this.moreInfo = moreInfo;
-    this.contractDate = contractDate;
-  }
-
-  public Supplier(NewSupplier newSupplier) {
-    this.displayName = newSupplier.getDisplayName();
-    this.address = newSupplier.getAddress();
-    this.phone = newSupplier.getPhone();
-    this.email = newSupplier.getEmail();
-    this.moreInfo = newSupplier.getMoreInfo();
-    this.contractDate = new Date();
+    this.fromContractDate = fromContractDate;
+    this.toContractDate = toContractDate;
   }
 }
