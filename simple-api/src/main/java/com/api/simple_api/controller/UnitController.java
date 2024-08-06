@@ -43,8 +43,8 @@ public class UnitController {
   @PostMapping("")
   public ResponseEntity<Responder> save(@RequestBody NewUnit entity) {
     try {
-      unitService.save(new Unit(entity.getDisplayName()));
-      return ResponseEntity.ok().body(new SuccessResponder());
+      Unit newUnit = unitService.save(new Unit(entity.getDisplayName()));
+      return ResponseEntity.ok().body(new SuccessResponder(newUnit));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));
     }

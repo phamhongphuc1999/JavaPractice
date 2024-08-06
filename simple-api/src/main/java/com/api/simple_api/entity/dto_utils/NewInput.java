@@ -1,13 +1,13 @@
 package com.api.simple_api.entity.dto_utils;
 
 public class NewInput {
-  private String objectId;
+  private Long objectId;
 
-  public String getObjectId() {
+  public Long getObjectId() {
     return objectId;
   }
 
-  public void setObjectId(String objectId) {
+  public void setObjectId(Long objectId) {
     this.objectId = objectId;
   }
 

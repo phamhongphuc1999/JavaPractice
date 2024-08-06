@@ -18,7 +18,8 @@ public class SupplierService {
     return supplierRepository.getByFilter(supplier);
   }
 
-  public void save(Supplier entity) {
-    supplierRepository.save(entity);
+  public Supplier save(Supplier entity) {
+    Supplier result = supplierRepository.save(entity);
+    return result;
   }
 }

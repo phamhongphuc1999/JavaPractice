@@ -45,8 +45,8 @@ public class SupplierController {
   @PostMapping("")
   public ResponseEntity<Responder> save(@RequestBody NewSupplier entity) {
     try {
-      supplierService.save(new Supplier(entity));
-      return ResponseEntity.ok().body(new SuccessResponder());
+      Supplier newSupplier = supplierService.save(new Supplier(entity));
+      return ResponseEntity.ok().body(new SuccessResponder(newSupplier));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));
     }

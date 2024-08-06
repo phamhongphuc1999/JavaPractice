@@ -18,7 +18,8 @@ public class UnitService {
     return unitRepository.getByFilter(filteredUnit);
   }
 
-  public void save(Unit entity) {
-    unitRepository.save(entity);
+  public Unit save(Unit entity) {
+    Unit result = unitRepository.save(entity);
+    return result;
   }
 }

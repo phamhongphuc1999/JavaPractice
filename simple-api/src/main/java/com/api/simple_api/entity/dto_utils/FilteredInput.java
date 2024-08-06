@@ -5,9 +5,7 @@ import java.util.UUID;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.Column;
-
-public class ResultInput {
+public class FilteredInput {
   private UUID id;
 
   public UUID getId() {
@@ -39,18 +37,27 @@ public class ResultInput {
   }
 
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-  @Column(name = "input_date")
-  private Date inputDate;
+  private Date fromInputDate;
 
-  public Date getInputDate() {
-    return inputDate;
+  public Date getFromInputDate() {
+    return fromInputDate;
   }
 
-  public void setInputDate(Date inputDate) {
-    this.inputDate = inputDate;
+  public void setFromInputDate(Date fromInputDate) {
+    this.fromInputDate = fromInputDate;
   }
 
-  @Column(name = "count")
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+  private Date toInputDate;
+
+  public Date getToInputDate() {
+    return toInputDate;
+  }
+
+  public void setToInputDate(Date toInputDate) {
+    this.toInputDate = toInputDate;
+  }
+
   private Integer count;
 
   public Integer getCount() {
@@ -61,7 +68,6 @@ public class ResultInput {
     this.count = count;
   }
 
-  @Column(name = "input_price")
   private Float inputPrice;
 
   public Float getInputPrice() {
@@ -72,7 +78,6 @@ public class ResultInput {
     this.inputPrice = inputPrice;
   }
 
-  @Column(name = "status")
   private String status;
 
   public String getStatus() {
@@ -83,35 +88,14 @@ public class ResultInput {
     this.status = status;
   }
 
-  private String objectName;
-
-  public String getObjectName() {
-    return objectName;
-  }
-
-  public void setObjectName(String objectName) {
-    this.objectName = objectName;
-  }
-
-  private String unitName;
-
-  public String getUnitName() {
-    return unitName;
-  }
-
-  public void setUnitName(String unitName) {
-    this.unitName = unitName;
-  }
-
-  public ResultInput(UUID id, UUID infoId, Long objectId, Date inputDate, Integer count, Float inputPrice, String status, String objectName, String unitName) {
+  public FilteredInput(UUID id, UUID infoId, Long objectId, Date fromInputDate, Date toInputDate, Integer count, Float inputPrice, String status) {
     this.id = id;
     this.infoId = infoId;
     this.objectId = objectId;
-    this.inputDate = inputDate;
+    this.fromInputDate = fromInputDate;
+    this.toInputDate = toInputDate;
     this.count = count;
     this.inputPrice = inputPrice;
     this.status = status;
-    this.objectName = objectName;
-    this.unitName = unitName;
   }
 }

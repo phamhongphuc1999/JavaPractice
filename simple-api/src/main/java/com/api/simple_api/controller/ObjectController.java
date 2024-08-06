@@ -44,8 +44,8 @@ public class ObjectController {
   @PostMapping("")
   public ResponseEntity<Responder> save(@RequestBody NewObjectDto entity) {
     try {
-      objectService.save(new ObjectDto(entity));
-      return ResponseEntity.ok().body(new SuccessResponder());
+      ObjectDto newObject = objectService.save(new ObjectDto(entity));
+      return ResponseEntity.ok().body(new SuccessResponder(newObject));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));
     }

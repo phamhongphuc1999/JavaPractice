@@ -21,7 +21,11 @@ dev:
 	mvn clean install
 	mvn spring-boot:run
 
-## Up mongodb using docker.
+## Test.
+test:
+	mvn test
+
+## Up mongodb using docker. | Docker
 mongo:
 	docker-compose -f ./docker-compose-mongo.yaml up -d
 

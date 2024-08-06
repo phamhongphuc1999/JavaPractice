@@ -4,81 +4,77 @@ GO
 USE java_app;
 GO
 
-CREATE TABLE IF NOT EXISTS Unit (
+CREATE TABLE IF NOT EXISTS unit (
   id INT NOT NULL AUTO_INCREMENT,
-  displayName VARCHAR(50),
+  display_name VARCHAR(50),
   PRIMARY KEY (id)
 );
 GO
 
-INSERT INTO Unit (displayName)
-VALUES ("kilogram"),
-        ("unit"),
-        ("m");
-
-CREATE TABLE Supplier (
+CREATE TABLE supplier (
   id INT NOT NULL AUTO_INCREMENT,
-  displayName VARCHAR(50),
+  display_name VARCHAR(50),
   address VARCHAR(100),
   phone VARCHAR(20),
   email VARCHAR(100),
-  moreInfo VARCHAR(200),
-  contractDate DATETIME,
+  more_info VARCHAR(200),
+  contract_date DATETIME,
   PRIMARY KEY (id)
 );
 GO
 
-CREATE TABLE Customer (
+CREATE TABLE customer (
   id INT NOT NULL AUTO_INCREMENT,
-  displayName VARCHAR(50),
+  display_name VARCHAR(50),
   address VARCHAR(100),
   phone VARCHAR(20),
   email VARCHAR(100),
-  moreInfo VARCHAR(200),
-  contractDate DATETIME,
+  more_info VARCHAR(200),
+  contract_date DATETIME,
   PRIMARY KEY (id)
 );
 GO
 
-CREATE TABLE Object (
+CREATE TABLE object (
   id BINARY(16) NOT NULL,
-  displayName VARCHAR(50),
+  display_name VARCHAR(50),
   unitId INT NOT NULL,
-  supplierId INT NOT NULL,
-  qrCode VARCHAR(200),
-  barCode VARCHAR(200),
+  supplier_id INT NOT NULL,
+  count INT,
+  qr_code VARCHAR(200),
+  bar_code VARCHAR(200),
   PRIMARY KEY (id),
-  FOREIGN KEY (unitId) REFERENCES Unit(id),
-  FOREIGN KEY (supplierId) REFERENCES Supplier(id)
+  FOREIGN KEY (unit_id) REFERENCES unit(id),
+  FOREIGN KEY (supplier_id) REFERENCES supplier(id)
 );
 GO
 
-CREATE TABLE UserRole (
+CREATE TABLE user_role (
   id INT NOT NULL AUTO_INCREMENT,
-  displayName VARCHAR(50),
+  display_name VARCHAR(50),
   PRIMARY KEY (id)
 );
 GO
 
-CREATE TABLE User (
+CREATE TABLE user (
   id INT NOT NULL AUTO_INCREMENT,
-  displayName VARCHAR(50),
-  userName VARCHAR(100),
+  display_name VARCHAR(50),
+  username VARCHAR(100),
   password VARCHAR(100),
-  roleId INT NOT NULL,
+  role_id INT NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (roleId) REFERENCES UserRole(id)
+  FOREIGN KEY (role_id) REFERENCES user_role(id)
 );
 GO
 
-CREATE TABLE Input (
+CREATE TABLE input (
   id UUID NOT NULL,
-  inputDate DATETIME,
+  input_date DATETIME,
   PRIMARY KEY (id)
 );
 GO
 
-CREATE TABLE InputInfo (
+CREATE TABLE input_info (
   id UUID NOT NULL,
   object_id BINARY(16) NOT NULL,
   input_id VARCHAR(128) NOT NULL,
@@ -86,19 +82,19 @@ CREATE TABLE InputInfo (
   input_price FLOAT DEFAULT 0,
   status VARCHAR(10),
   PRIMARY KEY (id),
-  FOREIGN KEY (object_id) REFERENCES Object(id),
-  FOREIGN KEY (input_id) REFERENCES Input(id)
+  FOREIGN KEY (object_id) REFERENCES object(id),
+  FOREIGN KEY (input_id) REFERENCES input(id)
 );
 GO
 
-CREATE TABLE Output (
+CREATE TABLE output (
   id UUID NOT NULL,
-  outputDate DATETIME,
+  output_date DATETIME,
   PRIMARY KEY (id)
 );
 GO
 
-CREATE TABLE OutputInfo (
+CREATE TABLE output_info (
   id UUID NOT NULL,
   object_id BINARY(16) NOT NULL,
   output_id VARCHAR(128) NOT NULL,
@@ -107,8 +103,35 @@ CREATE TABLE OutputInfo (
   output_price FLOAT DEFAULT 0,
   status VARCHAR(10),
   PRIMARY KEY (id),
-  FOREIGN KEY (object_id) REFERENCES Object(id),
-  FOREIGN KEY (output_id) REFERENCES OutputInfo(id),
-  FOREIGN KEY (customer_id) REFERENCES Customer(id)
+  FOREIGN KEY (object_id) REFERENCES object(id),
+  FOREIGN KEY (output_id) REFERENCES output_info(id),
+  FOREIGN KEY (customer_id) REFERENCES customer(id)
 );
 GO
+
+INSERT INTO unit (display_name)
+VALUES ("kg"),
+        ("unit"),
+        ("m");
+
+INSERT INTO supplier (display_name, address, phone, email, more_info, contract_date)
+VALUES ("supplier1", "address1", "123456789", "supplier1@mail.com", "supplier1 more information", "2024-08-05 21:57:41.190000"),
+        ("supplier2", "address2", "123456799", "supplier2@mail.com", "supplier2 more information", "2024-08-05 21:57:41.190000"),
+        ("supplier3", "address3", "123456789", "supplier3@mail.com", "supplier3 more information", "2024-08-05 21:57:41.190000");
+
+INSERT INTO object (display_name, unit_id, supplier_id, qr_code, bar_code)
+VALUES ("object1", 1, 1, "0x01", "0x01"),
+        ("object2", 2, 2, "0x02", "0x02"),
+        ("object3", 3, 2, "0x03", "0x03"),
+        ("object4", 1, 3, "0x04", "0x04"),
+        ("object5", 3, 1, "0x05", "0x05");
+
+INSERT INTO user_role (display_name)
+VALUES ("user"),
+        ("admin"),
+        ("root");
+
+INSERT INTO user (display_name, username, password, role_id)
+VALUES ("user1", "username1", "123", 1),
+        ("user2", "username2", "123", 2),
+        ("user3", "username3", "123", 3);

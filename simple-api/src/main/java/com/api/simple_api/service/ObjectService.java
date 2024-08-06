@@ -18,7 +18,8 @@ public class ObjectService {
     return objectRepository.getByFilter(filteredObject);
   }
 
-  public void save(ObjectDto entity) {
-    objectRepository.save(entity);
+  public ObjectDto save(ObjectDto entity) {
+    ObjectDto result = objectRepository.save(entity);
+    return result;
   }
 }

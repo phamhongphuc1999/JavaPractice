@@ -61,6 +61,17 @@ public class ObjectDto {
     this.supplier = supplier;
   }
 
+  @Column(name = "count")
+  private Integer count;
+
+  public Integer getCount() {
+    return count;
+  }
+
+  public void setCount(Integer count) {
+    this.count = count;
+  }
+
   @Column(name = "qr_code")
   private String qrCode;
 
@@ -85,11 +96,12 @@ public class ObjectDto {
 
   public ObjectDto() {}
 
-  public ObjectDto(Long id, String displayName, Unit unit, Supplier supplier, String qrCode, String barCode) {
+  public ObjectDto(Long id, String displayName, Unit unit, Supplier supplier, Integer count, String qrCode, String barCode) {
     this.id = id;
     this.displayName = displayName;
     this.unit = unit;
     this.supplier = supplier;
+    this.count = count;
     this.qrCode = qrCode;
     this.barCode = barCode;
   }
@@ -98,6 +110,7 @@ public class ObjectDto {
     this.displayName = newObject.getDisplayName();
     this.unit = new Unit(newObject.getUnitId(), newObject.getDisplayName());
     this.supplier = new Supplier();
+    this.count = 0;
     this.supplier.setId(newObject.getSupplierId());
     this.qrCode = newObject.getQrCode();
     this.barCode = newObject.getBarCode();
