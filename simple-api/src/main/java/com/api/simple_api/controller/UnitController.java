@@ -22,7 +22,7 @@ import com.api.simple_api.service.UnitService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Unit", description = "unit description")
+@Tag(name = "Unit", description = "Unit description")
 @RestController
 @EnableAutoConfiguration
 @RequestMapping(value = "/unit")

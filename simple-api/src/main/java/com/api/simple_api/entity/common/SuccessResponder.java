@@ -1,13 +1,13 @@
 package com.api.simple_api.entity.common;
 
-import org.springframework.http.HttpStatus;
+import com.api.simple_api.config.Constance.ResponderStatus;
 
 public class SuccessResponder extends Responder {
   public SuccessResponder(Object data) {
-    super(HttpStatus.OK, data);
+    super(ResponderStatus.OK, data);
   }
 
   public SuccessResponder() {
-    super(HttpStatus.OK, null);
+    super(ResponderStatus.OK, null);
   }
 }

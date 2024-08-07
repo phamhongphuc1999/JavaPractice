@@ -1,17 +1,17 @@
 package com.api.simple_api.entity.common;
 
-import org.springframework.http.HttpStatus;
+import com.api.simple_api.config.Constance.ResponderStatus;
 
 public class Responder {
-  protected HttpStatus status;
+  protected ResponderStatus status;
   protected Object data;
 
-  public Responder(HttpStatus status, Object data) {
+  public Responder(ResponderStatus status, Object data) {
     this.status = status;
     this.data = data;
   }
 
-  public HttpStatus getStatus() {
+  public ResponderStatus getStatus() {
     return this.status;
   }
 

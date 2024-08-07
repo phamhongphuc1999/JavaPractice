@@ -14,6 +14,7 @@ import com.api.simple_api.entity.dto_utils.NewInput;
 import com.api.simple_api.entity.dto_utils.ResultInput;
 import com.api.simple_api.repository.InputInfoRepository;
 import com.api.simple_api.repository.InputRepository;
+import com.api.simple_api.repository.ObjectRepository;
 
 @Service
 public class InputService {
@@ -22,6 +23,9 @@ public class InputService {
 
   @Autowired
   private InputInfoRepository inputInfoRepository;
+
+  @Autowired
+  private ObjectRepository objectRepository;
 
   public List<ResultInput> getByFilter(FilteredInput filteredInput) {
     return inputRepository.getByFilter(filteredInput);
@@ -32,6 +36,7 @@ public class InputService {
     Input savedInput = inputRepository.save(newInput);
     InputInfo newInputInfo = new InputInfo(entity, savedInput.getId());
     InputInfo savedInputInfo = inputInfoRepository.save(newInputInfo);
+    objectRepository.increaseCount(entity.getObjectId(), entity.getCount());
     return new Pair<Input,InputInfo>(savedInput, savedInputInfo);
   }
 }

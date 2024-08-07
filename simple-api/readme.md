@@ -46,6 +46,12 @@ use java_app;
 SHOW TABLES;
 ```
 
+-   5. List columns on a table
+
+```shell
+SELECT COLUMNS FROM table_name;
+```
+
 ## Issues
 
 #### can't import packages on VSCode

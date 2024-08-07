@@ -24,7 +24,7 @@ import com.api.simple_api.service.SupplierService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Supplier", description = "supplier description")
+@Tag(name = "Supplier", description = "Supplier description")
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/supplier")

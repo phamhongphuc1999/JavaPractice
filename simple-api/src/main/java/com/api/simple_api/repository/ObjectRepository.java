@@ -3,12 +3,15 @@ package com.api.simple_api.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.api.simple_api.entity.dto.ObjectDto;
 import com.api.simple_api.entity.dto_utils.FilteredObjectDto;
+
+import jakarta.transaction.Transactional;
 
 @Repository
 public interface ObjectRepository extends JpaRepository<ObjectDto, Long> {
@@ -21,4 +24,14 @@ public interface ObjectRepository extends JpaRepository<ObjectDto, Long> {
   "(:#{#filteredObject.qrCode} IS NULL OR o.qrCode LIKE %:#{#filteredObject.qrCode}%) AND " + 
   "(:#{#filteredObject.barCode} IS NULL OR o.barCode LIKE %:#{#filteredObject.barCode}%)")
   List<ObjectDto> getByFilter(@Param("filteredObject") FilteredObjectDto filteredObject);
+
+  @Modifying
+  @Transactional
+  @Query(value = "UPDATE object SET count = count + :increment WHERE id = :objectId", nativeQuery = true)
+  void increaseCount(@Param("objectId") Long objectId, @Param("increment") Integer increment);
+
+  @Modifying
+  @Transactional
+  @Query(value =  "UPDATE object SET count = count - :decrement WHERE id = :objectId", nativeQuery = true)
+  void decreaseCount(@Param("objectId") Long objectId, @Param("decrement") Integer decrement);
 }

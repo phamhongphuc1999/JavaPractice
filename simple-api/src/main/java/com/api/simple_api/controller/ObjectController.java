@@ -23,7 +23,7 @@ import com.api.simple_api.service.ObjectService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Object", description = "object description")
+@Tag(name = "Object", description = "Object description")
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/object")

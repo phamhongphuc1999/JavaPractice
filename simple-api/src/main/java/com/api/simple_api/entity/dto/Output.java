@@ -40,4 +40,13 @@ public class Output {
   }
 
   public Output() {}
+
+  public Output(Date outputDate) {
+    this.outputDate = outputDate;
+  }
+
+  public Output(UUID id, Date outputDate) {
+    this.id = id;
+    this.outputDate = outputDate;
+  }
 }
