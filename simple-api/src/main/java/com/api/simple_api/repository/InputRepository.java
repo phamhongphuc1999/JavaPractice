@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.api.simple_api.entity.dto.Input;
@@ -24,5 +25,5 @@ public interface InputRepository extends JpaRepository<Input, UUID> {
   "(:#{#filteredInput.count} IS NULL OR ifn.count=:#{#filteredInput.count}) AND " + 
   "(:#{#filteredInput.inputPrice} IS NULL OR ifn.inputPrice=:#{#filteredInput.inputPrice}) AND " + 
   "(:#{#filteredInput.status} IS NULL OR ifn.status=:#{#filteredInput.status})")
-  List<ResultInput> getByFilter(FilteredInput filteredInput);
+  List<ResultInput> getByFilter(@Param("filteredInput") FilteredInput filteredInput);
 }

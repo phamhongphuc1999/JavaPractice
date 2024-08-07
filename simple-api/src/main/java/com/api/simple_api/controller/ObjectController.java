@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.simple_api.entity.common.BadRequestResponder;
+import com.api.simple_api.entity.common.FailResponder;
 import com.api.simple_api.entity.common.Responder;
-import com.api.simple_api.entity.common.SuccessResponder;
+import com.api.simple_api.entity.common.OkResponder;
 import com.api.simple_api.entity.dto.ObjectDto;
 import com.api.simple_api.entity.dto_utils.FilteredObjectDto;
 import com.api.simple_api.entity.dto_utils.NewObjectDto;
@@ -35,9 +35,9 @@ public class ObjectController {
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false) String displayName, @RequestParam(required = false) Long unitId, @RequestParam(required = false) Long supplierId, @RequestParam(required = false) String qrCode, @RequestParam(required = false) String barCode) {
     try {
       List<ObjectDto> objects = objectService.getByFilter(new FilteredObjectDto(id, displayName, unitId, supplierId, qrCode, barCode));
-      return ResponseEntity.ok().body(new SuccessResponder(objects));
+      return ResponseEntity.ok().body(new OkResponder(objects));
     } catch (Exception exception) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   }
 
@@ -45,9 +45,9 @@ public class ObjectController {
   public ResponseEntity<Responder> save(@RequestBody NewObjectDto entity) {
     try {
       ObjectDto newObject = objectService.save(new ObjectDto(entity));
-      return ResponseEntity.ok().body(new SuccessResponder(newObject));
+      return ResponseEntity.ok().body(new OkResponder(newObject));
     } catch (Exception exception) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   }
 }

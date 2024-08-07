@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.simple_api.entity.common.BadRequestResponder;
+import com.api.simple_api.entity.common.FailResponder;
 import com.api.simple_api.entity.common.Responder;
-import com.api.simple_api.entity.common.SuccessResponder;
+import com.api.simple_api.entity.common.OkResponder;
 import com.api.simple_api.entity.dto.Unit;
 import com.api.simple_api.entity.dto_utils.NewUnit;
 import com.api.simple_api.service.UnitService;
@@ -34,9 +34,9 @@ public class UnitController {
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false, name = "Display name") String displayName) {
     try {
       List<Unit> units = unitService.getByFilter(new Unit(id, displayName));
-      return ResponseEntity.ok().body(new SuccessResponder(units));
+      return ResponseEntity.ok().body(new OkResponder(units));
     } catch(Exception exception) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   }
 
@@ -44,9 +44,9 @@ public class UnitController {
   public ResponseEntity<Responder> save(@RequestBody NewUnit entity) {
     try {
       Unit newUnit = unitService.save(new Unit(entity.getDisplayName()));
-      return ResponseEntity.ok().body(new SuccessResponder(newUnit));
+      return ResponseEntity.ok().body(new OkResponder(newUnit));
     } catch (Exception exception) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   }
 }

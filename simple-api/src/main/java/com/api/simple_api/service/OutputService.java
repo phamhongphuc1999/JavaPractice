@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.api.simple_api.entity.dto.ObjectDto;
 import com.api.simple_api.entity.dto.Output;
 import com.api.simple_api.entity.dto.OutputInfo;
+import com.api.simple_api.entity.dto_utils.FilteredOutput;
 import com.api.simple_api.entity.dto_utils.NewOutput;
 import com.api.simple_api.entity.dto_utils.ResultOutput;
 import com.api.simple_api.repository.ObjectRepository;
@@ -30,8 +31,8 @@ public class OutputService {
   @Autowired
   private ObjectRepository objectRepository;
 
-  public List<ResultOutput> getByFilter() {
-    return outputRepository.getByFilter();
+  public List<ResultOutput> getByFilter(FilteredOutput filteredOutput) {
+    return outputRepository.getByFilter(filteredOutput);
   }
 
   @SuppressWarnings("unused")

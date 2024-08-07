@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.simple_api.entity.common.BadRequestResponder;
+import com.api.simple_api.entity.common.FailResponder;
 import com.api.simple_api.entity.common.Responder;
-import com.api.simple_api.entity.common.SuccessResponder;
+import com.api.simple_api.entity.common.OkResponder;
 import com.api.simple_api.entity.dto.Supplier;
 import com.api.simple_api.entity.dto_utils.FilteredSupplier;
 import com.api.simple_api.entity.dto_utils.NewSupplier;
@@ -36,9 +36,9 @@ public class SupplierController {
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false) String displayName, @RequestParam(required = false) String address, @RequestParam(required = false) String phone, @RequestParam(required = false) String email, @RequestParam(required = false) String moreInfo, @RequestParam(required = false) Date fromContractDate, @RequestParam(required = false) Date toContractDate) {
     try {
       List<Supplier> suppliers = supplierService.getByFilter(new FilteredSupplier(id, displayName, address, phone, email, moreInfo, fromContractDate, toContractDate));
-      return ResponseEntity.ok().body(new SuccessResponder(suppliers));
+      return ResponseEntity.ok().body(new OkResponder(suppliers));
     } catch(Exception exception) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   }
 
@@ -46,9 +46,9 @@ public class SupplierController {
   public ResponseEntity<Responder> save(@RequestBody NewSupplier entity) {
     try {
       Supplier newSupplier = supplierService.save(new Supplier(entity));
-      return ResponseEntity.ok().body(new SuccessResponder(newSupplier));
+      return ResponseEntity.ok().body(new OkResponder(newSupplier));
     } catch (Exception exception) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   }
 }

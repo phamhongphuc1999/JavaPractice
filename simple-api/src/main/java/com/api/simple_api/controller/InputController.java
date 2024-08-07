@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.simple_api.entity.common.BadRequestResponder;
+import com.api.simple_api.entity.common.FailResponder;
 import com.api.simple_api.entity.common.Responder;
-import com.api.simple_api.entity.common.SuccessResponder;
+import com.api.simple_api.entity.common.OkResponder;
 import com.api.simple_api.entity.dto.Input;
 import com.api.simple_api.entity.dto.InputInfo;
 import com.api.simple_api.entity.dto_utils.FilteredInput;
@@ -42,9 +42,9 @@ public class InputController {
     try {
       FilteredInput filteredInput = new FilteredInput(id, infoId, objectId, fromInputDate, toInputDate, count, inputPrice, status);
       List<ResultInput> result = inputService.getByFilter(filteredInput);
-      return ResponseEntity.ok().body(new SuccessResponder(result));
+      return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   }
 
@@ -55,9 +55,9 @@ public class InputController {
       HashMap<String, Object> realResult = new HashMap<String, Object>();
       realResult.put("input", result.getValue0());
       realResult.put("information", result.getValue1());
-      return ResponseEntity.ok().body(new SuccessResponder(realResult));
+      return ResponseEntity.ok().body(new OkResponder(realResult));
     } catch (Exception exception) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   } 
 }

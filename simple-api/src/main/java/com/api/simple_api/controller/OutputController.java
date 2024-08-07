@@ -1,7 +1,9 @@
 package com.api.simple_api.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -11,13 +13,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.simple_api.entity.common.BadRequestResponder;
+import com.api.simple_api.entity.common.FailResponder;
 import com.api.simple_api.entity.common.Responder;
-import com.api.simple_api.entity.common.SuccessResponder;
+import com.api.simple_api.entity.common.OkResponder;
 import com.api.simple_api.entity.dto.Output;
 import com.api.simple_api.entity.dto.OutputInfo;
+import com.api.simple_api.entity.dto_utils.FilteredOutput;
 import com.api.simple_api.entity.dto_utils.NewOutput;
 import com.api.simple_api.entity.dto_utils.ResultOutput;
 import com.api.simple_api.service.OutputService;
@@ -34,12 +38,13 @@ public class OutputController {
   private OutputService outputService;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter() {
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) UUID id, @RequestParam(required = false) UUID infoId, @RequestParam(required = false) Long objectId, @RequestParam(required = false) Long customerId, @RequestParam(required = false) Date fromOutputDate, @RequestParam(required = false) Date toOutputDate, @RequestParam(required = false) Integer count, @RequestParam(required = false) Float outputPrice, @RequestParam(required = false) String status, @RequestParam(required = false) String objectName, @RequestParam(required = false) String unitName, @RequestParam(required = false) String customerName) {
     try {
-      List<ResultOutput> result = outputService.getByFilter();
-      return ResponseEntity.ok().body(new SuccessResponder(result));
+      FilteredOutput filteredOutput = new FilteredOutput(id, infoId, objectId, customerId, fromOutputDate, toOutputDate, count, outputPrice, status, objectName, unitName, customerName);
+      List<ResultOutput> result = outputService.getByFilter(filteredOutput);
+      return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   }
 
@@ -48,13 +53,13 @@ public class OutputController {
     try {
       Pair<Output, OutputInfo> result = outputService.save(entity);
       if (result == null)
-        return ResponseEntity.ok().body(new BadRequestResponder("Current count is not enough"));
+        return ResponseEntity.ok().body(new FailResponder("Current count is not enough"));
       HashMap<String, Object> realResult = new HashMap<String, Object>();
       realResult.put("output", result.getValue0());
       realResult.put("information", result.getValue1());
-      return ResponseEntity.ok().body(new SuccessResponder(realResult));
+      return ResponseEntity.ok().body(new OkResponder(realResult));
     } catch (Exception exception) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponder(exception.getMessage()));
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   }
 }

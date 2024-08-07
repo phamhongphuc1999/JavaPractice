@@ -122,7 +122,7 @@ VALUES ("supplier1", "address1", "123456789", "supplier1@mail.com", "supplier1 m
 INSERT INTO customer (display_name, address, phone, email, more_info, contract_date)
 VALUES ("customer1", "address-c1", "234523501", "customer1@mail.com", "customer1 more information", "2024-08-05 21:57:41.190000"),
         ("customer2", "address-c2", "234523501", "customer2@mail.com", "customer2 more information", "2024-08-05 21:57:41.190000"),
-        ("customer3", "address-c3", "234523501", "customer3@mail.com", "customer3 more information", "2024-08-05 21:57:41.190000"),
+        ("customer3", "address-c3", "234523501", "customer3@mail.com", "customer3 more information", "2024-08-05 21:57:41.190000");
 
 INSERT INTO object (display_name, unit_id, supplier_id, qr_code, bar_code)
 VALUES ("object1", 1, 1, "0x01", "0x01"),

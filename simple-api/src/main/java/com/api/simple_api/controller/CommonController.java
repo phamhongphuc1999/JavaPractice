@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.simple_api.entity.common.Responder;
-import com.api.simple_api.entity.common.SuccessResponder;
+import com.api.simple_api.entity.common.OkResponder;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -18,6 +18,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class CommonController {
   @GetMapping("/hello")
   public ResponseEntity<Responder> hello() {
-    return ResponseEntity.ok().body(new SuccessResponder("Welcome to Spring boot!"));
+    return ResponseEntity.ok().body(new OkResponder("Welcome to Spring boot!"));
   }
 }
