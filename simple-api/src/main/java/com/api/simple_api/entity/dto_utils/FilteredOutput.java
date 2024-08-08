@@ -78,14 +78,24 @@ public class FilteredOutput {
     this.count = count;
   }
 
-  private Float outputPrice;
+  private Float fromOutputPrice;
 
-  public Float getOutputPrice() {
-    return outputPrice;
+  public Float getFromOutputPrice() {
+    return fromOutputPrice;
   }
 
-  public void setOutputPrice(Float outputPrice) {
-    this.outputPrice = outputPrice;
+  public void setFromOutputPrice(Float fromOutputPrice) {
+    this.fromOutputPrice = fromOutputPrice;
+  }
+
+  private Float toOutputPrice;
+
+  public Float getToOutputPrice() {
+    return toOutputPrice;
+  }
+
+  public void setToOutputPrice(Float toOutputPrice) {
+    this.toOutputPrice = toOutputPrice;
   }
 
   private String status;
@@ -128,7 +138,9 @@ public class FilteredOutput {
     this.customerName = customerName;
   }
 
-  public FilteredOutput(UUID id, UUID infoId, Long objectId, Long customerId, Date fromOutputDate, Date toOutputDate, Integer count, Float outputPrice, String status, String objectName, String unitName, String customerName) {
+  public FilteredOutput() {}
+
+  public FilteredOutput(UUID id, UUID infoId, Long objectId, Long customerId, Date fromOutputDate, Date toOutputDate, Integer count, Float fromOutputPrice, Float toOutputPrice, String status, String objectName, String unitName, String customerName) {
     this.id = id;
     this.infoId = infoId;
     this.objectId = objectId;
@@ -136,7 +148,8 @@ public class FilteredOutput {
     this.fromOutputDate = fromOutputDate;
     this.toOutputDate = toOutputDate;
     this.count = count;
-    this.outputPrice = outputPrice;
+    this.fromOutputPrice = fromOutputPrice;
+    this.toOutputPrice = toOutputPrice;
     this.status = status;
     this.objectName = objectName;
     this.unitName = unitName;

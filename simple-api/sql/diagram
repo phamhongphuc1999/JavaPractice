@@ -55,7 +55,7 @@ Table input {
 
 Table input_info {
   id varchar(128) [pk, not null]
-  object_id binary(16) [not null, ref: < object.id]
+  object_id binary(16) [not null, ref: > object.id]
   input_id varchar(128) [not null, ref: - input.id]
   count int
   input_price float
@@ -69,7 +69,7 @@ Table output {
 
 Table output_info {
   id varchar(128) [pk, not null]
-  object_id binary(16) [not null, ref: < object.id]
+  object_id binary(16) [not null, ref: > object.id]
   output_id varchar(128) [not null, ref: - output.id]
   customer_id int [not null, ref: > customer.id]
   count int

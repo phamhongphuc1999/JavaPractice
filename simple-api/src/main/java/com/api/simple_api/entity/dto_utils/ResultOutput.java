@@ -117,7 +117,17 @@ public class ResultOutput {
     this.customerName = customerName;
   }
 
-  public ResultOutput(UUID id, UUID infoId, Long objectId, Long customerId, Date outputDate, Integer count, Float outputPrice, String status, String objectName, String unitName, String customerName) {
+  private String supplierName;
+
+  public String getSupplierName() {
+    return supplierName;
+  }
+
+  public void setSupplierName(String supplierName) {
+    this.supplierName = supplierName;
+  }
+
+  public ResultOutput(UUID id, UUID infoId, Long objectId, Long customerId, Date outputDate, Integer count, Float outputPrice, String status, String objectName, String unitName, String customerName, String supplierName) {
     this.id = id;
     this.infoId = infoId;
     this.objectId = objectId;
@@ -129,5 +139,6 @@ public class ResultOutput {
     this.objectName = objectName;
     this.unitName = unitName;
     this.customerName = customerName;
+    this.supplierName = supplierName;
   }
 }

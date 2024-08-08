@@ -1,5 +1,7 @@
 package com.api.simple_api.entity.dto;
 
+import com.api.simple_api.entity.dto_utils.NewUser;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -67,4 +69,11 @@ public class User {
   }
 
   public User() {}
+
+  public User(NewUser entity) {
+    this.displayName = entity.getDisplayName();
+    this.username = entity.getUsername();
+    this.password = entity.getPassword();
+    this.roleId = entity.getRoleId();
+  }
 }

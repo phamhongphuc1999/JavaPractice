@@ -16,7 +16,8 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface ObjectRepository extends JpaRepository<ObjectDto, Long> {
   @Query("SELECT o FROM ObjectDto o " +
-  "LEFT JOIN Unit u ON o.unit.id=u.id LEFT JOIN Supplier s ON o.supplier.id=s.id WHERE " +
+  "LEFT JOIN Unit u ON o.unit.id=u.id " +
+  "LEFT JOIN Supplier s ON o.supplier.id=s.id WHERE " +
   "(:#{#filteredObject.id} IS NULL OR o.id=:#{#filteredObject.id}) AND " +
   "(:#{#filteredObject.displayName} IS NULL OR o.displayName LIKE %:#{#filteredObject.displayName}%) AND " +
   "(:#{#filteredObject.unitId} IS NULL OR o.unit.id=:#{#filteredObject.unitId}) AND " +

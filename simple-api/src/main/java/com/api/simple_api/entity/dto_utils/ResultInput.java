@@ -103,7 +103,17 @@ public class ResultInput {
     this.unitName = unitName;
   }
 
-  public ResultInput(UUID id, UUID infoId, Long objectId, Date inputDate, Integer count, Float inputPrice, String status, String objectName, String unitName) {
+  private String supplierName;
+
+  public String getSupplierName() {
+    return supplierName;
+  }
+
+  public void setSupplierName(String supplierName) {
+    this.supplierName = supplierName;
+  }
+
+  public ResultInput(UUID id, UUID infoId, Long objectId, Date inputDate, Integer count, Float inputPrice, String status, String objectName, String unitName, String supplierName) {
     this.id = id;
     this.infoId = infoId;
     this.objectId = objectId;
@@ -113,5 +123,6 @@ public class ResultInput {
     this.status = status;
     this.objectName = objectName;
     this.unitName = unitName;
+    this.supplierName = supplierName;
   }
 }

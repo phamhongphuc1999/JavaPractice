@@ -58,24 +58,44 @@ public class FilteredInput {
     this.toInputDate = toInputDate;
   }
 
-  private Integer count;
+  private Integer fromCount;
 
-  public Integer getCount() {
-    return count;
+  public Integer getFromCount() {
+    return fromCount;
   }
 
-  public void setCount(Integer count) {
-    this.count = count;
+  public void setFromCount(Integer fromCount) {
+    this.fromCount = fromCount;
   }
 
-  private Float inputPrice;
+  private Integer toCount;
 
-  public Float getInputPrice() {
-    return inputPrice;
+  public Integer getToCount() {
+    return toCount;
   }
 
-  public void setInputPrice(Float inputPrice) {
-    this.inputPrice = inputPrice;
+  public void setToCount(Integer toCount) {
+    this.toCount = toCount;
+  }
+
+  private Float fromInputPrice;
+
+  public Float getFromInputPrice() {
+    return fromInputPrice;
+  }
+
+  public void setFromInputPrice(Float fromInputPrice) {
+    this.fromInputPrice = fromInputPrice;
+  }
+
+  private Float toInputPrice;
+
+  public Float getToInputPrice() {
+    return toInputPrice;
+  }
+
+  public void setToInputPrice(Float toInputPrice) {
+    this.toInputPrice = toInputPrice;
   }
 
   private String status;
@@ -88,14 +108,16 @@ public class FilteredInput {
     this.status = status;
   }
 
-  public FilteredInput(UUID id, UUID infoId, Long objectId, Date fromInputDate, Date toInputDate, Integer count, Float inputPrice, String status) {
+  public FilteredInput(UUID id, UUID infoId, Long objectId, Date fromInputDate, Date toInputDate, Integer fromCount, Integer toCount, Float fromInputPrice, Float toInputPrice, String status) {
     this.id = id;
     this.infoId = infoId;
     this.objectId = objectId;
     this.fromInputDate = fromInputDate;
     this.toInputDate = toInputDate;
-    this.count = count;
-    this.inputPrice = inputPrice;
+    this.fromCount = fromCount;
+    this.toCount = toCount;
+    this.fromInputPrice = fromInputPrice;
+    this.toInputPrice = toInputPrice;
     this.status = status;
   }
 }

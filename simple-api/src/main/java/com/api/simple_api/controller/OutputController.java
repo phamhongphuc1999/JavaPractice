@@ -38,9 +38,9 @@ public class OutputController {
   private OutputService outputService;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) UUID id, @RequestParam(required = false) UUID infoId, @RequestParam(required = false) Long objectId, @RequestParam(required = false) Long customerId, @RequestParam(required = false) Date fromOutputDate, @RequestParam(required = false) Date toOutputDate, @RequestParam(required = false) Integer count, @RequestParam(required = false) Float outputPrice, @RequestParam(required = false) String status, @RequestParam(required = false) String objectName, @RequestParam(required = false) String unitName, @RequestParam(required = false) String customerName) {
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) UUID id, @RequestParam(required = false, name = "output id") UUID infoId, @RequestParam(required = false, name = "object id") Long objectId, @RequestParam(required = false, name = "customer id") Long customerId, @RequestParam(required = false, name = "from output date") Date fromOutputDate, @RequestParam(required = false, name = "to output date") Date toOutputDate, @RequestParam(required = false) Integer count, @RequestParam(required = false, name = "from output price") Float fromOutputPrice, @RequestParam(required = false, name = "to output price") Float toOutputPrice, @RequestParam(required = false) String status, @RequestParam(required = false, name = "object name") String objectName, @RequestParam(required = false, name = "unit name") String unitName, @RequestParam(required = false, name = "customer name") String customerName) {
     try {
-      FilteredOutput filteredOutput = new FilteredOutput(id, infoId, objectId, customerId, fromOutputDate, toOutputDate, count, outputPrice, status, objectName, unitName, customerName);
+      FilteredOutput filteredOutput = new FilteredOutput(id, infoId, objectId, customerId, fromOutputDate, toOutputDate, count, fromOutputPrice, toOutputPrice, status, objectName, unitName, customerName);
       List<ResultOutput> result = outputService.getByFilter(filteredOutput);
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {

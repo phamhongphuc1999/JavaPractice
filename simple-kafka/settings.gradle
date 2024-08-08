@@ -12,3 +12,5 @@ plugins {
 
 rootProject.name = 'simple-kafka'
 include('app')
+include 'kafka-basic'
+

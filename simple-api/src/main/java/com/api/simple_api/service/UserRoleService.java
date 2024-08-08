@@ -16,4 +16,8 @@ public class UserRoleService {
   public List<UserRole> getByFilter(Long id, String displayName) {
     return userRoleRepository.getByFilter(id, displayName);
   }
+
+  public UserRole save(String displayName) {
+    return userRoleRepository.save(new UserRole(displayName));
+  }
 }

@@ -32,7 +32,7 @@ public class ObjectController {
   private ObjectService objectService;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false) String displayName, @RequestParam(required = false) Long unitId, @RequestParam(required = false) Long supplierId, @RequestParam(required = false) String qrCode, @RequestParam(required = false) String barCode) {
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false, name = "display name") String displayName, @RequestParam(required = false, name = "unit id") Long unitId, @RequestParam(required = false, name = "supplier id") Long supplierId, @RequestParam(required = false, name = "qr code") String qrCode, @RequestParam(required = false, name = "bar code") String barCode) {
     try {
       List<ObjectDto> objects = objectService.getByFilter(new FilteredObjectDto(id, displayName, unitId, supplierId, qrCode, barCode));
       return ResponseEntity.ok().body(new OkResponder(objects));
