@@ -1,17 +1,6 @@
-package com.api.simple_api.entity.dto;
+package com.api.simple_api.entity.dto_utils;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "user")
-public class User {
-  @Id
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
+public class FilteredUser {
   private Long id;
 
   public Long getId() {
@@ -22,7 +11,6 @@ public class User {
     this.id = id;
   }
 
-  @Column(name = "display_name")
   private String displayName;
 
   public String getDisplayName() {
@@ -33,7 +21,6 @@ public class User {
     this.displayName = displayName;
   }
 
-  @Column(name = "username")
   private String username;
 
   public String getUsername() {
@@ -44,7 +31,6 @@ public class User {
     this.username = username;
   }
 
-  @Column(name = "password")
   private String password;
 
   public String getPassword() {
@@ -55,7 +41,6 @@ public class User {
     this.password = password;
   }
 
-  @Column(name = "role_id")
   private Long roleId;
 
   public Long getRoleId() {
@@ -66,5 +51,10 @@ public class User {
     this.roleId = roleId;
   }
 
-  public User() {}
+  public FilteredUser(Long id, String displayName, String password, Long roleId) {
+    this.id = id;
+    this.displayName = displayName;
+    this.password = password;
+    this.roleId =roleId;
+  }
 }

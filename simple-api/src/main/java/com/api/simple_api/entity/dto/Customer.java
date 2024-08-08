@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.api.simple_api.entity.dto_utils.NewCustomer;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -94,4 +96,13 @@ public class Customer {
   }
 
   public Customer() {}
+
+  public Customer(NewCustomer entity) {
+    this.displayName = entity.getDisplayName();
+    this.address = entity.getAddress();
+    this.phone = entity.getPhone();
+    this.email = entity.getEmail();
+    this.moreInfo = entity.getMoreInfo();
+    this.contractDate = new Date();
+  }
 }

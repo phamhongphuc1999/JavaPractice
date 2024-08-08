@@ -2,6 +2,7 @@
 
 ## Project
 
-| Project                     | Description                                 |
-| :-------------------------- | :------------------------------------------ |
-| [simple-api](./simple-api/) | Simple api using maven and java spring boot |
+| Project                         | Description                                 |
+| :------------------------------ | :------------------------------------------ |
+| [simple-api](./simple-api/)     | Simple api using maven and java spring boot |
+| [simple-kafka](./simple-kafka/) | Simple kafka                                |

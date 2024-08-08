@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.simple_api.entity.common.FailResponder;
@@ -27,9 +28,9 @@ public class UserRoleController {
   private UserRoleService userRoleService;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter() {
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false) String displayName) {
     try {
-      List<UserRole> result = userRoleService.getByFilter();
+      List<UserRole> result = userRoleService.getByFilter(id, displayName);
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));

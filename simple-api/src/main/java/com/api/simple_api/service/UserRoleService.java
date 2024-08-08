@@ -13,7 +13,7 @@ public class UserRoleService {
   @Autowired
   private UserRoleRepository userRoleRepository;
 
-  public List<UserRole> getByFilter() {
-    return userRoleRepository.getByFilter();
+  public List<UserRole> getByFilter(Long id, String displayName) {
+    return userRoleRepository.getByFilter(id, displayName);
   }
 }
