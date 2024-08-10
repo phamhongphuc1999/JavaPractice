@@ -26,7 +26,8 @@ public interface OutputRepository extends JpaRepository<Output, UUID> {
   "(:#{#filteredOutput.customerId} IS NULL OR cs.id=:#{#filteredOutput.customerId}) AND " + 
   "(:#{#filteredOutput.fromOutputDate} IS NULL OR op.outputDate>=:#{#filteredOutput.fromOutputDate}) AND " +
   "(:#{#filteredOutput.toOutputDate} IS NULL OR op.outputDate<=:#{#filteredOutput.toOutputDate}) AND " +
-  "(:#{#filteredOutput.count} IS NULL OR oin.count=:#{#filteredOutput.count}) AND " +
+  "(:#{#filteredOutput.fromCount} IS NULL OR oin.count>=:#{#filteredOutput.fromCount}) AND " +
+  "(:#{#filteredOutput.toCount} IS NULL OR oin.count<=:#{#filteredOutput.toCount}) AND " +
   "(:#{#filteredOutput.fromOutputPrice} IS NULL OR oin.outputPrice>=:#{#filteredOutput.fromOutputPrice}) AND " +
   "(:#{#filteredOutput.toOutputPrice} IS NULL OR oin.outputPrice>=:#{#filteredOutput.toOutputPrice}) AND " +
   "(:#{#filteredOutput.status} IS NULL OR oin.status=:#{#filteredOutput.status}) AND " +

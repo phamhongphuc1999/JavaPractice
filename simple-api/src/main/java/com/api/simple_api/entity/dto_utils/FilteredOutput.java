@@ -68,14 +68,24 @@ public class FilteredOutput {
     this.toOutputDate = toOutputDate;
   }
 
-  private Integer count;
+  private Integer fromCount;
 
-  public Integer getCount() {
-    return count;
+  public Integer getFromCount() {
+    return fromCount;
   }
 
-  public void setCount(Integer count) {
-    this.count = count;
+  public void setFromCount(Integer fromCount) {
+    this.fromCount = fromCount;
+  }
+
+  private Integer toCount;
+
+  public Integer getToCount() {
+    return toCount;
+  }
+
+  public void setToCount(Integer toCount) {
+    this.toCount = toCount;
   }
 
   private Float fromOutputPrice;
@@ -140,14 +150,15 @@ public class FilteredOutput {
 
   public FilteredOutput() {}
 
-  public FilteredOutput(UUID id, UUID infoId, Long objectId, Long customerId, Date fromOutputDate, Date toOutputDate, Integer count, Float fromOutputPrice, Float toOutputPrice, String status, String objectName, String unitName, String customerName) {
+  public FilteredOutput(UUID id, UUID infoId, Long objectId, Long customerId, Date fromOutputDate, Date toOutputDate, Integer fromCount, Integer toCount, Float fromOutputPrice, Float toOutputPrice, String status, String objectName, String unitName, String customerName) {
     this.id = id;
     this.infoId = infoId;
     this.objectId = objectId;
     this.customerId = customerId;
     this.fromOutputDate = fromOutputDate;
     this.toOutputDate = toOutputDate;
-    this.count = count;
+    this.fromCount = fromCount;
+    this.toCount = toCount;
     this.fromOutputPrice = fromOutputPrice;
     this.toOutputPrice = toOutputPrice;
     this.status = status;

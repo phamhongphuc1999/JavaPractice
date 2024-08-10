@@ -1,4 +1,4 @@
-PROJECT_NAME=java_simple_api
+PROJECT_NAME=java_practice
 
 # colors
 GREEN = $(shell tput -Txterm setaf 2)

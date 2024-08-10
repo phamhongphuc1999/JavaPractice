@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.simple_api.entity.common.Responder;
 import com.api.simple_api.entity.common.OkResponder;
+import com.api.simple_api.entity.common.Responder;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 

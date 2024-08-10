@@ -8,7 +8,7 @@ buildd:
 run:
 	mvn spring-boot:run
 
-## Dev.
+## Build and run.
 dev:
 	mvn clean install
 	mvn spring-boot:run
