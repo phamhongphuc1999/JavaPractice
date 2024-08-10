@@ -10,7 +10,7 @@ import com.api.simple_api.entity.dto_utils.FilteredObjectDto;
 import com.api.simple_api.repository.ObjectRepository;
 
 @Service
-public class ObjectService {
+public class ObjectDtoService {
   @Autowired
   private ObjectRepository objectRepository;
 

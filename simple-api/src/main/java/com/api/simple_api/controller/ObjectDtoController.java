@@ -19,7 +19,7 @@ import com.api.simple_api.entity.common.OkResponder;
 import com.api.simple_api.entity.dto.ObjectDto;
 import com.api.simple_api.entity.dto_utils.FilteredObjectDto;
 import com.api.simple_api.entity.dto_utils.NewObjectDto;
-import com.api.simple_api.service.ObjectService;
+import com.api.simple_api.service.ObjectDtoService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -27,9 +27,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/object")
-public class ObjectController {
+public class ObjectDtoController {
   @Autowired
-  private ObjectService objectService;
+  private ObjectDtoService objectService;
 
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false, name = "display name") String displayName, @RequestParam(required = false, name = "unit id") Long unitId, @RequestParam(required = false, name = "supplier id") Long supplierId, @RequestParam(required = false, name = "qr code") String qrCode, @RequestParam(required = false, name = "bar code") String barCode) {

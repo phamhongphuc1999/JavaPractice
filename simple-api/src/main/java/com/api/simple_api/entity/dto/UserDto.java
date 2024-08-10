@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class UserDto {
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
@@ -68,9 +68,9 @@ public class User {
     this.roleId = roleId;
   }
 
-  public User() {}
+  public UserDto() {}
 
-  public User(NewUser entity) {
+  public UserDto(NewUser entity) {
     this.displayName = entity.getDisplayName();
     this.username = entity.getUsername();
     this.password = entity.getPassword();

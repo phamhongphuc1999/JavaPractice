@@ -1,8 +1,8 @@
 package com.api.simple_api.entity.dto_utils;
 
-import com.api.simple_api.entity.dto.User;
+import com.api.simple_api.entity.dto.UserDto;
 
-public class ResultUser extends User {
+public class ResultUser extends UserDto {
   private String roleName;
 
   public String getRoleName() {

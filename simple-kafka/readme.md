@@ -52,4 +52,4 @@ make conduktor
 make panda
 ```
 
-2. Go to
+2. Go to `http://localhost:8080`
