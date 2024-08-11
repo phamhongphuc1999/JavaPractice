@@ -8,6 +8,13 @@ RESET = $(shell tput -Txterm sgr0)
 GRAY = $(shell tput -Txterm setaf 6)
 TARGET_MAX_CHAR_NUM = 20
 
+## Up Kafka cluster docker using conduktor config. | Docker
+conduktor:
+	docker-compose -f ../docker/conduktor-docker-compose.yaml up -d
+## Up Kafka cluster docker using only redpanda config.
+panda:
+	docker-compose -f ../docker/redpanda-docker-compose.yaml up -d
+
 ## Shows help. | Help
 help:
 	@echo ''

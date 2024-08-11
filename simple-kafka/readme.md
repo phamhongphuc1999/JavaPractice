@@ -53,3 +53,8 @@ make panda
 ```
 
 2. Go to `http://localhost:8080`
+
+### Real-world project
+
+-   Wikimedia Producer
+-   OpenSearch Consumer

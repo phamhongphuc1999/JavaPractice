@@ -1,1 +1,2 @@
 -   https://www.digitalocean.com/community/tutorials/install-maven-mac-os
+-   https://www.javainuse.com/spring/boot-jwt-mysql
