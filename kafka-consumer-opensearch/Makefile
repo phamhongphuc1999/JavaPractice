@@ -1,5 +1,9 @@
 include ../Makefile.mk
 
-## Up opensearch docker cluster using docker. | Docker
+## Up offcial opensearch docker cluster using docker. | Docker
 opensearch:
-	docker-compose -f ./opensearch-docker-compose.yaml up -d
+	docker-compose -f ./offcial-opensearch.yaml up -d
+
+## Up simple opensearch docker cluster using docker.
+simple:
+	docker-compose -f ./simple-opensearch.yaml up -d

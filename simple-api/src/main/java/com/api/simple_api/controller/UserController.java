@@ -26,8 +26,7 @@ import com.api.simple_api.entity.dto_utils.JwtResponseUser;
 import com.api.simple_api.entity.dto_utils.JwtUser;
 import com.api.simple_api.entity.dto_utils.NewUser;
 import com.api.simple_api.entity.dto_utils.ResultUser;
-import com.api.simple_api.service.JwtUserDetailsService;
-import com.api.simple_api.service.USerService;
+import com.api.simple_api.service.UserService;
 import com.api.simple_api.utils.JwtTokenUtil;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -39,20 +38,19 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/user")
 public class UserController {
   @Autowired
-  private USerService uSerService;
+  private UserService userService;
 
-	private AuthenticationManager authenticationManager;
-
-	@Autowired
-	private JwtTokenUtil jwtTokenUtil;
+  private AuthenticationManager authenticationManager;
 
   @Autowired
-	private JwtUserDetailsService userDetailsService;
+  private JwtTokenUtil jwtTokenUtil;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false, name = "display name") String displayName, @RequestParam(required = false) String password, @RequestParam(required = false, name = "role id") Long roleId) {
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id,
+      @RequestParam(required = false, name = "display name") String displayName,
+      @RequestParam(required = false) String password, @RequestParam(required = false, name = "role id") Long roleId) {
     try {
-      List<ResultUser> result = uSerService.getByFilter(new FilteredUser(id, displayName, password, roleId));
+      List<ResultUser> result = userService.getByFilter(new FilteredUser(id, displayName, password, roleId));
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
@@ -62,7 +60,7 @@ public class UserController {
   @PostMapping("")
   public ResponseEntity<Responder> save(@RequestBody NewUser entity) {
     try {
-      UserDto result = uSerService.save(new UserDto(entity));
+      UserDto result = userService.save(new UserDto(entity));
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
@@ -73,8 +71,8 @@ public class UserController {
   public ResponseEntity<Responder> login(@RequestBody JwtUser jwtUser) {
     try {
       authenticate(jwtUser.getUsername(), jwtUser.getPassword());
-      final UserDetails userDetails = userDetailsService
-				.loadUserByUsername(jwtUser.getUsername());
+      final UserDetails userDetails = userService
+          .loadUserByUsername(jwtUser.getUsername());
       final String token = jwtTokenUtil.generateToken(userDetails);
       return ResponseEntity.ok(new OkResponder(new JwtResponseUser(token)));
     } catch (Exception exception) {
@@ -83,12 +81,12 @@ public class UserController {
   }
 
   private void authenticate(String username, String password) throws Exception {
-		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-		} catch (DisabledException e) {
-			throw new Exception("USER_DISABLED", e);
-		} catch (BadCredentialsException e) {
-			throw new Exception("INVALID_CREDENTIALS", e);
-		}
-	}
+    try {
+      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+    } catch (DisabledException e) {
+      throw new Exception("USER_DISABLED", e);
+    } catch (BadCredentialsException e) {
+      throw new Exception("INVALID_CREDENTIALS", e);
+    }
+  }
 }
