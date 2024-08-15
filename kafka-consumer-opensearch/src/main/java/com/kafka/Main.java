@@ -2,7 +2,6 @@ package com.kafka;
 
 import java.io.IOException;
 import java.time.Duration;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Properties;
 
@@ -10,9 +9,11 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.errors.WakeupException;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.opensearch.action.bulk.BulkRequest;
+import org.opensearch.action.bulk.BulkResponse;
 import org.opensearch.action.index.IndexRequest;
-import org.opensearch.action.index.IndexResponse;
 import org.opensearch.client.RequestOptions;
 import org.opensearch.client.RestHighLevelClient;
 import org.opensearch.client.indices.CreateIndexRequest;
@@ -36,6 +37,7 @@ public class Main {
 		properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 		properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);
 		properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+		properties.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
 
 		// create a consumer
 		KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(properties);
@@ -49,6 +51,21 @@ public class Main {
 		RestHighLevelClient openSearchClient = CreateOpenSearchClient.create();
 
 		KafkaConsumer<String, String> consumer = createConsumer();
+
+		final Thread mainThread = Thread.currentThread();
+
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			public void run() {
+				log.info("Detected a shutdown, let's exit by calling consumer.wakeup()");
+				consumer.wakeup();
+
+				try {
+					mainThread.join();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 
 		try (openSearchClient; consumer) {
 			GetIndexRequest getIndexRequest = new GetIndexRequest("wikimedia");
@@ -68,18 +85,43 @@ public class Main {
 				int recordCount = records.count();
 				log.info("Received: " + recordCount + " record(s)");
 
+				BulkRequest bulkRequest = new BulkRequest();
+
 				for (ConsumerRecord<String, String> record : records) {
-					// send into OpenSearch
-					IndexRequest indexRequest = new IndexRequest("wikimedia").source(record.value(), XContentType.JSON);
+					try {
+						String id = JsonExtraction.extractId(record.value());
+						// send into OpenSearch
+						IndexRequest indexRequest = new IndexRequest("wikimedia").source(record.value(), XContentType.JSON).id(id);
 
-					IndexResponse response = openSearchClient.index(indexRequest, RequestOptions.DEFAULT);
+						bulkRequest.add(indexRequest);
 
-					log.info("Inserted 1 document into OpenSearch: " + response.getId());
+						// IndexResponse response = openSearchClient.index(indexRequest,
+						// RequestOptions.DEFAULT);
+
+						// log.info("Inserted 1 document: " + response.getId());
+					} catch (Exception exception) {
+						exception.printStackTrace();
+					}
+				}
+
+				if (bulkRequest.numberOfActions() > 0) {
+					BulkResponse bulkResponse = openSearchClient.bulk(bulkRequest, RequestOptions.DEFAULT);
+
+					log.info("Inserted: " + bulkResponse.getItems().length + " record(s)");
+
+					// commit offsets after the batch is consumed
+					consumer.commitSync();
+					log.info("Offsets have been committed");
 				}
 			}
+		} catch (WakeupException e) {
+			log.info("Consumer is starting to shutdown");
+		} catch (Exception e) {
+			log.error("Unexpected exception in the consumer", e);
+		} finally {
+			consumer.close();
+			openSearchClient.close();
+			log.info("Client is shutdown gracefully!");
 		}
-
-		// close things
-		openSearchClient.close();
 	}
 }
