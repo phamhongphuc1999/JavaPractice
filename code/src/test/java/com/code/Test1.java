@@ -69,9 +69,26 @@ public class Test1 {
 
   @ParameterizedTest
   @DisplayName("Find the Index of the First Occurrence in a String")
-  @CsvSource({ "sadbutsad, sad, 0", "leetcode, leeto, -1", "abcabcabc, cab, 2", "a, a, 0" })
+  @CsvSource({ "sadbutsad, sad, 0", "leetcode, leeto, -1", "abcabcabc, cab, 2",
+      "a, a, 0" })
   void findTheIndex(String haystack, String needle, int expectedIndex) {
     int result = Simple.strStr(haystack, needle);
     assertEquals(result, expectedIndex);
+  }
+
+  @ParameterizedTest
+  @DisplayName("Longest Substring Without Repeating Characters")
+  @CsvSource({ "abcabcbb, 3", "bbbbb, 1", "pwwkew, 3" })
+  void longestSubstring(String s, int expectedLen) {
+    int result = LongestSubstringWithoutRepeat.lengthOfLongestSubstring(s);
+    assertEquals(result, expectedLen);
+  }
+
+  @ParameterizedTest
+  @DisplayName("Zigzag Conversion")
+  @CsvSource({ "PAYPALISHIRING, 3, PAHNAPLSIIGYIR", "PAYPALISHIRING, 4, PINALSIGYAHRPI", "A, 1, A" })
+  void zigzagConversion(String s, int rows, String expectedS) {
+    String result = Medium.convert(s, rows);
+    assertEquals(result, expectedS);
   }
 }

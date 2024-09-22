@@ -5,16 +5,16 @@ import java.util.Stack;
 public class LongestCommonPrefix {
   static String longestCommonPrefix(String[] strs) {
     String result = "";
-    Integer size = strs.length;
+    int size = strs.length;
     if (size == 0)
       return "";
     else if (size == 1)
       return strs[0];
-    Integer counter = 0;
+    int counter = 0;
     try {
       while (true) {
         char _s = strs[0].charAt(counter);
-        for (Integer i = 1; i < size; i++) {
+        for (int i = 1; i < size; i++) {
           char _si = strs[i].charAt(counter);
           if (_s != _si)
             return result;
@@ -37,11 +37,11 @@ public class LongestCommonPrefix {
       else if (c == '[')
         stack.push(3);
       else {
-        Integer size = stack.size();
+        int size = stack.size();
         if (size == 0)
           return false;
-        Integer check = c == '}' ? 1 : c == ')' ? 2 : 3;
-        Integer n = stack.pop();
+        int check = c == '}' ? 1 : c == ')' ? 2 : 3;
+        int n = stack.pop();
         if (check != n)
           return false;
       }
