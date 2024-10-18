@@ -27,6 +27,13 @@ public class Test1 {
         Arguments.of(new int[] { 0, 1, 2, 2, 3, 0, 4, 2 }, 2, 5));
   }
 
+  private static Stream<Arguments> plusOne() {
+    return Stream.of(Arguments.of(new int[] { 9 }, new int[] { 1, 0 }),
+        Arguments.of(new int[] { 1, 2, 3 }, new int[] { 1, 2, 4 }),
+        Arguments.of(new int[] { 9, 9, 9 }, new int[] { 1, 0, 0, 0 }),
+        Arguments.of(new int[] { 1, 9, 1, 9 }, new int[] { 1, 9, 2, 0 }));
+  }
+
   @ParameterizedTest
   @DisplayName("Smallest window sliding")
   @CsvSource({ "ADOBECODEBANC, ABC, BANC", "AAAAA, A, A", "B, BB, ''" })
@@ -90,5 +97,19 @@ public class Test1 {
   void zigzagConversion(String s, int rows, String expectedS) {
     String result = Medium.convert(s, rows);
     assertEquals(result, expectedS);
+  }
+
+  @ParameterizedTest
+  @DisplayName("Plus one")
+  @MethodSource("plusOne")
+  void plusOneTest(int[] digits, int[] expectedResult) {
+    int[] result = Problem66.plusOne(digits);
+    int _len = result.length;
+    int _expectedLen = expectedResult.length;
+    assertEquals(_len, _expectedLen);
+    for (int i = 0; i < _len; i++) {
+      System.out.printf("i: " + result[i] + ", " + expectedResult[i]);
+      assertEquals(result[i], expectedResult[i]);
+    }
   }
 }

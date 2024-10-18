@@ -2,10 +2,9 @@ package com.code;
 
 public class Main {
 	public static void main(String[] args) {
-		String source = "ADOBECODEBANC";
-		String target = "ABC";
-
-		String _result = WindowSliding.minWindow(source, target);
-		System.out.println("result: " + _result + ", len: " + _result.length());
+		int[] result = Problem66.plusOne(new int[] { 1, 2, 3 });
+		for (int i : result) {
+			System.out.println(i);
+		}
 	}
 }
