@@ -2,7 +2,7 @@ package com.code;
 
 import java.util.Stack;
 
-public class LongestCommonPrefix {
+public class Problem14 {
   static String longestCommonPrefix(String[] str) {
     String result = "";
     int size = str.length;

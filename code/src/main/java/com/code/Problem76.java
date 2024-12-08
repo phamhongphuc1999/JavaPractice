@@ -3,7 +3,7 @@ package com.code;
 
 import java.util.Arrays;
 
-public class WindowSliding {
+public class Problem76 {
   static boolean isValid(String s, String p, int mid, int[] start) {
     int[] count = new int[256];
     Arrays.fill(count, 0);

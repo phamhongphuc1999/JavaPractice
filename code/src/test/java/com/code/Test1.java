@@ -38,15 +38,15 @@ public class Test1 {
   @DisplayName("Smallest window sliding")
   @CsvSource({ "ADOBECODEBANC, ABC, BANC", "AAAAA, A, A", "B, BB, ''" })
   void windowSliding(String source, String target, String expectedResult) {
-    String output = WindowSliding.minWindow(source, target);
+    String output = Problem76.minWindow(source, target);
     assertEquals(expectedResult, output);
   }
 
   @ParameterizedTest
   @DisplayName("Longest common prefix")
   @MethodSource("lcpData")
-  void longestCommonPrefix(String[] strs, String expectedResult) {
-    String result = LongestCommonPrefix.longestCommonPrefix(strs);
+  void problem14(String[] strs, String expectedResult) {
+    String result = Problem14.longestCommonPrefix(strs);
     assertEquals(expectedResult, result);
   }
 
@@ -54,7 +54,7 @@ public class Test1 {
   @DisplayName("Valid parentheses")
   @CsvSource({ "(), true", "([{)}], false", "()[]{}, true", "(, false" })
   void isValidParentheses(String s, boolean expectedResult) {
-    boolean result = LongestCommonPrefix.isValidParentheses(s);
+    boolean result = Problem14.isValidParentheses(s);
     assertEquals(expectedResult, result);
   }
 
@@ -87,7 +87,7 @@ public class Test1 {
   @DisplayName("Longest Substring Without Repeating Characters")
   @CsvSource({ "abcabcbb, 3", "bbbbb, 1", "pwwkew, 3" })
   void longestSubstring(String s, int expectedLen) {
-    int result = LongestSubstringWithoutRepeat.lengthOfLongestSubstring(s);
+    int result = Problem3.lengthOfLongestSubstring(s);
     assertEquals(result, expectedLen);
   }
 
@@ -97,6 +97,14 @@ public class Test1 {
   void zigzagConversion(String s, int rows, String expectedS) {
     String result = Medium.convert(s, rows);
     assertEquals(result, expectedS);
+  }
+
+  @ParameterizedTest
+  @DisplayName("Add binary")
+  @CsvSource({ "11, 1, 100", "1010, 1011, 10101" })
+  void addBinary(String a, String b, String expectedResult) {
+    String total = Simple.addBinary(a, b);
+    assertEquals(total, expectedResult);
   }
 
   @ParameterizedTest

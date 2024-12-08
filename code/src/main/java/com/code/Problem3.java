@@ -1,9 +1,8 @@
-/*https://leetcode.com/problems/longest-substring-without-repeating-characters/description/*/
 package com.code;
 
 import java.util.Arrays;
 
-public class LongestSubstringWithoutRepeat {
+public class Problem3 {
   static boolean isValid(String s, int mid) {
     int[] count = new int[256];
     Arrays.fill(count, 0);
