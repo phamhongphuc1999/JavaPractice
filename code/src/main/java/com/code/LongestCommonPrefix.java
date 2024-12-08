@@ -3,19 +3,19 @@ package com.code;
 import java.util.Stack;
 
 public class LongestCommonPrefix {
-  static String longestCommonPrefix(String[] strs) {
+  static String longestCommonPrefix(String[] str) {
     String result = "";
-    int size = strs.length;
+    int size = str.length;
     if (size == 0)
       return "";
     else if (size == 1)
-      return strs[0];
+      return str[0];
     int counter = 0;
     try {
       while (true) {
-        char _s = strs[0].charAt(counter);
+        char _s = str[0].charAt(counter);
         for (int i = 1; i < size; i++) {
-          char _si = strs[i].charAt(counter);
+          char _si = str[i].charAt(counter);
           if (_s != _si)
             return result;
         }

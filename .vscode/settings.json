@@ -1,6 +1,4 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive",
-    "java.compile.nullAnalysis.mode": "automatic",
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
     "editor.detectIndentation": false

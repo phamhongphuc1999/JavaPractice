@@ -22,10 +22,10 @@ public class OpenAPIConfiguration {
     myContact.setEmail("peterpresent");
 
     Info information = new Info()
-            .title("Symple API")
-            .version("1.0")
-            .description("")
-            .contact(myContact);
+        .title("Symple API")
+        .version("1.0")
+        .description("")
+        .contact(myContact);
     return new OpenAPI().info(information).servers(List.of(server));
   }
 }

@@ -2,10 +2,14 @@
 
 ## Run
 
+-   Setup step
+
+You must run both mongo and mysql first!
+
 -   1. Build project
 
 ```shell
-make build
+make buildd
 ```
 
 -   2. Run
@@ -33,6 +37,8 @@ docker exec -it dev_java_sql_container bash
 ```shell
 mysql -u root -p
 ```
+
+system will ask you enter password, please enter `java`
 
 -   3. Using java_app database
 

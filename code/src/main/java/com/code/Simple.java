@@ -1,29 +1,29 @@
 package com.code;
 
 public class Simple {
-  static int removeDuplicates(int[] nums) {
-    if (nums.length == 0)
+  static int removeDuplicates(int[] numList) {
+    if (numList.length == 0)
       return 0;
     int result = 0;
-    int currentValue = nums[0];
-    for (int n : nums) {
+    int currentValue = numList[0];
+    for (int n : numList) {
       if (currentValue != n) {
         result += 1;
         currentValue = n;
-        nums[result] = currentValue;
+        numList[result] = currentValue;
       }
     }
     return result + 1;
   }
 
-  static int removeElement(int[] nums, int val) {
-    if (nums.length == 0)
+  static int removeElement(int[] numList, int val) {
+    if (numList.length == 0)
       return 0;
     int result = -1;
-    for (int n : nums) {
+    for (int n : numList) {
       if (n != val) {
         result += 1;
-        nums[result] = n;
+        numList[result] = n;
       }
     }
     return result + 1;

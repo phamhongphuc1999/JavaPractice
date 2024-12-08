@@ -15,13 +15,14 @@ public class SimpleApiApplication {
 		SpringApplication.run(SimpleApiApplication.class, args);
 	}
 
+	@SuppressWarnings("unused")
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext context) {
 		return arg -> {
 			System.out.println("Let's inspect the beans provided by Spring Boot:");
 			String[] beanNames = context.getBeanDefinitionNames();
 			Arrays.sort(beanNames);
-			for (String beanName: beanNames) {
+			for (String beanName : beanNames) {
 				System.out.println(beanName);
 			}
 		};
