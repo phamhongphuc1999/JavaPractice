@@ -22,4 +22,34 @@ public class Medium {
     }
     return String.join("", temp);
   }
+
+  static String runLengthEncoding(String s) {
+    String result = "";
+    int counter = 0;
+    char c = s.charAt(0);
+    for (int i = 0; i < s.length(); i++) {
+      char test = s.charAt(i);
+      if (c == test)
+        counter++;
+      else {
+        result += String.format("%s%s", counter, c);
+        counter = 1;
+      }
+      c = test;
+    }
+    result += String.format("%s%s", counter, c);
+    return result;
+  }
+
+  // https://leetcode.com/problems/count-and-say/description/
+  static String countAndSay(int n) {
+    if (n == 1)
+      return "1";
+    String[] arr = new String[n];
+    arr[0] = "1";
+    for (int i = 1; i < n; i++) {
+      arr[i] = runLengthEncoding(arr[i - 1]);
+    }
+    return arr[n - 1];
+  }
 }
