@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 @Table(name = "unit")
 public class Unit {
   @Id
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   public Long getId() {
@@ -33,13 +33,14 @@ public class Unit {
     this.displayName = displayName;
   }
 
-  public Unit() {}
+  public Unit() {
+  }
 
-  public Unit (String displayName) {
+  public Unit(String displayName) {
     this.displayName = displayName;
   }
 
-  public Unit (Long id, String displayName) {
+  public Unit(Long id, String displayName) {
     this.id = id;
     this.displayName = displayName;
   }

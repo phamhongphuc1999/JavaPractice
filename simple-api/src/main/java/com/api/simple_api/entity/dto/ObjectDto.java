@@ -14,8 +14,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "object")
 public class ObjectDto {
-  @Id 
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   public Long getId() {
@@ -38,7 +38,7 @@ public class ObjectDto {
   }
 
   @ManyToOne
-  @JoinColumn(name =  "unit_id")
+  @JoinColumn(name = "unit_id")
   private Unit unit;
 
   public Unit getUnit() {
@@ -94,9 +94,11 @@ public class ObjectDto {
     this.barCode = barCode;
   }
 
-  public ObjectDto() {}
+  public ObjectDto() {
+  }
 
-  public ObjectDto(Long id, String displayName, Unit unit, Supplier supplier, Integer count, String qrCode, String barCode) {
+  public ObjectDto(Long id, String displayName, Unit unit, Supplier supplier, Integer count, String qrCode,
+      String barCode) {
     this.id = id;
     this.displayName = displayName;
     this.unit = unit;

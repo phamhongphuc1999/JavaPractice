@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.simple_api.entity.common.FailResponder;
-import com.api.simple_api.entity.common.Responder;
 import com.api.simple_api.entity.common.OkResponder;
+import com.api.simple_api.entity.common.Responder;
 import com.api.simple_api.entity.dto.Input;
 import com.api.simple_api.entity.dto.InputInfo;
 import com.api.simple_api.entity.dto_utils.FilteredInput;
@@ -38,9 +38,18 @@ public class InputController {
   private InputService inputService;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) UUID id, @RequestParam(required = false, name = "input id") UUID infoId, @RequestParam(required = false) Long objectId, @RequestParam(required = false, name = "from input date") Date fromInputDate, @RequestParam(required = false, name = "to input date") Date toInputDate, @RequestParam(required = false, name = "from count") Integer fromCount, @RequestParam(required = false, name = "to count") Integer toCount, @RequestParam(required = false, name = "from input price") Float fromInputPrice, @RequestParam(required = false, name = "to input price") Float toInputPrice, @RequestParam(required = false) String status) {
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) UUID id,
+      @RequestParam(required = false, name = "input id") UUID infoId, @RequestParam(required = false) Long objectId,
+      @RequestParam(required = false, name = "from input date") Date fromInputDate,
+      @RequestParam(required = false, name = "to input date") Date toInputDate,
+      @RequestParam(required = false, name = "from count") Integer fromCount,
+      @RequestParam(required = false, name = "to count") Integer toCount,
+      @RequestParam(required = false, name = "from input price") Float fromInputPrice,
+      @RequestParam(required = false, name = "to input price") Float toInputPrice,
+      @RequestParam(required = false) String status) {
     try {
-      FilteredInput filteredInput = new FilteredInput(id, infoId, objectId, fromInputDate, toInputDate, fromCount, toCount, fromInputPrice, toInputPrice, status);
+      FilteredInput filteredInput = new FilteredInput(id, infoId, objectId, fromInputDate, toInputDate, fromCount,
+          toCount, fromInputPrice, toInputPrice, status);
       List<ResultInput> result = inputService.getByFilter(filteredInput);
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
@@ -59,5 +68,5 @@ public class InputController {
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
-  } 
+  }
 }

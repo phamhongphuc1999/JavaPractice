@@ -33,9 +33,15 @@ public class CustomerController {
   private CustomerService customerService;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false, name = "display name") String displayName, @RequestParam(required = false) String address, @RequestParam(required = false) String phone, @RequestParam(required = false) String email, @RequestParam(required = false) String moreInfo, @RequestParam(required = false, name = "from contract date") Date fromContractDate, @RequestParam(required = false, name = "to contract date") Date toContractDate) {
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id,
+      @RequestParam(required = false, name = "display name") String displayName,
+      @RequestParam(required = false) String address, @RequestParam(required = false) String phone,
+      @RequestParam(required = false) String email, @RequestParam(required = false) String moreInfo,
+      @RequestParam(required = false, name = "from contract date") Date fromContractDate,
+      @RequestParam(required = false, name = "to contract date") Date toContractDate) {
     try {
-      FilteredCustomer filteredCustomer = new FilteredCustomer(id, displayName, address, phone, email, moreInfo, fromContractDate, toContractDate);
+      FilteredCustomer filteredCustomer = new FilteredCustomer(id, displayName, address, phone, email, moreInfo,
+          fromContractDate, toContractDate);
       List<Customer> result = customerService.getByFilter(filteredCustomer);
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {

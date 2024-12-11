@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 @Table(name = "input_info")
 public class InputInfo {
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID) 
+  @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
   public UUID getId() {
@@ -81,7 +81,8 @@ public class InputInfo {
     this.status = status;
   }
 
-  public InputInfo() {}
+  public InputInfo() {
+  }
 
   public InputInfo(NewInput entity, UUID inputId) {
     this.objectId = entity.getObjectId();

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.simple_api.entity.common.FailResponder;
-import com.api.simple_api.entity.common.Responder;
 import com.api.simple_api.entity.common.OkResponder;
+import com.api.simple_api.entity.common.Responder;
 import com.api.simple_api.entity.dto.Unit;
 import com.api.simple_api.entity.dto_utils.NewUnit;
 import com.api.simple_api.service.UnitService;
@@ -31,11 +31,12 @@ public class UnitController {
   private UnitService unitService;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false, name = "Display name") String displayName) {
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id,
+      @RequestParam(required = false, name = "Display name") String displayName) {
     try {
       List<Unit> units = unitService.getByFilter(new Unit(id, displayName));
       return ResponseEntity.ok().body(new OkResponder(units));
-    } catch(Exception exception) {
+    } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   }

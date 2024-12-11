@@ -29,7 +29,8 @@ public class UserRoleController {
   private UserRoleService userRoleService;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false, name = "display name") String displayName) {
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id,
+      @RequestParam(required = false, name = "display name") String displayName) {
     try {
       List<UserRole> result = userRoleService.getByFilter(id, displayName);
       return ResponseEntity.ok().body(new OkResponder(result));

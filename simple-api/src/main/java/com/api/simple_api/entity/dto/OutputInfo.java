@@ -92,7 +92,8 @@ public class OutputInfo {
     this.status = status;
   }
 
-  public OutputInfo() {}
+  public OutputInfo() {
+  }
 
   public OutputInfo(NewOutput entity, UUID outputId) {
     this.objectId = entity.getObjectId();
@@ -100,6 +101,6 @@ public class OutputInfo {
     this.customerId = entity.getCustomerId();
     this.count = entity.getCount();
     this.outputPrice = entity.getOutputPrice();
-    this.status = entity.getStatus(); 
+    this.status = entity.getStatus();
   }
 }

@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 @Table(name = "user_role")
 public class UserRole {
   @Id
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   public Long getId() {
@@ -33,7 +33,8 @@ public class UserRole {
     this.displayName = displayName;
   }
 
-  public UserRole() {}
+  public UserRole() {
+  }
 
   public UserRole(String displayName) {
     this.displayName = displayName;

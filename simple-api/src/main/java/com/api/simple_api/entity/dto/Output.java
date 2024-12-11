@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 @Table(name = "output")
 public class Output {
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID) 
+  @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
   public UUID getId() {
@@ -39,7 +39,8 @@ public class Output {
     this.outputDate = outputDate;
   }
 
-  public Output() {}
+  public Output() {
+  }
 
   public Output(Date outputDate) {
     this.outputDate = outputDate;

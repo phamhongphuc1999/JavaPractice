@@ -108,7 +108,8 @@ public class FilteredInput {
     this.status = status;
   }
 
-  public FilteredInput(UUID id, UUID infoId, Long objectId, Date fromInputDate, Date toInputDate, Integer fromCount, Integer toCount, Float fromInputPrice, Float toInputPrice, String status) {
+  public FilteredInput(UUID id, UUID infoId, Long objectId, Date fromInputDate, Date toInputDate, Integer fromCount,
+      Integer toCount, Float fromInputPrice, Float toInputPrice, String status) {
     this.id = id;
     this.infoId = infoId;
     this.objectId = objectId;

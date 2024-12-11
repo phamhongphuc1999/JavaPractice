@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
@@ -17,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.simple_api.entity.common.FailResponder;
-import com.api.simple_api.entity.common.Responder;
 import com.api.simple_api.entity.common.OkResponder;
+import com.api.simple_api.entity.common.Responder;
 import com.api.simple_api.entity.dto.Output;
 import com.api.simple_api.entity.dto.OutputInfo;
 import com.api.simple_api.entity.dto_utils.FilteredOutput;
@@ -26,7 +27,6 @@ import com.api.simple_api.entity.dto_utils.NewOutput;
 import com.api.simple_api.entity.dto_utils.ResultOutput;
 import com.api.simple_api.service.OutputService;
 
-import org.javatuples.Pair;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Output", description = "Output description")
@@ -38,9 +38,23 @@ public class OutputController {
   private OutputService outputService;
 
   @GetMapping
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) UUID id, @RequestParam(required = false, name = "output id") UUID infoId, @RequestParam(required = false, name = "object id") Long objectId, @RequestParam(required = false, name = "customer id") Long customerId, @RequestParam(required = false, name = "from output date") Date fromOutputDate, @RequestParam(required = false, name = "to output date") Date toOutputDate, @RequestParam(required = false, name = "from count") Integer fromCount, @RequestParam(required = false, name = "to count") Integer toCount, @RequestParam(required = false, name = "from output price") Float fromOutputPrice, @RequestParam(required = false, name = "to output price") Float toOutputPrice, @RequestParam(required = false) String status, @RequestParam(required = false, name = "object name") String objectName, @RequestParam(required = false, name = "unit name") String unitName, @RequestParam(required = false, name = "customer name") String customerName) {
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) UUID id,
+      @RequestParam(required = false, name = "output id") UUID infoId,
+      @RequestParam(required = false, name = "object id") Long objectId,
+      @RequestParam(required = false, name = "customer id") Long customerId,
+      @RequestParam(required = false, name = "from output date") Date fromOutputDate,
+      @RequestParam(required = false, name = "to output date") Date toOutputDate,
+      @RequestParam(required = false, name = "from count") Integer fromCount,
+      @RequestParam(required = false, name = "to count") Integer toCount,
+      @RequestParam(required = false, name = "from output price") Float fromOutputPrice,
+      @RequestParam(required = false, name = "to output price") Float toOutputPrice,
+      @RequestParam(required = false) String status,
+      @RequestParam(required = false, name = "object name") String objectName,
+      @RequestParam(required = false, name = "unit name") String unitName,
+      @RequestParam(required = false, name = "customer name") String customerName) {
     try {
-      FilteredOutput filteredOutput = new FilteredOutput(id, infoId, objectId, customerId, fromOutputDate, toOutputDate, fromCount, toCount, fromOutputPrice, toOutputPrice, status, objectName, unitName, customerName);
+      FilteredOutput filteredOutput = new FilteredOutput(id, infoId, objectId, customerId, fromOutputDate, toOutputDate,
+          fromCount, toCount, fromOutputPrice, toOutputPrice, status, objectName, unitName, customerName);
       List<ResultOutput> result = outputService.getByFilter(filteredOutput);
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {

@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
 @Table(name = "supplier")
 public class Supplier {
   @Id
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   public Long getId() {
@@ -95,7 +95,8 @@ public class Supplier {
     this.contractDate = contractDate;
   }
 
-  public Supplier() {}
+  public Supplier() {
+  }
 
   public Supplier(String displayName, String address, String phone, String email, String moreInfo, Date contractDate) {
     this.displayName = displayName;

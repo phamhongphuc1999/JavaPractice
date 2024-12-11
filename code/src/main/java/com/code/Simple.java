@@ -154,4 +154,21 @@ public class Simple {
     }
     return arr[n];
   }
+
+  static ListNode deleteDuplicates(ListNode head) {
+    if (head == null)
+      return null;
+    ListNode result = new ListNode(head.val);
+    ListNode resultTail = result;
+    ListNode pointer = head.next;
+    while (pointer != null) {
+      if (pointer.val != resultTail.val) {
+        ListNode temp = new ListNode(pointer.val);
+        resultTail.next = temp;
+        resultTail = temp;
+      }
+      pointer = pointer.next;
+    }
+    return result;
+  }
 }

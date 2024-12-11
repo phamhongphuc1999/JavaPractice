@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.simple_api.entity.common.FailResponder;
-import com.api.simple_api.entity.common.Responder;
 import com.api.simple_api.entity.common.OkResponder;
+import com.api.simple_api.entity.common.Responder;
 import com.api.simple_api.entity.dto.Supplier;
 import com.api.simple_api.entity.dto_utils.FilteredSupplier;
 import com.api.simple_api.entity.dto_utils.NewSupplier;
@@ -33,11 +33,18 @@ public class SupplierController {
   public SupplierService supplierService;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id, @RequestParam(required = false, name = "display name") String displayName, @RequestParam(required = false) String address, @RequestParam(required = false) String phone, @RequestParam(required = false) String email, @RequestParam(required = false, name = "more information") String moreInfo, @RequestParam(required = false, name = "from contract date") Date fromContractDate, @RequestParam(required = false, name = "to contract date") Date toContractDate) {
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id,
+      @RequestParam(required = false, name = "display name") String displayName,
+      @RequestParam(required = false) String address, @RequestParam(required = false) String phone,
+      @RequestParam(required = false) String email,
+      @RequestParam(required = false, name = "more information") String moreInfo,
+      @RequestParam(required = false, name = "from contract date") Date fromContractDate,
+      @RequestParam(required = false, name = "to contract date") Date toContractDate) {
     try {
-      List<Supplier> suppliers = supplierService.getByFilter(new FilteredSupplier(id, displayName, address, phone, email, moreInfo, fromContractDate, toContractDate));
+      List<Supplier> suppliers = supplierService.getByFilter(
+          new FilteredSupplier(id, displayName, address, phone, email, moreInfo, fromContractDate, toContractDate));
       return ResponseEntity.ok().body(new OkResponder(suppliers));
-    } catch(Exception exception) {
+    } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   }

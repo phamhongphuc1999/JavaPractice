@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 @Table(name = "user")
 public class UserDto {
   @Id
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   public Long getId() {
@@ -68,7 +68,8 @@ public class UserDto {
     this.roleId = roleId;
   }
 
-  public UserDto() {}
+  public UserDto() {
+  }
 
   public UserDto(NewUser entity) {
     this.displayName = entity.getDisplayName();

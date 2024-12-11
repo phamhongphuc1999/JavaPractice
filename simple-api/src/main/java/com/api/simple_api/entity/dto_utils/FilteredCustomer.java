@@ -87,7 +87,8 @@ public class FilteredCustomer {
     this.toContractDate = toContractDate;
   }
 
-  public FilteredCustomer(Long id, String displayName, String address, String phone, String email, String moreInfo, Date fromContractDate, Date toContractDate) {
+  public FilteredCustomer(Long id, String displayName, String address, String phone, String email, String moreInfo,
+      Date fromContractDate, Date toContractDate) {
     this.id = id;
     this.displayName = displayName;
     this.address = address;
