@@ -37,6 +37,6 @@ public class InputService {
     InputInfo newInputInfo = new InputInfo(entity, savedInput.getId());
     InputInfo savedInputInfo = inputInfoRepository.save(newInputInfo);
     objectRepository.increaseCount(entity.getObjectId(), entity.getCount());
-    return new Pair<Input,InputInfo>(savedInput, savedInputInfo);
+    return new Pair<Input, InputInfo>(savedInput, savedInputInfo);
   }
 }

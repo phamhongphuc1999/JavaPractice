@@ -1,4 +1,4 @@
-package com.order.config;
+package com.example.config;
 
 public class Constance {
   public static enum ResponderStatus {

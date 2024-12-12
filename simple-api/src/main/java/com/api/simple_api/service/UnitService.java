@@ -13,7 +13,6 @@ public class UnitService {
   @Autowired
   private UnitRepository unitRepository;
 
-
   public List<Unit> getByFilter(Unit filteredUnit) {
     return unitRepository.getByFilter(filteredUnit);
   }

@@ -38,7 +38,7 @@ GO
 CREATE TABLE object (
   id BINARY(16) NOT NULL,
   display_name VARCHAR(50),
-  unitId INT NOT NULL,
+  unit_id INT NOT NULL,
   supplier_id INT NOT NULL,
   count INT,
   qr_code VARCHAR(200),
@@ -68,16 +68,16 @@ CREATE TABLE user (
 GO
 
 CREATE TABLE input (
-  id UUID NOT NULL,
+  id CHAR(36) NOT NULL,
   input_date DATETIME,
   PRIMARY KEY (id)
 );
 GO
 
 CREATE TABLE input_info (
-  id UUID NOT NULL,
+  id CHAR(36) NOT NULL,
   object_id BINARY(16) NOT NULL,
-  input_id VARCHAR(128) NOT NULL,
+  input_id CHAR(36) NOT NULL,
   count INT,
   input_price FLOAT DEFAULT 0,
   status VARCHAR(10),
@@ -88,16 +88,16 @@ CREATE TABLE input_info (
 GO
 
 CREATE TABLE output (
-  id UUID NOT NULL,
+  id CHAR(36) NOT NULL,
   output_date DATETIME,
   PRIMARY KEY (id)
 );
 GO
 
 CREATE TABLE output_info (
-  id UUID NOT NULL,
+  id CHAR(36) NOT NULL,
   object_id BINARY(16) NOT NULL,
-  output_id VARCHAR(128) NOT NULL,
+  output_id CHAR(36) NOT NULL,
   customer_id INT NOT NULL,
   count INT,
   output_price FLOAT DEFAULT 0,
@@ -124,12 +124,12 @@ VALUES ("customer1", "address-c1", "234523501", "customer1@mail.com", "customer1
         ("customer2", "address-c2", "234523501", "customer2@mail.com", "customer2 more information", "2024-08-05 21:57:41.190000"),
         ("customer3", "address-c3", "234523501", "customer3@mail.com", "customer3 more information", "2024-08-05 21:57:41.190000");
 
-INSERT INTO object (display_name, unit_id, supplier_id, qr_code, bar_code)
-VALUES ("object1", 1, 1, "0x01", "0x01"),
-        ("object2", 2, 2, "0x02", "0x02"),
-        ("object3", 3, 2, "0x03", "0x03"),
-        ("object4", 1, 3, "0x04", "0x04"),
-        ("object5", 3, 1, "0x05", "0x05");
+INSERT INTO object (id, display_name, unit_id, supplier_id, qr_code, bar_code)
+VALUES (UUID_TO_BIN(UUID()), "object1", 1, 1, "0x01", "0x01"),
+        (UUID_TO_BIN(UUID()), "object2", 2, 2, "0x02", "0x02"),
+        (UUID_TO_BIN(UUID()), "object3", 3, 2, "0x03", "0x03"),
+        (UUID_TO_BIN(UUID()), "object4", 1, 3, "0x04", "0x04"),
+        (UUID_TO_BIN(UUID()), "object5", 3, 1, "0x05", "0x05");
 
 INSERT INTO user_role (display_name)
 VALUES ("user"),

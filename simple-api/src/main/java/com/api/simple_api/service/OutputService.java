@@ -38,7 +38,7 @@ public class OutputService {
   @SuppressWarnings("unused")
   public @Nullable Pair<Output, OutputInfo> save(NewOutput entity) {
     Optional<ObjectDto> testingObject = objectRepository.findById(entity.getObjectId());
-    if (testingObject == null) 
+    if (testingObject == null)
       return null;
     if (testingObject.get().getCount() < entity.getCount())
       return null;
@@ -47,6 +47,6 @@ public class OutputService {
     OutputInfo newOutputInfo = new OutputInfo(entity, savedOutput.getId());
     OutputInfo savedOutputInfo = outputInfoRepository.save(newOutputInfo);
     objectRepository.decreaseCount(entity.getObjectId(), entity.getCount());
-    return new Pair<Output,OutputInfo>(savedOutput, savedOutputInfo);
+    return new Pair<Output, OutputInfo>(savedOutput, savedOutputInfo);
   }
 }

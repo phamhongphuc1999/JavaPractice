@@ -1,5 +1,8 @@
 package com.code;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 public class Simple {
   static int removeDuplicates(int[] numList) {
     if (numList.length == 0)
@@ -168,6 +171,24 @@ public class Simple {
         resultTail = temp;
       }
       pointer = pointer.next;
+    }
+    return result;
+  }
+
+  // problem 2558
+  static long pickGifts(int[] gifts, int k) {
+    Comparator<Integer> descendingOrder = (a, b) -> b - a;
+    PriorityQueue<Integer> heap = new PriorityQueue<>(descendingOrder);
+    for (int item : gifts) {
+      heap.add(item);
+    }
+    for (int i = 0; i < k; i++) {
+      int item = heap.poll();
+      heap.add((int) Math.floor(Math.sqrt(item)));
+    }
+    long result = 0;
+    while (heap.size() > 0) {
+      result += heap.poll();
     }
     return result;
   }

@@ -2,7 +2,7 @@
 
 ## Run
 
--   Setup step
+-   Setup
 
 You must run both mongo and mysql first!
 
