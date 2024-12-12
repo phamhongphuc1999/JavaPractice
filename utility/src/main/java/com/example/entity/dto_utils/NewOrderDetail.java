@@ -1,23 +1,23 @@
 package com.example.entity.dto_utils;
 
 public class NewOrderDetail {
-  private Long productId;
+  private Integer productId;
 
-  public Long getProductId() {
+  public Integer getProductId() {
     return this.productId;
   }
 
-  public void setProductId(Long productId) {
+  public void setProductId(Integer productId) {
     this.productId = productId;
   }
 
-  private Long quantity;
+  private Integer quantity;
 
-  public Long getQuantity() {
+  public Integer getQuantity() {
     return this.quantity;
   }
 
-  public void setQuantity(Long quantity) {
+  public void setQuantity(Integer quantity) {
     this.quantity = quantity;
   }
 

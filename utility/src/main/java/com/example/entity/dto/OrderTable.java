@@ -18,27 +18,27 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "order_table")
-public class Order {
+public class OrderTable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private Integer id;
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
   @Column(name = "customer_id")
-  private Long customerId;
+  private Integer customerId;
 
-  public Long getCustomerId() {
+  public Integer getCustomerId() {
     return this.customerId;
   }
 
-  public void setCustomerId(Long customerId) {
+  public void setCustomerId(Integer customerId) {
     this.customerId = customerId;
   }
 
@@ -66,13 +66,13 @@ public class Order {
   }
 
   @Column(name = "total_amount")
-  private Long totalAmount;
+  private Integer totalAmount;
 
-  public Long getTotalAmount() {
+  public Integer getTotalAmount() {
     return this.totalAmount;
   }
 
-  public void setTotalAmount(Long totalAmount) {
+  public void setTotalAmount(Integer totalAmount) {
     this.totalAmount = totalAmount;
   }
 
@@ -112,14 +112,14 @@ public class Order {
     this.updateAt = updateAt;
   }
 
-  public Order() {
+  public OrderTable() {
   }
 
-  public Order(NewOrder newOrder) {
+  public OrderTable(NewOrder newOrder) {
     this.customerId = newOrder.getCustomerId();
     this.orderDate = newOrder.getOrderDate();
     this.status = Constance.OrderStatus.PENDING.toString();
-    this.totalAmount = (long) newOrder.getOrderDetails().size();
+    this.totalAmount = newOrder.getOrderDetails().size();
     this.paymentMethod.setId(newOrder.getPaymentMethodId());
     this.createAt = new Date();
   }

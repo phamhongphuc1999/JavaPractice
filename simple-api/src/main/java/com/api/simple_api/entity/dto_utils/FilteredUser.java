@@ -1,13 +1,13 @@
 package com.api.simple_api.entity.dto_utils;
 
 public class FilteredUser {
-  private Long id;
+  private Integer id;
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -41,20 +41,20 @@ public class FilteredUser {
     this.password = password;
   }
 
-  private Long roleId;
+  private Integer roleId;
 
-  public Long getRoleId() {
+  public Integer getRoleId() {
     return roleId;
   }
 
-  public void setRoleId(Long roleId) {
+  public void setRoleId(Integer roleId) {
     this.roleId = roleId;
   }
 
-  public FilteredUser(Long id, String displayName, String password, Long roleId) {
+  public FilteredUser(Integer id, String displayName, String password, Integer roleId) {
     this.id = id;
     this.displayName = displayName;
     this.password = password;
-    this.roleId =roleId;
+    this.roleId = roleId;
   }
 }

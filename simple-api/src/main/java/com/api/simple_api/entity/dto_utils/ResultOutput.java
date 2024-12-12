@@ -26,23 +26,23 @@ public class ResultOutput {
     this.infoId = infoId;
   }
 
-  private Long objectId;
+  private UUID objectId;
 
-  public Long getObjectId() {
+  public UUID getObjectId() {
     return objectId;
   }
 
-  public void setObjectId(Long objectId) {
+  public void setObjectId(UUID objectId) {
     this.objectId = objectId;
   }
 
-  private Long customerId;
+  private Integer customerId;
 
-  public Long getCustomerId() {
+  public Integer getCustomerId() {
     return customerId;
   }
 
-  public void setCustomerId(Long customerId) {
+  public void setCustomerId(Integer customerId) {
     this.customerId = customerId;
   }
 
@@ -127,7 +127,8 @@ public class ResultOutput {
     this.supplierName = supplierName;
   }
 
-  public ResultOutput(UUID id, UUID infoId, Long objectId, Long customerId, Date outputDate, Integer count, Float outputPrice, String status, String objectName, String unitName, String customerName, String supplierName) {
+  public ResultOutput(UUID id, UUID infoId, UUID objectId, Integer customerId, Date outputDate, Integer count,
+      Float outputPrice, String status, String objectName, String unitName, String customerName, String supplierName) {
     this.id = id;
     this.infoId = infoId;
     this.objectId = objectId;

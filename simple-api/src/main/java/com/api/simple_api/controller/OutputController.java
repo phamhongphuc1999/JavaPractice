@@ -40,8 +40,8 @@ public class OutputController {
   @GetMapping
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) UUID id,
       @RequestParam(required = false, name = "output id") UUID infoId,
-      @RequestParam(required = false, name = "object id") Long objectId,
-      @RequestParam(required = false, name = "customer id") Long customerId,
+      @RequestParam(required = false, name = "object id") UUID objectId,
+      @RequestParam(required = false, name = "customer id") Integer customerId,
       @RequestParam(required = false, name = "from output date") Date fromOutputDate,
       @RequestParam(required = false, name = "to output date") Date toOutputDate,
       @RequestParam(required = false, name = "from count") Integer fromCount,

@@ -39,7 +39,7 @@ public class InputController {
 
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) UUID id,
-      @RequestParam(required = false, name = "input id") UUID infoId, @RequestParam(required = false) Long objectId,
+      @RequestParam(required = false, name = "input id") UUID infoId, @RequestParam(required = false) UUID objectId,
       @RequestParam(required = false, name = "from input date") Date fromInputDate,
       @RequestParam(required = false, name = "to input date") Date toInputDate,
       @RequestParam(required = false, name = "from count") Integer fromCount,

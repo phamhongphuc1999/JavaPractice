@@ -1,6 +1,7 @@
 package com.api.simple_api.repository;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -14,7 +15,7 @@ import com.api.simple_api.entity.dto_utils.FilteredObjectDto;
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface ObjectRepository extends JpaRepository<ObjectDto, Long> {
+public interface ObjectRepository extends JpaRepository<ObjectDto, UUID> {
   @Query("SELECT o FROM ObjectDto o " +
       "LEFT JOIN Unit u ON o.unit.id=u.id " +
       "LEFT JOIN Supplier s ON o.supplier.id=s.id WHERE " +
@@ -29,10 +30,10 @@ public interface ObjectRepository extends JpaRepository<ObjectDto, Long> {
   @Modifying
   @Transactional
   @Query(value = "UPDATE object SET count = count + :increment WHERE id = :objectId", nativeQuery = true)
-  void increaseCount(@Param("objectId") Long objectId, @Param("increment") Integer increment);
+  void increaseCount(@Param("objectId") UUID objectId, @Param("increment") Integer increment);
 
   @Modifying
   @Transactional
   @Query(value = "UPDATE object SET count = count - :decrement WHERE id = :objectId", nativeQuery = true)
-  void decreaseCount(@Param("objectId") Long objectId, @Param("decrement") Integer decrement);
+  void decreaseCount(@Param("objectId") UUID objectId, @Param("decrement") Integer decrement);
 }

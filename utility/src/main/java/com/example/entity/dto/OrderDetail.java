@@ -1,5 +1,7 @@
 package com.example.entity.dto;
 
+import com.example.entity.dto_utils.NewOrderDetail;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,45 +14,45 @@ import jakarta.persistence.Table;
 public class OrderDetail {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private Integer id;
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
   @Column(name = "order_id")
-  private Long orderId;
+  private Integer orderId;
 
-  public Long getOrderId() {
+  public Integer getOrderId() {
     return this.orderId;
   }
 
-  public void setOrderId(Long orderId) {
+  public void setOrderId(Integer orderId) {
     this.orderId = orderId;
   }
 
   @Column(name = "product_id")
-  private Long productId;
+  private Integer productId;
 
-  public Long getProductId() {
+  public Integer getProductId() {
     return this.productId;
   }
 
-  public void setProductId(Long productId) {
+  public void setProductId(Integer productId) {
     this.productId = productId;
   }
 
-  private Long quantity;
+  private Integer quantity;
 
-  public Long getQuantity() {
+  public Integer getQuantity() {
     return this.quantity;
   }
 
-  public void setQuantity(Long quantity) {
+  public void setQuantity(Integer quantity) {
     this.quantity = quantity;
   }
 
@@ -62,5 +64,15 @@ public class OrderDetail {
 
   public void setPrice(Float price) {
     this.price = price;
+  }
+
+  public OrderDetail() {
+  }
+
+  public OrderDetail(NewOrderDetail newOrderDetail, Integer orderId) {
+    this.orderId = orderId;
+    this.productId = newOrderDetail.getProductId();
+    this.quantity = newOrderDetail.getQuantity();
+    this.price = newOrderDetail.getPrice();
   }
 }

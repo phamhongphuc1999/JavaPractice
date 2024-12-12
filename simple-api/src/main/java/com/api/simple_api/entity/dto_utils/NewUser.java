@@ -31,17 +31,17 @@ public class NewUser {
     this.password = password;
   }
 
-  private Long roleId;
+  private Integer roleId;
 
-  public Long getRoleId() {
+  public Integer getRoleId() {
     return roleId;
   }
 
-  public void setRoleId(Long roleId) {
+  public void setRoleId(Integer roleId) {
     this.roleId = roleId;
   }
 
-  public NewUser(String displayName, String username, String password, Long roleId) {
+  public NewUser(String displayName, String username, String password, Integer roleId) {
     this.displayName = displayName;
     this.username = username;
     this.password = password;

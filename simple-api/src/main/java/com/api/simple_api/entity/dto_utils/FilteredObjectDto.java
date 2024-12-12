@@ -1,13 +1,15 @@
 package com.api.simple_api.entity.dto_utils;
 
-public class FilteredObjectDto {
-  private Long id;
+import java.util.UUID;
 
-  public Long getId() {
+public class FilteredObjectDto {
+  private UUID id;
+
+  public UUID getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 
@@ -21,23 +23,23 @@ public class FilteredObjectDto {
     this.displayName = displayName;
   }
 
-  private Long unitId;
+  private Integer unitId;
 
-  public Long getUnitId() {
+  public Integer getUnitId() {
     return unitId;
   }
 
-  public void setUnitId(Long unitId) {
+  public void setUnitId(Integer unitId) {
     this.unitId = unitId;
   }
 
-  private Long supplierId;
+  private Integer supplierId;
 
-  public Long getSupplierId() {
+  public Integer getSupplierId() {
     return supplierId;
   }
 
-  public void setSupplierId(Long supplierId) {
+  public void setSupplierId(Integer supplierId) {
     this.supplierId = supplierId;
   }
 
@@ -61,7 +63,8 @@ public class FilteredObjectDto {
     this.barCode = barCode;
   }
 
-  public FilteredObjectDto(Long id, String displayName, Long unitId, Long supplierId, String qrCode, String barCode) {
+  public FilteredObjectDto(UUID id, String displayName, Integer unitId, Integer supplierId, String qrCode,
+      String barCode) {
     this.id = id;
     this.displayName = displayName;
     this.unitId = unitId;

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.api.simple_api.entity.dto.Unit;
 
 @Repository
-public interface UnitRepository extends JpaRepository<Unit, Long> {
+public interface UnitRepository extends JpaRepository<Unit, Integer> {
   @Query("SELECT u FROM Unit u WHERE " +
       "(:#{#filteredUnit.id} IS NULL OR u.id=:#{#filteredUnit.id}) AND " +
       "(:#{#filteredUnit.displayName} IS NULL OR u.displayName LIKE %:#{#filteredUnit.displayName}%)")

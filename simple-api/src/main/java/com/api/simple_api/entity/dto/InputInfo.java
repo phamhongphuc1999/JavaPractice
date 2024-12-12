@@ -27,13 +27,13 @@ public class InputInfo {
   }
 
   @Column(name = "object_id")
-  private Long objectId;
+  private UUID objectId;
 
-  public Long getObjectId() {
+  public UUID getObjectId() {
     return objectId;
   }
 
-  public void setObjectId(Long objectId) {
+  public void setObjectId(UUID objectId) {
     this.objectId = objectId;
   }
 

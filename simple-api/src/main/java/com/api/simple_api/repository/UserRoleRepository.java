@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.api.simple_api.entity.dto.UserRole;
 
 @Repository
-public interface UserRoleRepository extends JpaRepository<UserRole, Long> {
+public interface UserRoleRepository extends JpaRepository<UserRole, Integer> {
   @Query("SELECT ur FROM UserRole ur WHERE " +
       "(:id IS NULL OR ur.id=:id) AND " +
       "(:displayName IS NULL OR ur.displayName LIKE :displayName)")
-  List<UserRole> getByFilter(@Param("id") Long id, @Param("displayName") String displayName);
+  List<UserRole> getByFilter(@Param("id") Integer id, @Param("displayName") String displayName);
 }

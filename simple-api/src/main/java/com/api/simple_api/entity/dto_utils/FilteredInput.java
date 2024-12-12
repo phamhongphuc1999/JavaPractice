@@ -26,13 +26,13 @@ public class FilteredInput {
     this.infoId = infoId;
   }
 
-  private Long objectId;
+  private UUID objectId;
 
-  public Long getObjectId() {
+  public UUID getObjectId() {
     return objectId;
   }
 
-  public void setObjectId(Long objectId) {
+  public void setObjectId(UUID objectId) {
     this.objectId = objectId;
   }
 
@@ -108,7 +108,7 @@ public class FilteredInput {
     this.status = status;
   }
 
-  public FilteredInput(UUID id, UUID infoId, Long objectId, Date fromInputDate, Date toInputDate, Integer fromCount,
+  public FilteredInput(UUID id, UUID infoId, UUID objectId, Date fromInputDate, Date toInputDate, Integer fromCount,
       Integer toCount, Float fromInputPrice, Float toInputPrice, String status) {
     this.id = id;
     this.infoId = infoId;

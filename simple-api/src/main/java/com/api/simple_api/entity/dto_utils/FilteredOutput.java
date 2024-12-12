@@ -26,23 +26,23 @@ public class FilteredOutput {
     this.infoId = infoId;
   }
 
-  private Long objectId;
+  private UUID objectId;
 
-  public Long getObjectId() {
+  public UUID getObjectId() {
     return objectId;
   }
 
-  public void setObjectId(Long objectId) {
+  public void setObjectId(UUID objectId) {
     this.objectId = objectId;
   }
 
-  private Long customerId;
+  private Integer customerId;
 
-  public Long getCustomerId() {
+  public Integer getCustomerId() {
     return customerId;
   }
 
-  public void setCustomerId(Long customerId) {
+  public void setCustomerId(Integer customerId) {
     this.customerId = customerId;
   }
 
@@ -148,9 +148,13 @@ public class FilteredOutput {
     this.customerName = customerName;
   }
 
-  public FilteredOutput() {}
+  public FilteredOutput() {
+  }
 
-  public FilteredOutput(UUID id, UUID infoId, Long objectId, Long customerId, Date fromOutputDate, Date toOutputDate, Integer fromCount, Integer toCount, Float fromOutputPrice, Float toOutputPrice, String status, String objectName, String unitName, String customerName) {
+  public FilteredOutput(UUID id, UUID infoId, UUID objectId, Integer customerId, Date fromOutputDate,
+      Date toOutputDate,
+      Integer fromCount, Integer toCount, Float fromOutputPrice, Float toOutputPrice, String status, String objectName,
+      String unitName, String customerName) {
     this.id = id;
     this.infoId = infoId;
     this.objectId = objectId;

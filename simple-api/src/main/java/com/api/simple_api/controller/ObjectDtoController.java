@@ -1,6 +1,7 @@
 package com.api.simple_api.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -32,10 +33,10 @@ public class ObjectDtoController {
   private ObjectDtoService objectService;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id,
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) UUID id,
       @RequestParam(required = false, name = "display name") String displayName,
-      @RequestParam(required = false, name = "unit id") Long unitId,
-      @RequestParam(required = false, name = "supplier id") Long supplierId,
+      @RequestParam(required = false, name = "unit id") Integer unitId,
+      @RequestParam(required = false, name = "supplier id") Integer supplierId,
       @RequestParam(required = false, name = "qr code") String qrCode,
       @RequestParam(required = false, name = "bar code") String barCode) {
     try {

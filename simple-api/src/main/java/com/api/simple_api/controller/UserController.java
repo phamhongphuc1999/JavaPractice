@@ -46,9 +46,10 @@ public class UserController {
   private JwtTokenUtil jwtTokenUtil;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id,
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Integer id,
       @RequestParam(required = false, name = "display name") String displayName,
-      @RequestParam(required = false) String password, @RequestParam(required = false, name = "role id") Long roleId) {
+      @RequestParam(required = false) String password,
+      @RequestParam(required = false, name = "role id") Integer roleId) {
     try {
       List<ResultUser> result = userService.getByFilter(new FilteredUser(id, displayName, password, roleId));
       return ResponseEntity.ok().body(new OkResponder(result));

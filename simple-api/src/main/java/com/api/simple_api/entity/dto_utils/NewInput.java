@@ -1,13 +1,15 @@
 package com.api.simple_api.entity.dto_utils;
 
-public class NewInput {
-  private Long objectId;
+import java.util.UUID;
 
-  public Long getObjectId() {
+public class NewInput {
+  private UUID objectId;
+
+  public UUID getObjectId() {
     return objectId;
   }
 
-  public void setObjectId(Long objectId) {
+  public void setObjectId(UUID objectId) {
     this.objectId = objectId;
   }
 

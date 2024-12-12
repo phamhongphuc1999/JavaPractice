@@ -5,13 +5,13 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class FilteredCustomer {
-  private Long id;
+  private Integer id;
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -87,7 +87,7 @@ public class FilteredCustomer {
     this.toContractDate = toContractDate;
   }
 
-  public FilteredCustomer(Long id, String displayName, String address, String phone, String email, String moreInfo,
+  public FilteredCustomer(Integer id, String displayName, String address, String phone, String email, String moreInfo,
       Date fromContractDate, Date toContractDate) {
     this.id = id;
     this.displayName = displayName;

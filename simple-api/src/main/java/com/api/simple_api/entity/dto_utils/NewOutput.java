@@ -1,23 +1,25 @@
 package com.api.simple_api.entity.dto_utils;
 
-public class NewOutput {
-  private Long objectId;
+import java.util.UUID;
 
-  public Long getObjectId() {
+public class NewOutput {
+  private UUID objectId;
+
+  public UUID getObjectId() {
     return objectId;
   }
 
-  public void setObjectId(Long objectId) {
+  public void setObjectId(UUID objectId) {
     this.objectId = objectId;
   }
 
-  private Long customerId;
+  private Integer customerId;
 
-  public Long getCustomerId() {
+  public Integer getCustomerId() {
     return customerId;
   }
 
-  public void setCustomerId(Long customerId) {
+  public void setCustomerId(Integer customerId) {
     this.customerId = customerId;
   }
 

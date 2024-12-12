@@ -12,13 +12,13 @@ import jakarta.persistence.Table;
 public class Unit {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private Integer id;
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -40,7 +40,7 @@ public class Unit {
     this.displayName = displayName;
   }
 
-  public Unit(Long id, String displayName) {
+  public Unit(Integer id, String displayName) {
     this.id = id;
     this.displayName = displayName;
   }

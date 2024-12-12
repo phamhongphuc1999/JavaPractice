@@ -11,23 +11,23 @@ public class NewObjectDto {
     this.displayName = displayName;
   }
 
-  private Long unitId;
+  private Integer unitId;
 
-  public Long getUnitId() {
+  public Integer getUnitId() {
     return unitId;
   }
 
-  public void setUnitId(Long unitId) {
+  public void setUnitId(Integer unitId) {
     this.unitId = unitId;
   }
 
-  private Long supplierId;
+  private Integer supplierId;
 
-  public Long getSupplierId() {
+  public Integer getSupplierId() {
     return supplierId;
   }
 
-  public void setSupplierId(Long supplierId) {
+  public void setSupplierId(Integer supplierId) {
     this.supplierId = supplierId;
   }
 

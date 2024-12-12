@@ -14,13 +14,13 @@ import jakarta.persistence.Table;
 public class UserDto {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private Integer id;
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -58,13 +58,13 @@ public class UserDto {
   }
 
   @Column(name = "role_id")
-  private Long roleId;
+  private Integer roleId;
 
-  public Long getRoleId() {
+  public Integer getRoleId() {
     return roleId;
   }
 
-  public void setRoleId(Long roleId) {
+  public void setRoleId(Integer roleId) {
     this.roleId = roleId;
   }
 

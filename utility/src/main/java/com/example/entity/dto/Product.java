@@ -18,13 +18,13 @@ import jakarta.persistence.Table;
 public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private Integer id;
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -40,7 +40,7 @@ public class Product {
   }
 
   @ManyToOne
-  @JoinColumn(name = "supplier_id")
+  @JoinColumn(name = "supplier_id", referencedColumnName = "id")
   private Supplier supplier;
 
   public Supplier getSupplier() {
@@ -51,13 +51,13 @@ public class Product {
     this.supplier = supplier;
   }
 
-  private Long quantity;
+  private Integer quantity;
 
-  public Long getQuantity() {
+  public Integer getQuantity() {
     return this.quantity;
   }
 
-  public void setQuantity(Long quantity) {
+  public void setQuantity(Integer quantity) {
     this.quantity = quantity;
   }
 

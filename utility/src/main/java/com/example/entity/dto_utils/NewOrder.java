@@ -4,13 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 public class NewOrder {
-  private Long customerId;
+  private Integer customerId;
 
-  public Long getCustomerId() {
+  public Integer getCustomerId() {
     return this.customerId;
   }
 
-  public void setCustomerId(Long customerId) {
+  public void setCustomerId(Integer customerId) {
     this.customerId = customerId;
   }
 
@@ -34,13 +34,13 @@ public class NewOrder {
     this.orderDetails = orderDetails;
   }
 
-  private Long paymentMethodId;
+  private Integer paymentMethodId;
 
-  public Long getPaymentMethodId() {
+  public Integer getPaymentMethodId() {
     return this.paymentMethodId;
   }
 
-  public void setPaymentMethod(Long paymentMethodId) {
+  public void setPaymentMethod(Integer paymentMethodId) {
     this.paymentMethodId = paymentMethodId;
   }
 }

@@ -33,7 +33,7 @@ public class CustomerController {
   private CustomerService customerService;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id,
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Integer id,
       @RequestParam(required = false, name = "display name") String displayName,
       @RequestParam(required = false) String address, @RequestParam(required = false) String phone,
       @RequestParam(required = false) String email, @RequestParam(required = false) String moreInfo,

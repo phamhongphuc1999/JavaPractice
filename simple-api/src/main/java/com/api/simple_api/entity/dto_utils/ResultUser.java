@@ -13,7 +13,7 @@ public class ResultUser extends UserDto {
     this.roleName = roleName;
   }
 
-  public ResultUser(Long id, String displayName, String username, String password, Long roleId, String roleName) {
+  public ResultUser(Integer id, String displayName, String username, String password, Integer roleId, String roleName) {
     this.setId(id);
     this.setDisplayName(displayName);
     this.setUsername(username);

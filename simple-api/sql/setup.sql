@@ -68,16 +68,16 @@ CREATE TABLE user (
 GO
 
 CREATE TABLE input (
-  id CHAR(36) NOT NULL,
+  id BINARY(16) NOT NULL,
   input_date DATETIME,
   PRIMARY KEY (id)
 );
 GO
 
 CREATE TABLE input_info (
-  id CHAR(36) NOT NULL,
+  id BINARY(16) NOT NULL,
   object_id BINARY(16) NOT NULL,
-  input_id CHAR(36) NOT NULL,
+  input_id BINARY(16) NOT NULL,
   count INT,
   input_price FLOAT DEFAULT 0,
   status VARCHAR(10),
@@ -88,16 +88,16 @@ CREATE TABLE input_info (
 GO
 
 CREATE TABLE output (
-  id CHAR(36) NOT NULL,
+  id BINARY(16) NOT NULL,
   output_date DATETIME,
   PRIMARY KEY (id)
 );
 GO
 
 CREATE TABLE output_info (
-  id CHAR(36) NOT NULL,
+  id BINARY(16) NOT NULL,
   object_id BINARY(16) NOT NULL,
-  output_id CHAR(36) NOT NULL,
+  output_id BINARY(16) NOT NULL,
   customer_id INT NOT NULL,
   count INT,
   output_price FLOAT DEFAULT 0,

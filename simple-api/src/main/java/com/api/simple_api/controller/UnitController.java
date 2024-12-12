@@ -31,7 +31,7 @@ public class UnitController {
   private UnitService unitService;
 
   @GetMapping("")
-  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Long id,
+  public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Integer id,
       @RequestParam(required = false, name = "Display name") String displayName) {
     try {
       List<Unit> units = unitService.getByFilter(new Unit(id, displayName));

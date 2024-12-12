@@ -11,7 +11,7 @@ import com.api.simple_api.entity.dto.Supplier;
 import com.api.simple_api.entity.dto_utils.FilteredSupplier;
 
 @Repository
-public interface SupplierRepository extends JpaRepository<Supplier, Long> {
+public interface SupplierRepository extends JpaRepository<Supplier, Integer> {
   @Query("SELECT s FROM Supplier s WHERE " +
       "(:#{#filteredSupplier.id} IS NULL OR s.id=:#{#filteredSupplier.id}) AND " +
       "(:#{#filteredSupplier.displayName} IS NULL OR s.displayName LIKE %:#{#filteredSupplier.displayName}%) AND " +

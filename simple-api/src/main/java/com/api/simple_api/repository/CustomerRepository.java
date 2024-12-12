@@ -11,7 +11,7 @@ import com.api.simple_api.entity.dto.Customer;
 import com.api.simple_api.entity.dto_utils.FilteredCustomer;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+public interface CustomerRepository extends JpaRepository<Customer, Integer> {
   @Query("SELECT c FROM Customer c WHERE " +
       "(:#{#filteredCustomer.id} IS NULL OR c.id=:#{#filteredCustomer.id}) AND " +
       "(:#{#filteredCustomer.displayName} IS NULL OR c.displayName LIKE :#{#filteredCustomer.displayName}) AND " +

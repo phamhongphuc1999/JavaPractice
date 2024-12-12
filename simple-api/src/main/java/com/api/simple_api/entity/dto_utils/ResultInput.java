@@ -28,13 +28,13 @@ public class ResultInput {
     this.infoId = infoId;
   }
 
-  private Long objectId;
+  private UUID objectId;
 
-  public Long getObjectId() {
+  public UUID getObjectId() {
     return objectId;
   }
 
-  public void setObjectId(Long objectId) {
+  public void setObjectId(UUID objectId) {
     this.objectId = objectId;
   }
 
@@ -113,7 +113,8 @@ public class ResultInput {
     this.supplierName = supplierName;
   }
 
-  public ResultInput(UUID id, UUID infoId, Long objectId, Date inputDate, Integer count, Float inputPrice, String status, String objectName, String unitName, String supplierName) {
+  public ResultInput(UUID id, UUID infoId, UUID objectId, Date inputDate, Integer count, Float inputPrice,
+      String status, String objectName, String unitName, String supplierName) {
     this.id = id;
     this.infoId = infoId;
     this.objectId = objectId;

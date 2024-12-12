@@ -1,5 +1,7 @@
 package com.api.simple_api.entity.dto;
 
+import java.util.UUID;
+
 import com.api.simple_api.entity.dto_utils.NewObjectDto;
 
 import jakarta.persistence.Column;
@@ -16,13 +18,13 @@ import jakarta.persistence.Table;
 public class ObjectDto {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private UUID id;
 
-  public Long getId() {
+  public UUID getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 
@@ -97,7 +99,7 @@ public class ObjectDto {
   public ObjectDto() {
   }
 
-  public ObjectDto(Long id, String displayName, Unit unit, Supplier supplier, Integer count, String qrCode,
+  public ObjectDto(UUID id, String displayName, Unit unit, Supplier supplier, Integer count, String qrCode,
       String barCode) {
     this.id = id;
     this.displayName = displayName;

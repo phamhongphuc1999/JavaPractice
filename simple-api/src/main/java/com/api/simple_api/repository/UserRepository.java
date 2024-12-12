@@ -12,7 +12,7 @@ import com.api.simple_api.entity.dto_utils.FilteredUser;
 import com.api.simple_api.entity.dto_utils.ResultUser;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserDto, Long> {
+public interface UserRepository extends JpaRepository<UserDto, Integer> {
   @Query("SELECT new com.api.simple_api.entity.dto_utils.ResultUser(u.id, u.displayName, u.username, u.password, u.roleId, ur.displayName) FROM UserDto u LEFT JOIN UserRole ur ON ur.id=u.roleId WHERE "
       +
       "(:#{#filterUser.id} IS NULL OR u.id=:#{#filterUser.id}) AND " +

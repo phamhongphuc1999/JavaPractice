@@ -1,9 +1,16 @@
 package com.order.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.entity.dto.Order;
+import com.example.entity.dto.OrderTable;
+import com.example.entity.dto.OrderDetail;
+import com.example.entity.dto_utils.NewOrderDetail;
+import com.example.entity.dto_utils.SaveOrderResult;
+import com.order.repository.OrderDetailRepository;
 import com.order.repository.OrderRepository;
 
 @Service
@@ -11,7 +18,16 @@ public class OrderService {
   @Autowired
   private OrderRepository orderRepository;
 
-  public Order save(Order entity) {
-    return orderRepository.save(entity);
+  @Autowired
+  private OrderDetailRepository orderDetailRepository;
+
+  public SaveOrderResult save(OrderTable entity, List<NewOrderDetail> orderDetails) {
+    OrderTable newOrder = orderRepository.save(entity);
+    List<OrderDetail> list = new ArrayList<>();
+    for (NewOrderDetail item : orderDetails) {
+      list.add(new OrderDetail(item, newOrder.getId()));
+    }
+    List<OrderDetail> newOrderDetails = orderDetailRepository.saveAll(list);
+    return new SaveOrderResult(newOrder, newOrderDetails);
   }
 }
