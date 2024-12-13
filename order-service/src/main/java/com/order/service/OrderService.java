@@ -6,8 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.entity.dto.OrderTable;
 import com.example.entity.dto.OrderDetail;
+import com.example.entity.dto.OrderTable;
+import com.example.entity.dto_utils.FilteredOrder;
 import com.example.entity.dto_utils.NewOrderDetail;
 import com.example.entity.dto_utils.SaveOrderResult;
 import com.order.repository.OrderDetailRepository;
@@ -20,6 +21,10 @@ public class OrderService {
 
   @Autowired
   private OrderDetailRepository orderDetailRepository;
+
+  public List<OrderTable> getByFilter(FilteredOrder filteredOrder) {
+    return orderRepository.getByFilter(filteredOrder);
+  }
 
   public SaveOrderResult save(OrderTable entity, List<NewOrderDetail> orderDetails) {
     OrderTable newOrder = orderRepository.save(entity);

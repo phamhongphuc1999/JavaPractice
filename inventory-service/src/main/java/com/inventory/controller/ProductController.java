@@ -1,4 +1,4 @@
-package com.order.controller;
+package com.inventory.controller;
 
 import java.util.Date;
 import java.util.List;
@@ -17,33 +17,31 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.entity.common.FailResponder;
 import com.example.entity.common.OkResponder;
 import com.example.entity.common.Responder;
-import com.example.entity.dto.OrderTable;
-import com.example.entity.dto_utils.FilteredOrder;
-import com.example.entity.dto_utils.NewOrder;
-import com.example.entity.dto_utils.SaveOrderResult;
-import com.order.service.OrderService;
+import com.example.entity.dto.Product;
+import com.example.entity.dto_utils.FilteredProduct;
+import com.example.entity.dto_utils.NewProduct;
+import com.inventory.service.ProductService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Order", description = "Order")
+@Tag(name = "Product", description = "Product")
 @RestController
 @EnableAutoConfiguration
-@RequestMapping("/order")
-public class OrderController {
+@RequestMapping("/product")
+public class ProductController {
   @Autowired
-  private OrderService orderService;
+  private ProductService productService;
 
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Integer id,
-      @RequestParam(required = false) Integer customerId, @RequestParam(required = false) Date fromOrderDate,
-      @RequestParam(required = false) Date toOrderDate, @RequestParam(required = false) String status,
-      @RequestParam(required = false) Integer fromTotalAmount, @RequestParam(required = false) Integer toTotalAmount,
-      @RequestParam(required = false) String paymentMethodName, @RequestParam(required = false) Date fromCreateAt,
-      @RequestParam(required = false) Date toCreateAt) {
+      @RequestParam(required = false) String name, @RequestParam(required = false) Integer supplierId,
+      @RequestParam(required = false) Integer quantity, @RequestParam(required = false) Date fromCreateAt,
+      @RequestParam(required = false) Date toCreateAt, @RequestParam(required = false) Date fromUpdateAt,
+      @RequestParam(required = false) Date toUpdateAt) {
     try {
-      FilteredOrder filteredOrder = new FilteredOrder(id, customerId, fromOrderDate, toOrderDate, status,
-          fromTotalAmount, toTotalAmount, paymentMethodName, fromCreateAt, toCreateAt);
-      List<OrderTable> result = orderService.getByFilter(filteredOrder);
+      FilteredProduct filterProvider = new FilteredProduct(id, name, supplierId, quantity, fromCreateAt, toCreateAt,
+          fromUpdateAt, toUpdateAt);
+      List<Product> result = productService.getByFilter(filterProvider);
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
@@ -51,10 +49,10 @@ public class OrderController {
   }
 
   @PostMapping("")
-  public ResponseEntity<Responder> save(@RequestBody NewOrder entity) {
+  public ResponseEntity<Responder> save(@RequestBody NewProduct entity) {
     try {
-      SaveOrderResult result = orderService.save(new OrderTable(entity), entity.getOrderDetails());
-      return ResponseEntity.ok().body(new OkResponder(result));
+      Product newProduct = productService.save(new Product(entity));
+      return ResponseEntity.ok().body(new OkResponder(newProduct));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }

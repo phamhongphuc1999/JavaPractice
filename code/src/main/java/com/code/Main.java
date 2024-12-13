@@ -2,7 +2,6 @@ package com.code;
 
 public class Main {
 	public static void main(String[] args) {
-		int[] a = new int[] { 1, 1, 1, 1 };
-		System.out.println(Simple.pickGifts(a, 4));
+		System.out.println(Problem2593.findScore(new int[] { 5, 1, 1, 7, 2, 4 }));
 	}
 }

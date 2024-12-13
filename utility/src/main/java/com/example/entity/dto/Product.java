@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.example.entity.dto_utils.NewProduct;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -83,5 +85,15 @@ public class Product {
 
   public void setUpdateAt(Date updateAt) {
     this.updateAt = updateAt;
+  }
+
+  public Product() {
+  }
+
+  public Product(NewProduct newProduct) {
+    this.name = newProduct.getName();
+    this.supplier.setId(newProduct.getSupplierId());
+    this.quantity = newProduct.getQuantity();
+    this.createAt = new Date();
   }
 }
