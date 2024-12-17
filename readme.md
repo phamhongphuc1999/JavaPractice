@@ -2,16 +2,19 @@
 
 ## Project
 
-| Id  | Project                           | Description            |
-| :-- | :-------------------------------- | :--------------------- |
-| 1   | [simple-api](./simple-api/)       | Simple java api        |
-| 2   | [code](./code/)                   | Simple basic java code |
-| 3   | [utility](./utility/)             | Utility                |
-| 4   | [Order service](./order-service/) | Order service          |
+| Id  | Project                                   | Description            |
+| :-- | :---------------------------------------- | :--------------------- |
+| 1   | [code](./code/)                           | Simple basic java code |
+| 2   | [simple-api](./simple-api/)               | Simple java api        |
+| 3   | [producer](./producer/)                   | Simple kafka producer  |
+| 4   | [consumer](./consumer/)                   | Simple kafka consumer  |
+| 5   | [utility](./utility/)                     | Utility                |
+| 6   | [order-service](./order-service/)         | Order service          |
+| 7   | [inventory-service](./inventory-service/) | Inventory service      |
 
 ## Event driven microservices simple app
 
-The app includes project 3, 4 in the list of projects.
+The app includes project 5, 6 and 7 in the list of projects.
 
 ### 1. Setup
 
@@ -53,3 +56,14 @@ show tables;
 ```
 
 if tables were not created, create them.
+
+## References
+
+-   https://learn.conduktor.io/kafka/
+
+## Issues
+
+#### can't import packages on VSCode
+
+-   1. Open search box
+-   2. Search: Java: clean Java Language Server Workspace

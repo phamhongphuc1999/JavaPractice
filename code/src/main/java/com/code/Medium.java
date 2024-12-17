@@ -52,4 +52,51 @@ public class Medium {
     }
     return arr[n - 1];
   }
+
+  // problem 50
+  static double myPow(double x, int n) {
+    int _n = Math.abs(n);
+    double _x = Math.abs(x);
+    double[] result = new double[_n];
+    result[0] = _x;
+    for (int i = 1; i < _n; i++) {
+      if (i % 2 == 0)
+        result[i] = result[i / 2] * result[i / 2] * x;
+      else
+        result[i] = result[i / 2] * result[i / 2];
+    }
+    double realResult = result[_n - 1];
+    if (n < 0)
+      realResult = 1 / realResult;
+    if (x < 0 && _n % 2 == 1)
+      return -realResult;
+    else
+      return realResult;
+  }
+
+  static double _recursedPow(double x, int n) {
+    if (n == 1)
+      return x;
+    else if (n == 0)
+      return 1;
+    else {
+      double temp = _recursedPow(x, n / 2);
+      if (n % 2 == 0)
+        return temp * temp;
+      else
+        return temp * temp * x;
+    }
+  }
+
+  static double recursedPow(double x, int n) {
+    int _n = Math.abs(n);
+    double _x = Math.abs(x);
+    double temp = _recursedPow(_x, _n);
+    if (n < 0)
+      temp = 1 / temp;
+    if (x < 0 && _n % 2 == 1)
+      return -temp;
+    else
+      return temp;
+  }
 }

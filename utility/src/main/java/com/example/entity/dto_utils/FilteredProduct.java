@@ -33,14 +33,24 @@ public class FilteredProduct {
     this.supplierId = id;
   }
 
-  private Integer quantity;
+  private Integer fromQuantity;
 
-  public Integer getQuantity() {
-    return this.quantity;
+  public Integer getFromQuantity() {
+    return this.fromQuantity;
   }
 
-  public void setQuantity(Integer quantity) {
-    this.quantity = quantity;
+  public void setFromQuantity(Integer fromQuantity) {
+    this.fromQuantity = fromQuantity;
+  }
+
+  private Integer toQuantity;
+
+  public Integer getToQuantity() {
+    return this.toQuantity;
+  }
+
+  public void setToQuantity(Integer toQuantity) {
+    this.toQuantity = toQuantity;
   }
 
   private Date fromCreateAt;
@@ -83,12 +93,13 @@ public class FilteredProduct {
     this.toUpdateAt = toUpdateAt;
   }
 
-  public FilteredProduct(Integer id, String name, Integer supplierId, Integer quantity, Date fromCreateAt,
-      Date toCreateAt, Date fromUpdateAt, Date toUpdateAt) {
+  public FilteredProduct(Integer id, String name, Integer supplierId, Integer fromQuantity, Integer toQuantity,
+      Date fromCreateAt, Date toCreateAt, Date fromUpdateAt, Date toUpdateAt) {
     this.id = id;
     this.name = name;
     this.supplierId = supplierId;
-    this.quantity = quantity;
+    this.fromQuantity = fromQuantity;
+    this.toQuantity = toQuantity;
     this.fromCreateAt = fromCreateAt;
     this.toCreateAt = toCreateAt;
     this.fromUpdateAt = fromUpdateAt;

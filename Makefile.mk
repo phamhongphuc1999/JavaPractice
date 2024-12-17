@@ -8,12 +8,18 @@ RESET = $(shell tput -Txterm sgr0)
 GRAY = $(shell tput -Txterm setaf 6)
 TARGET_MAX_CHAR_NUM = 20
 
-## Up Kafka cluster docker using conduktor config. | Docker
-conduktor:
-	docker-compose -f ../docker/conduktor-docker-compose.yaml up -d
-## Up Kafka cluster docker using only redpanda config.
-panda:
-	docker-compose -f ../docker/redpanda-docker-compose.yaml up -d
+## Build. | Executed command line for almost spring boot (off course some can use for common maven project)
+buildd:
+	mvn clean install
+
+## Run.
+run:
+	mvn spring-boot:run
+
+## Build and run.
+dev:
+	mvn clean install
+	mvn spring-boot:run
 
 ## Shows help. | Help
 help:

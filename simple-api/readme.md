@@ -57,10 +57,3 @@ SHOW TABLES;
 ```shell
 SELECT COLUMNS FROM table_name;
 ```
-
-## Issues
-
-#### can't import packages on VSCode
-
--   1. Open search box
--   2. Search: Java: clean Java Language Server Workspace

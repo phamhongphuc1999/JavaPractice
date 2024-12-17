@@ -1,10 +1,6 @@
 include ../Makefile.mk
 
-## Build. | Executed command line
-buildd:
-	mvn clean install
-
-## Run.
+## Run. | Executed command line
 run:
 	java -cp target/code-1.0-SNAPSHOT.jar com.code.Main
 

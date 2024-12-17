@@ -27,7 +27,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "Product", description = "Product")
 @RestController
 @EnableAutoConfiguration
-@RequestMapping("/product")
+@RequestMapping("/inventory/product")
 public class ProductController {
   @Autowired
   private ProductService productService;
@@ -35,12 +35,12 @@ public class ProductController {
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Integer id,
       @RequestParam(required = false) String name, @RequestParam(required = false) Integer supplierId,
-      @RequestParam(required = false) Integer quantity, @RequestParam(required = false) Date fromCreateAt,
-      @RequestParam(required = false) Date toCreateAt, @RequestParam(required = false) Date fromUpdateAt,
-      @RequestParam(required = false) Date toUpdateAt) {
+      @RequestParam(required = false) Integer fromQuantity, @RequestParam(required = false) Integer toQuantity,
+      @RequestParam(required = false) Date fromCreateAt, @RequestParam(required = false) Date toCreateAt,
+      @RequestParam(required = false) Date fromUpdateAt, @RequestParam(required = false) Date toUpdateAt) {
     try {
-      FilteredProduct filterProvider = new FilteredProduct(id, name, supplierId, quantity, fromCreateAt, toCreateAt,
-          fromUpdateAt, toUpdateAt);
+      FilteredProduct filterProvider = new FilteredProduct(id, name, supplierId, fromQuantity, toQuantity, fromCreateAt,
+          toCreateAt, fromUpdateAt, toUpdateAt);
       List<Product> result = productService.getByFilter(filterProvider);
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {

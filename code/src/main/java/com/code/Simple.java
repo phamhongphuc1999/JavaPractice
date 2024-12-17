@@ -1,6 +1,9 @@
 package com.code;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.PriorityQueue;
 
 public class Simple {
@@ -189,6 +192,49 @@ public class Simple {
     long result = 0;
     while (heap.size() > 0) {
       result += heap.poll();
+    }
+    return result;
+  }
+
+  // problem 88
+  void merge(int[] nums1, int m, int[] nums2, int n) {
+    int[] temp1 = new int[m];
+    for (int i = 0; i < m; i++)
+      temp1[i] = nums1[i];
+    int m1 = 0;
+    int n1 = 0;
+    int counter = 0;
+    while (m1 < m && n1 < n) {
+      if (temp1[m1] < nums2[n1])
+        nums1[counter++] = temp1[m1++];
+      else
+        nums1[counter++] = nums2[n1++];
+    }
+    while (m1 < m) {
+      nums1[counter++] = temp1[m1++];
+    }
+    while (n1 < n) {
+      nums1[counter++] = nums2[n1++];
+    }
+  }
+
+  // problem 118
+  static List<List<Integer>> generate(int numRows) {
+    List<List<Integer>> result = new ArrayList<>();
+    result.add(Arrays.asList(1));
+    if (numRows == 1)
+      return result;
+    result.add(Arrays.asList(1, 1));
+    if (numRows == 2)
+      return result;
+    for (int i = 3; i <= numRows; i++) {
+      List<Integer> preArr = result.get(i - 2);
+      List<Integer> temp = new ArrayList<>();
+      temp.add(1);
+      for (int j = 1; j <= i - 2; j++)
+        temp.add(preArr.get(j - 1) + preArr.get(j));
+      temp.add(1);
+      result.add(temp);
     }
     return result;
   }
