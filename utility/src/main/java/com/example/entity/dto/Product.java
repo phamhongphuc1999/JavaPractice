@@ -95,5 +95,6 @@ public class Product {
     this.supplier.setId(newProduct.getSupplierId());
     this.quantity = newProduct.getQuantity();
     this.createAt = new Date();
+    this.updateAt = this.createAt;
   }
 }

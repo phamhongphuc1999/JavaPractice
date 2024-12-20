@@ -30,7 +30,7 @@ public class NewOrder {
     return this.orderDetails;
   }
 
-  public void setTotalAmount(List<NewOrderDetail> orderDetails) {
+  public void setOrderDetail(List<NewOrderDetail> orderDetails) {
     this.orderDetails = orderDetails;
   }
 
@@ -40,7 +40,7 @@ public class NewOrder {
     return this.paymentMethodId;
   }
 
-  public void setPaymentMethod(Integer paymentMethodId) {
+  public void setPaymentMethodId(Integer paymentMethodId) {
     this.paymentMethodId = paymentMethodId;
   }
 }

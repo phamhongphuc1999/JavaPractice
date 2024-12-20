@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Stack;
 
 public class Simple {
   static int removeDuplicates(int[] numList) {
@@ -235,6 +236,19 @@ public class Simple {
         temp.add(preArr.get(j - 1) + preArr.get(j));
       temp.add(1);
       result.add(temp);
+    }
+    return result;
+  }
+
+  // problem 1475
+  int[] finalPrices(int[] prices) {
+    int[] result = prices.clone();
+    Stack<Integer> stack = new Stack<>();
+    for (int i = 0; i < prices.length; i++) {
+      while (!stack.isEmpty() && prices[stack.peek()] >= prices[i]) {
+        result[stack.pop()] -= prices[i];
+      }
+      stack.add(i);
     }
     return result;
   }

@@ -1,6 +1,7 @@
 package com.kafka.producer;
 
 import java.util.Properties;
+import java.util.UUID;
 
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -10,6 +11,8 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
 
 public class Main {
 	private static final Logger log = LoggerFactory.getLogger(Main.class);
@@ -31,8 +34,13 @@ public class Main {
 		// create a producer record
 		String topic = "demo_java";
 		String key = "id";
-		String value = "hello world";
-		ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, key, value);
+		SimpleObject s = new SimpleObject("param1", 1, UUID.randomUUID());
+
+		Gson gson = new Gson();
+		String serializedObject = gson.toJson(s);
+
+		ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic,
+				key, serializedObject);
 
 		// send data - asynchronous
 		producer.send(producerRecord, new Callback() {
@@ -55,6 +63,6 @@ public class Main {
 		// flush and close producer
 		producer.close();
 
-		System.out.print("123");
+		System.out.print("Done!");
 	}
 }

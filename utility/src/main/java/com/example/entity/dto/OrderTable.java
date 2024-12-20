@@ -120,7 +120,9 @@ public class OrderTable {
     this.orderDate = newOrder.getOrderDate();
     this.status = Constance.OrderStatus.PENDING.toString();
     this.totalAmount = newOrder.getOrderDetails().size();
+    this.paymentMethod = new PaymentMethod();
     this.paymentMethod.setId(newOrder.getPaymentMethodId());
     this.createAt = new Date();
+    this.updateAt = this.createAt;
   }
 }

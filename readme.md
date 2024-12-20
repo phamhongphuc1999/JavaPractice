@@ -57,6 +57,18 @@ show tables;
 
 if tables were not created, create them.
 
+## Event-driven small app
+
+1. Run kafka server
+
+```shell
+make conduktor
+```
+
+-   I create kafka by conduktor docker, after running successfully, you can go http://localhost:8080/ to see Conduktor dashboard.
+
+-   Noticed that Bootstrap server runs in 127.0.0.1:19092
+
 ## References
 
 -   https://learn.conduktor.io/kafka/

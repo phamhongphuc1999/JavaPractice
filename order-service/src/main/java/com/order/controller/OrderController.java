@@ -50,6 +50,16 @@ public class OrderController {
     }
   }
 
+  @GetMapping("/id")
+  public ResponseEntity<Responder> getById(@RequestParam(required = false) Integer id) {
+    try {
+      SaveOrderResult result = orderService.getOrderById(id);
+      return ResponseEntity.ok().body(new OkResponder(result));
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
+    }
+  }
+
   @PostMapping("")
   public ResponseEntity<Responder> save(@RequestBody NewOrder entity) {
     try {

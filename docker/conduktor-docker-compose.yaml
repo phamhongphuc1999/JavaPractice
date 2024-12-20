@@ -10,8 +10,6 @@
 #   to deploy on Kubernetes via Helm, or AWS using Cloudformation.
 ####################################################################################################
 
-version: "3.8"
-
 services:
     # Conduktor Console, the enterprise UI.
     # It depends on PostgreSQL. Here, we depend on Redpanda only for our get-started.
