@@ -65,7 +65,7 @@ if tables were not created, create them.
 make conduktor
 ```
 
--   I create kafka by conduktor docker, after running successfully, you can go http://localhost:8080/ to see Conduktor dashboard.
+-   I create kafka by conduktor docker, after running successfully, you can go http://localhost:8080/ to see Conduktor dashboard. (email and password can be modified in `CDK_ADMIN_EMAIL` and `CDK_ADMIN_PASSWORD`)
 
 -   Noticed that Bootstrap server runs in 127.0.0.1:19092
 

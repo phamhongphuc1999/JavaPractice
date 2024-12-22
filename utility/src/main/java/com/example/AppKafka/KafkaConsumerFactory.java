@@ -1,4 +1,4 @@
-package com.order.AppKafka;
+package com.example.AppKafka;
 
 import java.util.Properties;
 
@@ -11,7 +11,7 @@ import com.example.config.KafkaConstance;
 public class KafkaConsumerFactory {
   private static KafkaConsumer<String, String> consumer;
 
-  private static void create() {
+  public static void create() {
     if (consumer == null) {
       // create consumer configs
       Properties properties = new Properties();

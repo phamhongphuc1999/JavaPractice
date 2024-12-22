@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.Serialization;
+import com.example.AppKafka.KafkaProducerFactory;
+import com.example.config.KafkaConstance;
 import com.example.entity.dto.OrderDetail;
 import com.example.entity.dto.OrderTable;
 import com.example.entity.dto_utils.FilteredOrder;
 import com.example.entity.dto_utils.FilteredOrderDetail;
+import com.example.entity.dto_utils.NewOrder;
 import com.example.entity.dto_utils.NewOrderDetail;
 import com.example.entity.dto_utils.SaveOrderResult;
 import com.order.repository.OrderDetailRepository;
@@ -36,13 +42,19 @@ public class OrderService {
     return new SaveOrderResult(orderTable.get(), orderDetails);
   }
 
-  public SaveOrderResult save(OrderTable entity, List<NewOrderDetail> orderDetails) {
-    OrderTable newOrder = orderRepository.save(entity);
+  public SaveOrderResult save(NewOrder newOrder) {
+    OrderTable entity = new OrderTable(newOrder);
+    OrderTable newEntity = orderRepository.save(entity);
     List<OrderDetail> list = new ArrayList<>();
-    for (NewOrderDetail item : orderDetails) {
-      list.add(new OrderDetail(item, newOrder.getId()));
+    for (NewOrderDetail item : newOrder.getOrderDetails()) {
+      list.add(new OrderDetail(item, newEntity.getId()));
     }
+    KafkaProducer<String, String> producer = KafkaProducerFactory.getEntity();
+    String sData = Serialization.toJson(newOrder);
+    ProducerRecord<String, String> producerRecord = new ProducerRecord<>(KafkaConstance.ORDER_CREATED_TOPIC, sData);
+    producer.send(producerRecord);
+    producer.flush();
     List<OrderDetail> newOrderDetails = orderDetailRepository.saveAll(list);
-    return new SaveOrderResult(newOrder, newOrderDetails);
+    return new SaveOrderResult(newEntity, newOrderDetails);
   }
 }

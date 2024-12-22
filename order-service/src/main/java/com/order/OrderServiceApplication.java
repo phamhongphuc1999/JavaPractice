@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
-import com.order.AppKafka.KafkaProducerFactory;
+import com.example.AppKafka.KafkaProducerFactory;
 
 @SpringBootApplication
 @EntityScan(basePackages = { "com.example.entity.*" })

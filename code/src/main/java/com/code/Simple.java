@@ -240,6 +240,27 @@ public class Simple {
     return result;
   }
 
+  // problem 119
+  public static List<Integer> getRow(int rowIndex) {
+    List<List<Integer>> result = new ArrayList<>();
+    result.add(Arrays.asList(1));
+    if (rowIndex == 0)
+      return result.get(0);
+    result.add(Arrays.asList(1, 1));
+    if (rowIndex == 1)
+      return result.get(1);
+    for (int i = 2; i <= rowIndex; i++) {
+      List<Integer> preArr = result.get(i - 1);
+      List<Integer> temp = new ArrayList<>();
+      temp.add(1);
+      for (int j = 1; j <= i - 1; j++)
+        temp.add(preArr.get(j - 1) + preArr.get(j));
+      temp.add(1);
+      result.add(temp);
+    }
+    return result.get(rowIndex);
+  }
+
   // problem 1475
   int[] finalPrices(int[] prices) {
     int[] result = prices.clone();
@@ -249,6 +270,21 @@ public class Simple {
         result[stack.pop()] -= prices[i];
       }
       stack.add(i);
+    }
+    return result;
+  }
+
+  // problem 168
+  static String convertToTitle(int columnNumber) {
+    String result = "";
+    while (columnNumber > 0) {
+      int remaining = columnNumber % 26;
+      if (remaining == 0) {
+        remaining = 26;
+        columnNumber -= 26;
+      }
+      result = (char) ('A' + (remaining - 1)) + result;
+      columnNumber = columnNumber / 26;
     }
     return result;
   }

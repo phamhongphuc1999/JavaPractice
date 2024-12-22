@@ -63,7 +63,7 @@ public class OrderController {
   @PostMapping("")
   public ResponseEntity<Responder> save(@RequestBody NewOrder entity) {
     try {
-      SaveOrderResult result = orderService.save(new OrderTable(entity), entity.getOrderDetails());
+      SaveOrderResult result = orderService.save(entity);
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
