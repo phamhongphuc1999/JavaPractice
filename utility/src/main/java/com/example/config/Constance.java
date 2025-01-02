@@ -17,6 +17,18 @@ public class Constance {
   }
 
   public static enum OrderStatus {
+    ORDER_OK {
+      @Override
+      public String toString() {
+        return "ORDER_OK";
+      }
+    },
+    FULL_ORDER {
+      @Override
+      public String toString() {
+        return "FULL_ORDER";
+      }
+    },
     PENDING {
       @Override
       public String toString() {

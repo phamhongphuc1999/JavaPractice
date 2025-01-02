@@ -13,7 +13,7 @@ public class KafkaTopicData {
     this.names = names;
     this.orderTopics = new HashSet<>();
     this.orderTopics.add(KafkaConstance.ORDER_CREATED_TOPIC);
-    this.orderTopics.add(KafkaConstance.INVENTORY_UPDATE_TOPIC);
+    this.orderTopics.add(KafkaConstance.CONFIRM_ORDER_TOPIC);
     this.orderTopics.add(KafkaConstance.PAYMENT_PROCESS_TOPIC);
   }
 }

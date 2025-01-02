@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class NewOrder {
-  private Integer customerId;
+  protected Integer customerId;
 
   public Integer getCustomerId() {
     return this.customerId;
@@ -14,7 +14,7 @@ public class NewOrder {
     this.customerId = customerId;
   }
 
-  private Date orderDate;
+  protected Date orderDate;
 
   public Date getOrderDate() {
     return this.orderDate;
@@ -24,7 +24,7 @@ public class NewOrder {
     this.orderDate = orderDate;
   }
 
-  private List<NewOrderDetail> orderDetails;
+  protected List<NewOrderDetail> orderDetails;
 
   public List<NewOrderDetail> getOrderDetails() {
     return this.orderDetails;
@@ -34,7 +34,7 @@ public class NewOrder {
     this.orderDetails = orderDetails;
   }
 
-  private Integer paymentMethodId;
+  protected Integer paymentMethodId;
 
   public Integer getPaymentMethodId() {
     return this.paymentMethodId;

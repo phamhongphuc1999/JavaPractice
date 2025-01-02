@@ -6,6 +6,6 @@ public class KafkaConstance {
   public static String GROUP_ID = "application";
 
   public static String ORDER_CREATED_TOPIC = "order-created";
-  public static String INVENTORY_UPDATE_TOPIC = "inventory-update";
+  public static String CONFIRM_ORDER_TOPIC = "confirm-order";
   public static String PAYMENT_PROCESS_TOPIC = "payment-process";
 }

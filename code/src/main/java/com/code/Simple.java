@@ -3,6 +3,7 @@ package com.code;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Stack;
@@ -287,5 +288,31 @@ public class Simple {
       columnNumber = columnNumber / 26;
     }
     return result;
+  }
+
+  // problem 1346
+  static boolean checkIfExist(int[] arr) {
+    HashMap<Integer, Integer> cache = new HashMap<Integer, Integer>();
+    int counterZero = 0;
+    for (int i : arr) {
+      if (i == 0) {
+        counterZero++;
+        if (counterZero > 1)
+          return true;
+      } else {
+        if (cache.containsKey(i)) {
+          if (cache.get(i) == 2)
+            return true;
+        } else {
+          cache.put(i, 1);
+          int doubleValue = i * 2;
+          if (cache.containsKey(doubleValue))
+            return true;
+          else
+            cache.put(doubleValue, 2);
+        }
+      }
+    }
+    return false;
   }
 }

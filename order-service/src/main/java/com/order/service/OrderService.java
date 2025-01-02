@@ -19,6 +19,7 @@ import com.example.entity.dto_utils.FilteredOrderDetail;
 import com.example.entity.dto_utils.NewOrder;
 import com.example.entity.dto_utils.NewOrderDetail;
 import com.example.entity.dto_utils.SaveOrderResult;
+import com.example.entity.dto_utils.SavedNewOrder;
 import com.order.repository.OrderDetailRepository;
 import com.order.repository.OrderRepository;
 
@@ -50,7 +51,7 @@ public class OrderService {
       list.add(new OrderDetail(item, newEntity.getId()));
     }
     KafkaProducer<String, String> producer = KafkaProducerFactory.getEntity();
-    String sData = Serialization.toJson(newOrder);
+    String sData = Serialization.toJson(new SavedNewOrder(entity.getId(), newOrder));
     ProducerRecord<String, String> producerRecord = new ProducerRecord<>(KafkaConstance.ORDER_CREATED_TOPIC, sData);
     producer.send(producerRecord);
     producer.flush();
