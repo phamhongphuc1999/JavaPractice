@@ -52,4 +52,18 @@ public class Problem3 {
     }
     return result;
   }
+
+  static public boolean solution(String x, String y) {
+    int xLen = x.length();
+    int yLen = y.length();
+    int counter = 0;
+    for (int i = 0; i < xLen; i++) {
+      if (counter < yLen) {
+        if (x.charAt(i) == y.charAt(counter))
+          counter++;
+      } else
+        break;
+    }
+    return counter >= yLen;
+  }
 }

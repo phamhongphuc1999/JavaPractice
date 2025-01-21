@@ -2,6 +2,7 @@ package com.code;
 
 public class Main {
 	public static void main(String[] args) {
-		Simple.checkIfExist(new int[] { -2, 0, 10, -19, 4, 6, -8 });
+		boolean a = Problem3.solution("AABCDEFAATY", "AAAAA");
+		System.out.println(a);
 	}
 }
