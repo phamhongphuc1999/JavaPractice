@@ -1,0 +1,19 @@
+Table user {
+  id int [pk, unique, not null]
+  display_name varchar(50)
+  user_name varchar(100)
+  password varchar(100)
+}
+
+Table category {
+  id int [pk, unique, not null]
+  title varchar(50)
+  user_id int [not null, ref: > user.id]
+}
+
+Table pair {
+  id int [pk, unique, not null]
+  en varchar(50)
+  vi varchar(50)
+  category_id int [not null, ref: > category.id]
+}

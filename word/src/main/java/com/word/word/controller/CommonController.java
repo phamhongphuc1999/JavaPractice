@@ -1,8 +1,13 @@
 package com.word.word.controller;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.entity.common.OkResponder;
+import com.example.entity.common.Responder;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -11,5 +16,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @EnableAutoConfiguration
 @RequestMapping("/common")
 public class CommonController {
-
+  @GetMapping("/hello")
+  public ResponseEntity<Responder> hello() {
+    return ResponseEntity.ok().body(new OkResponder("Welcome to Inventory Service"));
+  }
 }
