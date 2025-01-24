@@ -6,6 +6,7 @@
 | :-- | :---------------------------------------- | :--------------------- |
 | 1   | [code](./code/)                           | Simple basic java code |
 | 2   | [simple-api](./simple-api/)               | Simple java api        |
+| 3   | [word](./word/)                           | Word app               |
 | 3   | [producer](./producer/)                   | Simple kafka producer  |
 | 4   | [consumer](./consumer/)                   | Simple kafka consumer  |
 | 5   | [utility](./utility/)                     | Utility                |

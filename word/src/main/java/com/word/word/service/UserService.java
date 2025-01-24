@@ -37,4 +37,13 @@ public class UserService implements UserDetailsService {
   public UserDto save(UserDto entity) {
     return userRepository.save(entity);
   }
+
+  public boolean deleteUser(Integer id) {
+    try {
+      userRepository.deleteById(id);
+      return true;
+    } catch (Exception exception) {
+      return false;
+    }
+  }
 }

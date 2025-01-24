@@ -1,6 +1,8 @@
 package com.word.word.entity.dto_utils;
 
-public class NewUser {
+import com.word.word.entity.dto.CategoryDto;
+
+public class ResultCategory extends CategoryDto {
   private String displayName;
 
   public String getDisplayName() {
@@ -21,19 +23,11 @@ public class NewUser {
     this.username = username;
   }
 
-  private String password;
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public NewUser(String displayName, String username, String password) {
-    this.displayName = displayName;
-    this.username = username;
-    this.password = password;
+  public ResultCategory(Integer id, String title, Integer userId, String displayName, String username) {
+    this.setId(id);
+    this.setTitle(title);
+    this.setUserId(userId);
+    this.setDisplayName(displayName);
+    this.setUsername(username);
   }
 }

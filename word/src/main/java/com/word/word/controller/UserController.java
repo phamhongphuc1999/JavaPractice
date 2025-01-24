@@ -11,8 +11,10 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +31,6 @@ import com.word.word.entity.dto_utils.ResultUser;
 import com.word.word.service.UserService;
 import com.word.word.utils.JwtTokenUtil;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "User", description = "User description")
@@ -60,7 +61,8 @@ public class UserController {
   @PostMapping("")
   public ResponseEntity<Responder> save(@RequestBody NewUser entity) {
     try {
-      UserDto result = userService.save(new UserDto(entity));
+      UserDto newUser = new UserDto(entity);
+      UserDto result = userService.save(newUser);
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
@@ -75,6 +77,16 @@ public class UserController {
           .loadUserByUsername(jwtUser.getUsername());
       final String token = jwtTokenUtil.generateToken(userDetails);
       return ResponseEntity.ok(new OkResponder(new JwtResponseUser(token)));
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
+    }
+  }
+
+  @DeleteMapping("")
+  public ResponseEntity<Responder> delete(@RequestParam(required = true) Integer id) {
+    try {
+      boolean result = userService.deleteUser(id);
+      return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
