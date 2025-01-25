@@ -41,9 +41,10 @@ public class FilteredUser {
     this.password = password;
   }
 
-  public FilteredUser(Integer id, String displayName, String password) {
+  public FilteredUser(Integer id, String displayName, String username, String password) {
     this.id = id;
     this.displayName = displayName;
+    this.username = username;
     this.password = password;
   }
 }

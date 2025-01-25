@@ -15,10 +15,10 @@ import com.api.simple_api.entity.dto_utils.ResultUser;
 public interface UserRepository extends JpaRepository<UserDto, Integer> {
   @Query("SELECT new com.api.simple_api.entity.dto_utils.ResultUser(u.id, u.displayName, u.username, u.password, u.roleId, ur.displayName) FROM UserDto u LEFT JOIN UserRole ur ON ur.id=u.roleId WHERE "
       +
-      "(:#{#filterUser.id} IS NULL OR u.id=:#{#filterUser.id}) AND " +
-      "(:#{#filterUser.displayName} IS NULL OR u.displayName LIKE :#{#filterUser.displayName}) AND " +
-      "(:#{#filterUser.username} IS NULL OR u.username LIKE :#{#filterUser.username}) AND " +
-      "(:#{#filterUser.password} IS NULL OR u.password LIKE :#{#filterUser.password}) AND " +
-      "(:#{#filterUser.roleId} IS NULL OR u.roleId=:#{#filterUser.roleId})")
-  List<ResultUser> getByFilter(@Param("filterUser") FilteredUser filterUser);
+      "(:#{#filteredUser.id} IS NULL OR u.id=:#{#filteredUser.id}) AND " +
+      "(:#{#filteredUser.displayName} IS NULL OR u.displayName LIKE :#{#filteredUser.displayName}) AND " +
+      "(:#{#filteredUser.username} IS NULL OR u.username LIKE :#{#filteredUser.username}) AND " +
+      "(:#{#filteredUser.password} IS NULL OR u.password LIKE :#{#filteredUser.password}) AND " +
+      "(:#{#filteredUser.roleId} IS NULL OR u.roleId=:#{#filteredUser.roleId})")
+  List<ResultUser> getByFilter(@Param("filteredUser") FilteredUser filteredUser);
 }

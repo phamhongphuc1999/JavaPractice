@@ -60,6 +60,13 @@ public class UserDto {
   public UserDto() {
   }
 
+  public UserDto(Integer id, String displayName, String username, String password) {
+    this.id = id;
+    this.displayName = displayName;
+    this.username = username;
+    this.password = password;
+  }
+
   public UserDto(NewUser entity) {
     this.displayName = entity.getDisplayName();
     this.username = entity.getUsername();

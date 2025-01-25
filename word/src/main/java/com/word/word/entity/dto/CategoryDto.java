@@ -1,5 +1,7 @@
 package com.word.word.entity.dto;
 
+import com.word.word.entity.dto_utils.NewCategory;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,5 +43,13 @@ public class CategoryDto {
 
   public void setUserId(Integer userId) {
     this.userId = userId;
+  }
+
+  public CategoryDto() {
+  }
+
+  public CategoryDto(Integer userId, NewCategory entity) {
+    this.userId = userId;
+    this.title = entity.getTitle();
   }
 }

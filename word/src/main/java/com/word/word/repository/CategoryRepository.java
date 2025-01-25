@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.word.word.entity.dto.CategoryDto;
 import com.word.word.entity.dto_utils.FilteredCategory;
-import com.word.word.entity.dto_utils.ResultUser;
+import com.word.word.entity.dto_utils.ResultCategory;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<CategoryDto, Integer> {
@@ -17,5 +17,5 @@ public interface CategoryRepository extends JpaRepository<CategoryDto, Integer> 
       + "(:#{#filteredCategory.id} IS NULL OR c.id=:#{#filteredCategory.id}) AND " +
       "(:#{#filteredCategory.title} IS NULL OR c.title LIKE :#{#filteredCategory.title}) AND " +
       "(:#{#filteredCategory.userId} IS NULL OR c.userId=:#{#filteredCategory.userId})")
-  List<ResultUser> getByFilter(@Param("filteredCategory") FilteredCategory filterUser);
+  List<ResultCategory> getByFilter(@Param("filteredCategory") FilteredCategory filteredCategory);
 }

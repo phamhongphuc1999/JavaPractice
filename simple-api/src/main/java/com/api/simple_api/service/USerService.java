@@ -30,8 +30,8 @@ public class UserService implements UserDetailsService {
     }
   }
 
-  public List<ResultUser> getByFilter(FilteredUser filterUser) {
-    return userRepository.getByFilter(filterUser);
+  public List<ResultUser> getByFilter(FilteredUser filteredUser) {
+    return userRepository.getByFilter(filteredUser);
   }
 
   public UserDto save(UserDto entity) {

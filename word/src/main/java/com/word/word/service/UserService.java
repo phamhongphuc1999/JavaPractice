@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.word.word.entity.dto.UserDto;
@@ -20,22 +21,38 @@ public class UserService implements UserDetailsService {
   @Autowired
   private UserRepository userRepository;
 
+  @Autowired
+  private PasswordEncoder passwordEncoder;
+
+  public ResultUser getByUsername(String username) {
+    FilteredUser filteredUser = new FilteredUser(null, null, username, null);
+    List<ResultUser> users = userRepository.getByFilter(filteredUser);
+    if (users != null) {
+      ResultUser user = users.get(0);
+      return user;
+    }
+    return null;
+  }
+
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    if ("javainuse".equals(username)) {
-      return new User("javainuse", "$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6",
-          new ArrayList<>());
+    ResultUser user = this.getByUsername(username);
+    if (user != null) {
+      return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
     } else {
-      throw new UsernameNotFoundException("User not found with username: " + username);
+      throw new UsernameNotFoundException("User not found with username: " +
+          username);
     }
   }
 
-  public List<ResultUser> getByFilter(FilteredUser filterUser) {
-    return userRepository.getByFilter(filterUser);
+  public List<ResultUser> getByFilter(FilteredUser filteredUser) {
+    return userRepository.getByFilter(filteredUser);
   }
 
   public UserDto save(UserDto entity) {
-    return userRepository.save(entity);
+    String encodedPassword = passwordEncoder.encode(entity.getPassword());
+    UserDto savedUser = new UserDto(entity.getId(), entity.getDisplayName(), entity.getUsername(), encodedPassword);
+    return userRepository.save(savedUser);
   }
 
   public boolean deleteUser(Integer id) {

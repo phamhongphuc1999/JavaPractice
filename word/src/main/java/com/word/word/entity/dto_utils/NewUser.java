@@ -31,6 +31,9 @@ public class NewUser {
     this.password = password;
   }
 
+  public NewUser() {
+  }
+
   public NewUser(String displayName, String username, String password) {
     this.displayName = displayName;
     this.username = username;

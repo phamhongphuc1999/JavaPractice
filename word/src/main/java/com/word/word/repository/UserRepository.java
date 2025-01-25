@@ -15,9 +15,9 @@ import com.word.word.entity.dto_utils.ResultUser;
 public interface UserRepository extends JpaRepository<UserDto, Integer> {
   @Query("SELECT new com.word.word.entity.dto_utils.ResultUser(u.id, u.displayName, u.username, u.password) FROM UserDto u WHERE "
       +
-      "(:#{#filterUser.id} IS NULL OR u.id=:#{#filterUser.id}) AND " +
-      "(:#{#filterUser.displayName} IS NULL OR u.displayName LIKE :#{#filterUser.displayName}) AND " +
-      "(:#{#filterUser.username} IS NULL OR u.username LIKE :#{#filterUser.username}) AND " +
-      "(:#{#filterUser.password} IS NULL OR u.password LIKE :#{#filterUser.password})")
-  List<ResultUser> getByFilter(@Param("filterUser") FilteredUser filterUser);
+      "(:#{#filteredUser.id} IS NULL OR u.id=:#{#filteredUser.id}) AND " +
+      "(:#{#filteredUser.displayName} IS NULL OR u.displayName LIKE :#{#filteredUser.displayName}) AND " +
+      "(:#{#filteredUser.username} IS NULL OR u.username LIKE :#{#filteredUser.username}) AND " +
+      "(:#{#filteredUser.password} IS NULL OR u.password LIKE :#{#filteredUser.password})")
+  List<ResultUser> getByFilter(@Param("filteredUser") FilteredUser filteredUser);
 }

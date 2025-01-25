@@ -31,6 +31,7 @@ import com.word.word.entity.dto_utils.ResultUser;
 import com.word.word.service.UserService;
 import com.word.word.utils.JwtTokenUtil;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "User", description = "User description")
@@ -41,23 +42,27 @@ public class UserController {
   @Autowired
   private UserService userService;
 
+  @Autowired
   private AuthenticationManager authenticationManager;
 
   @Autowired
   private JwtTokenUtil jwtTokenUtil;
 
+  @Operation(summary = "getUserByFilter", description = "Get user list by filter")
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Integer id,
       @RequestParam(required = false, name = "display name") String displayName,
+      @RequestParam(required = false, name = "username") String username,
       @RequestParam(required = false) String password) {
     try {
-      List<ResultUser> result = userService.getByFilter(new FilteredUser(id, displayName, password));
+      List<ResultUser> result = userService.getByFilter(new FilteredUser(id, displayName, username, password));
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   }
 
+  @Operation(summary = "Create a new user", description = "Create a new user")
   @PostMapping("")
   public ResponseEntity<Responder> save(@RequestBody NewUser entity) {
     try {
@@ -69,24 +74,15 @@ public class UserController {
     }
   }
 
+  @Operation(summary = "login", description = "Login by username and password")
   @PostMapping("/login")
   public ResponseEntity<Responder> login(@RequestBody JwtUser jwtUser) {
     try {
       authenticate(jwtUser.getUsername(), jwtUser.getPassword());
-      final UserDetails userDetails = userService
+      UserDetails userDetails = userService
           .loadUserByUsername(jwtUser.getUsername());
-      final String token = jwtTokenUtil.generateToken(userDetails);
+      String token = jwtTokenUtil.generateToken(userDetails);
       return ResponseEntity.ok(new OkResponder(new JwtResponseUser(token)));
-    } catch (Exception exception) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
-    }
-  }
-
-  @DeleteMapping("")
-  public ResponseEntity<Responder> delete(@RequestParam(required = true) Integer id) {
-    try {
-      boolean result = userService.deleteUser(id);
-      return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
@@ -99,6 +95,17 @@ public class UserController {
       throw new Exception("USER_DISABLED", e);
     } catch (BadCredentialsException e) {
       throw new Exception("INVALID_CREDENTIALS", e);
+    }
+  }
+
+  @Operation(summary = "delete", description = "Delete user by user id")
+  @DeleteMapping("")
+  public ResponseEntity<Responder> delete(@RequestParam(required = true) Integer id) {
+    try {
+      boolean result = userService.deleteUser(id);
+      return ResponseEntity.ok().body(new OkResponder(result));
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   }
 }
