@@ -43,7 +43,7 @@ system will ask you enter password, please enter `java`
 -   3. Using java_app database
 
 ```shell
-use java_app;
+use word_app;
 ```
 
 -   4. List tables

@@ -39,13 +39,13 @@ public class InputController {
 
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) UUID id,
-      @RequestParam(required = false, name = "input id") UUID infoId, @RequestParam(required = false) UUID objectId,
-      @RequestParam(required = false, name = "from input date") Date fromInputDate,
-      @RequestParam(required = false, name = "to input date") Date toInputDate,
-      @RequestParam(required = false, name = "from count") Integer fromCount,
-      @RequestParam(required = false, name = "to count") Integer toCount,
-      @RequestParam(required = false, name = "from input price") Float fromInputPrice,
-      @RequestParam(required = false, name = "to input price") Float toInputPrice,
+      @RequestParam(required = false) UUID infoId, @RequestParam(required = false) UUID objectId,
+      @RequestParam(required = false) Date fromInputDate,
+      @RequestParam(required = false) Date toInputDate,
+      @RequestParam(required = false) Integer fromCount,
+      @RequestParam(required = false) Integer toCount,
+      @RequestParam(required = false) Float fromInputPrice,
+      @RequestParam(required = false) Float toInputPrice,
       @RequestParam(required = false) String status) {
     try {
       FilteredInput filteredInput = new FilteredInput(id, infoId, objectId, fromInputDate, toInputDate, fromCount,

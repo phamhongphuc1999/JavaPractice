@@ -58,7 +58,15 @@ public class PairDto {
   public PairDto() {
   }
 
+  public PairDto(Integer id, String en, String vi, Integer categoryId) {
+    this.id = id;
+    this.en = en;
+    this.vi = vi;
+    this.categoryId = categoryId;
+  }
+
   public PairDto(Integer categoryId, NewPair entity) {
+    this.categoryId = categoryId;
     this.en = entity.getEn();
     this.vi = entity.getVi();
   }

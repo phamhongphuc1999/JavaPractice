@@ -8,20 +8,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.common.FailResponder;
 import com.example.entity.common.OkResponder;
 import com.example.entity.common.Responder;
 import com.word.word.entity.dto.CategoryDto;
+import com.word.word.entity.dto.PairDto;
 import com.word.word.entity.dto_utils.FilteredCategory;
 import com.word.word.entity.dto_utils.NewCategory;
 import com.word.word.entity.dto_utils.ResultCategory;
 import com.word.word.entity.dto_utils.ResultUser;
 import com.word.word.entity.dto_utils.SavedResultCategory;
+import com.word.word.entity.dto_utils.UpdatedCategory;
 import com.word.word.service.CategoryService;
 import com.word.word.service.UserService;
 import com.word.word.utils.JwtTokenUtil;
@@ -59,17 +63,50 @@ public class CategoryController {
     }
   }
 
+  @Operation(summary = "getPairs", description = "Get pairs by categoryId")
+  @GetMapping("/pairs")
+  public ResponseEntity<Responder> getPairsByCategoryId(
+      @RequestHeader(value = "Authorization", required = true) String authorizationHeader,
+      @RequestParam(required = true) Integer categoryId) {
+    try {
+      String realAuthorization = authorizationHeader.replace("Bearer ", "");
+      String username = jwtTokenUtil.getUsernameFromToken(realAuthorization);
+      ResultUser user = userService.getByUsername(username);
+      List<PairDto> result = categoryService.getPairByCategoryId(user.getId(), categoryId);
+      return ResponseEntity.ok().body(new OkResponder(result));
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
+    }
+  }
+
   @Operation(summary = "createCategory", description = "Create category")
   @PostMapping("")
   public ResponseEntity<Responder> save(
-      @RequestBody NewCategory entity,
-      @RequestHeader(value = "Authorization", required = true) String authorizationHeader) {
+      @RequestHeader(value = "Authorization", required = true) String authorizationHeader,
+      @RequestBody NewCategory entity) {
     try {
       String realAuthorization = authorizationHeader.replace("Bearer ", "");
       String username = jwtTokenUtil.getUsernameFromToken(realAuthorization);
       ResultUser user = userService.getByUsername(username);
       CategoryDto newCategory = new CategoryDto(user.getId(), entity);
       SavedResultCategory result = categoryService.save(newCategory, entity.getPairs());
+      return ResponseEntity.ok().body(new OkResponder(result));
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
+    }
+  }
+
+  @Operation(summary = "updateCategory", description = "Update category")
+  @PutMapping("")
+  public ResponseEntity<Responder> updateCategory(
+      @RequestHeader(value = "Authorization", required = true) String authorizationHeader,
+      @RequestParam(required = true) Integer categoryId,
+      @RequestBody UpdatedCategory entity) {
+    try {
+      String realAuthorization = authorizationHeader.replace("Bearer ", "");
+      String username = jwtTokenUtil.getUsernameFromToken(realAuthorization);
+      ResultUser user = userService.getByUsername(username);
+      List<PairDto> result = categoryService.update(user.getId(), categoryId, entity);
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
