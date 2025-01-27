@@ -27,6 +27,7 @@ import com.api.simple_api.entity.dto_utils.NewInput;
 import com.api.simple_api.entity.dto_utils.ResultInput;
 import com.api.simple_api.service.InputService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Input", description = "Input information")
@@ -37,6 +38,7 @@ public class InputController {
   @Autowired
   private InputService inputService;
 
+  @Operation(summary = "get input by filter", description = "Get input by filter")
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) UUID id,
       @RequestParam(required = false) UUID infoId, @RequestParam(required = false) UUID objectId,
@@ -57,6 +59,7 @@ public class InputController {
     }
   }
 
+  @Operation(summary = "save new input", description = "Create new input")
   @PostMapping("")
   public ResponseEntity<Responder> save(@RequestBody NewInput entity) {
     try {

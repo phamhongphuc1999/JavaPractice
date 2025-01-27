@@ -27,6 +27,7 @@ import com.api.simple_api.entity.dto_utils.NewOutput;
 import com.api.simple_api.entity.dto_utils.ResultOutput;
 import com.api.simple_api.service.OutputService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Output", description = "Output description")
@@ -37,21 +38,22 @@ public class OutputController {
   @Autowired
   private OutputService outputService;
 
+  @Operation(summary = "getByFilter", description = "Get output by filter")
   @GetMapping
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) UUID id,
-      @RequestParam(required = false, name = "output id") UUID infoId,
-      @RequestParam(required = false, name = "object id") UUID objectId,
-      @RequestParam(required = false, name = "customer id") Integer customerId,
-      @RequestParam(required = false, name = "from output date") Date fromOutputDate,
-      @RequestParam(required = false, name = "to output date") Date toOutputDate,
-      @RequestParam(required = false, name = "from count") Integer fromCount,
-      @RequestParam(required = false, name = "to count") Integer toCount,
-      @RequestParam(required = false, name = "from output price") Float fromOutputPrice,
-      @RequestParam(required = false, name = "to output price") Float toOutputPrice,
+      @RequestParam(required = false) UUID infoId,
+      @RequestParam(required = false) UUID objectId,
+      @RequestParam(required = false) Integer customerId,
+      @RequestParam(required = false) Date fromOutputDate,
+      @RequestParam(required = false) Date toOutputDate,
+      @RequestParam(required = false) Integer fromCount,
+      @RequestParam(required = false) Integer toCount,
+      @RequestParam(required = false) Float fromOutputPrice,
+      @RequestParam(required = false) Float toOutputPrice,
       @RequestParam(required = false) String status,
-      @RequestParam(required = false, name = "object name") String objectName,
-      @RequestParam(required = false, name = "unit name") String unitName,
-      @RequestParam(required = false, name = "customer name") String customerName) {
+      @RequestParam(required = false) String objectName,
+      @RequestParam(required = false) String unitName,
+      @RequestParam(required = false) String customerName) {
     try {
       FilteredOutput filteredOutput = new FilteredOutput(id, infoId, objectId, customerId, fromOutputDate, toOutputDate,
           fromCount, toCount, fromOutputPrice, toOutputPrice, status, objectName, unitName, customerName);
@@ -62,6 +64,7 @@ public class OutputController {
     }
   }
 
+  @Operation(summary = "save", description = "Create new output")
   @PostMapping("")
   public ResponseEntity<Responder> save(@RequestBody NewOutput entity) {
     try {

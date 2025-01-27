@@ -22,6 +22,7 @@ import com.api.simple_api.entity.dto_utils.FilteredObjectDto;
 import com.api.simple_api.entity.dto_utils.NewObjectDto;
 import com.api.simple_api.service.ObjectDtoService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Object", description = "Object description")
@@ -32,6 +33,7 @@ public class ObjectDtoController {
   @Autowired
   private ObjectDtoService objectService;
 
+  @Operation(summary = "getByFilter", description = "Get Object by filter")
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) UUID id,
       @RequestParam(required = false) String displayName,
@@ -48,6 +50,7 @@ public class ObjectDtoController {
     }
   }
 
+  @Operation(summary = "save", description = "Create new object")
   @PostMapping("")
   public ResponseEntity<Responder> save(@RequestBody NewObjectDto entity) {
     try {

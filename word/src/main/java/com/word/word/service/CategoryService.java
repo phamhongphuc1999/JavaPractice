@@ -60,4 +60,17 @@ public class CategoryService {
     }
     return newPairs;
   }
+
+  public boolean delete(Integer userId, Integer categoryId) {
+    try {
+      FilteredCategory filteredCategory = new FilteredCategory(categoryId, null, userId);
+      List<ResultCategory> categories = categoryRepository.getByFilter(filteredCategory);
+      if (categories.size() > 0) {
+        categoryRepository.deleteById(categoryId);
+      }
+      return true;
+    } catch (Exception exception) {
+      return false;
+    }
+  }
 }

@@ -32,7 +32,7 @@ public class UnitController {
 
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Integer id,
-      @RequestParam(required = false, name = "Display name") String displayName) {
+      @RequestParam(required = false) String displayName) {
     try {
       List<Unit> units = unitService.getByFilter(new Unit(id, displayName));
       return ResponseEntity.ok().body(new OkResponder(units));

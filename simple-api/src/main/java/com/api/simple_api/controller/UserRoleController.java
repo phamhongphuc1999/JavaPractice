@@ -30,7 +30,7 @@ public class UserRoleController {
 
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Integer id,
-      @RequestParam(required = false, name = "display name") String displayName) {
+      @RequestParam(required = false) String displayName) {
     try {
       List<UserRole> result = userRoleService.getByFilter(id, displayName);
       return ResponseEntity.ok().body(new OkResponder(result));

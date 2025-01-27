@@ -22,6 +22,7 @@ import com.api.simple_api.entity.dto_utils.FilteredCustomer;
 import com.api.simple_api.entity.dto_utils.NewCustomer;
 import com.api.simple_api.service.CustomerService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Customer", description = "Customer description")
@@ -32,6 +33,7 @@ public class CustomerController {
   @Autowired
   private CustomerService customerService;
 
+  @Operation(summary = "getCustomerByFilter", description = "Get customer by filter")
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Integer id,
       @RequestParam(required = false) String displayName,
@@ -49,6 +51,7 @@ public class CustomerController {
     }
   }
 
+  @Operation(summary = "save", description = "Create new customer")
   @PostMapping("")
   public ResponseEntity<Responder> save(@RequestBody NewCustomer entity) {
     try {

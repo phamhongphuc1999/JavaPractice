@@ -22,6 +22,7 @@ import com.api.simple_api.entity.dto_utils.FilteredSupplier;
 import com.api.simple_api.entity.dto_utils.NewSupplier;
 import com.api.simple_api.service.SupplierService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Supplier", description = "Supplier description")
@@ -32,14 +33,15 @@ public class SupplierController {
   @Autowired
   public SupplierService supplierService;
 
+  @Operation(summary = "getByFilter", description = "get supplier by filter")
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Integer id,
-      @RequestParam(required = false, name = "display name") String displayName,
+      @RequestParam(required = false) String displayName,
       @RequestParam(required = false) String address, @RequestParam(required = false) String phone,
       @RequestParam(required = false) String email,
-      @RequestParam(required = false, name = "more information") String moreInfo,
-      @RequestParam(required = false, name = "from contract date") Date fromContractDate,
-      @RequestParam(required = false, name = "to contract date") Date toContractDate) {
+      @RequestParam(required = false) String moreInfo,
+      @RequestParam(required = false) Date fromContractDate,
+      @RequestParam(required = false) Date toContractDate) {
     try {
       List<Supplier> suppliers = supplierService.getByFilter(
           new FilteredSupplier(id, displayName, address, phone, email, moreInfo, fromContractDate, toContractDate));
@@ -49,6 +51,7 @@ public class SupplierController {
     }
   }
 
+  @Operation(summary = "save", description = "Create new supplier")
   @PostMapping("")
   public ResponseEntity<Responder> save(@RequestBody NewSupplier entity) {
     try {

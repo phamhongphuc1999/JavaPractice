@@ -30,6 +30,7 @@ import com.api.simple_api.entity.dto_utils.ResultUser;
 import com.api.simple_api.service.UserService;
 import com.api.simple_api.utils.JwtTokenUtil;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "User", description = "User description")
@@ -47,9 +48,9 @@ public class UserController {
 
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Integer id,
-      @RequestParam(required = false, name = "display name") String displayName,
+      @RequestParam(required = false) String displayName,
       @RequestParam(required = false) String password,
-      @RequestParam(required = false, name = "role id") Integer roleId) {
+      @RequestParam(required = false) Integer roleId) {
     try {
       List<ResultUser> result = userService.getByFilter(new FilteredUser(id, displayName, password, roleId));
       return ResponseEntity.ok().body(new OkResponder(result));
@@ -68,13 +69,14 @@ public class UserController {
     }
   }
 
+  @Operation(summary = "login", description = "Login by username and password")
   @PostMapping("/login")
   public ResponseEntity<Responder> login(@RequestBody JwtUser jwtUser) {
     try {
       authenticate(jwtUser.getUsername(), jwtUser.getPassword());
-      final UserDetails userDetails = userService
+      UserDetails userDetails = userService
           .loadUserByUsername(jwtUser.getUsername());
-      final String token = jwtTokenUtil.generateToken(userDetails);
+      String token = jwtTokenUtil.generateToken(userDetails);
       return ResponseEntity.ok(new OkResponder(new JwtResponseUser(token)));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));

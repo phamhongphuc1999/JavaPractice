@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -107,6 +108,22 @@ public class CategoryController {
       String username = jwtTokenUtil.getUsernameFromToken(realAuthorization);
       ResultUser user = userService.getByUsername(username);
       List<PairDto> result = categoryService.update(user.getId(), categoryId, entity);
+      return ResponseEntity.ok().body(new OkResponder(result));
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
+    }
+  }
+
+  @Operation(summary = "deleteCategory", description = "Delete category")
+  @DeleteMapping("")
+  public ResponseEntity<Responder> deleteCategory(
+      @RequestHeader(value = "Authorization", required = true) String authorizationHeader,
+      @RequestParam(required = true) Integer categoryId) {
+    try {
+      String realAuthorization = authorizationHeader.replace("Bearer ", "");
+      String username = jwtTokenUtil.getUsernameFromToken(realAuthorization);
+      ResultUser user = userService.getByUsername(username);
+      boolean result = categoryService.delete(user.getId(), categoryId);
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));

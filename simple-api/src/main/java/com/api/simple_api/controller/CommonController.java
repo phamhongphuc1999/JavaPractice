@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.simple_api.entity.common.OkResponder;
 import com.api.simple_api.entity.common.Responder;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Common", description = "Fetch metadata, don't link to any database")
@@ -16,6 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @EnableAutoConfiguration
 @RequestMapping("/common")
 public class CommonController {
+  @Operation(summary = "Hello world", description = "Hello world")
   @GetMapping("/hello")
   public ResponseEntity<Responder> hello() {
     return ResponseEntity.ok().body(new OkResponder("Welcome to Spring boot!"));
