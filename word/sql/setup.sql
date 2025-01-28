@@ -23,8 +23,8 @@ CREATE TABLE category {
 
 CREATE TABLE pair {
   id INT NOT NULL AUTO_INCREMENT,
-  en VARCHAR(50),
-  vi VARCHAR(50),
+  en VARCHAR(240),
+  vi VARCHAR(240),
   category_id INT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (category_id) REFERENCES category(id)

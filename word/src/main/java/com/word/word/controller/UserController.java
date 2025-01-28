@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,9 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.entity.common.FailResponder;
 import com.example.entity.common.OkResponder;
 import com.example.entity.common.Responder;
+import com.word.word.entity.commons.TokenEntity;
 import com.word.word.entity.dto.UserDto;
 import com.word.word.entity.dto_utils.FilteredUser;
-import com.word.word.entity.dto_utils.JwtResponseUser;
 import com.word.word.entity.dto_utils.JwtUser;
 import com.word.word.entity.dto_utils.NewUser;
 import com.word.word.entity.dto_utils.ResultUser;
@@ -81,8 +82,8 @@ public class UserController {
       authenticate(jwtUser.getUsername(), jwtUser.getPassword());
       UserDetails userDetails = userService
           .loadUserByUsername(jwtUser.getUsername());
-      String token = jwtTokenUtil.generateToken(userDetails);
-      return ResponseEntity.ok(new OkResponder(new JwtResponseUser(token)));
+      TokenEntity token = jwtTokenUtil.generateToken(userDetails);
+      return ResponseEntity.ok(new OkResponder(token));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
@@ -95,6 +96,19 @@ public class UserController {
       throw new Exception("USER_DISABLED", e);
     } catch (BadCredentialsException e) {
       throw new Exception("INVALID_CREDENTIALS", e);
+    }
+  }
+
+  @Operation(summary = "checkTokenExpire", description = "Check token expire")
+  @GetMapping("/login/expire")
+  public ResponseEntity<Responder> expireLogin(
+      @RequestHeader(value = "Authorization", required = true) String authorizationHeader) {
+    try {
+      String realAuthorization = authorizationHeader.replace("Bearer ", "");
+      Boolean isExpire = jwtTokenUtil.isTokenExpired(realAuthorization);
+      return ResponseEntity.ok(new OkResponder(isExpire));
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   }
 
