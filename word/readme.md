@@ -29,7 +29,7 @@ http://localhost:9090/swagger-ui/index.html
 -   1. Execute database docker container
 
 ```shell
-docker exec -it dev_java_sql_container bash
+docker exec -it word_container bash
 ```
 
 -   2. Login

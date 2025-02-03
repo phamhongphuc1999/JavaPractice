@@ -12,18 +12,18 @@ import org.springframework.http.ResponseEntity;
 
 import com.api.simple_api.entity.common.Responder;
 
-@SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class CommonControllerTest {
   @Autowired
   private TestRestTemplate template;
-  
+
   @Test
   public void getHello() throws Exception {
     ResponseEntity<Responder> response = template.getForEntity("/common/hello", Responder.class);
     Responder body = response.getBody();
     if (body != null) {
-      assertThat(body.getData()).isEqualTo("Welcome to Spring boot!");
+      assertThat(body.getData()).isEqualTo("Welcome to SimpleApp!");
     }
   }
 }

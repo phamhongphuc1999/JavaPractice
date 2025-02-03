@@ -1,5 +1,9 @@
 include ../Makefile.mk
 
+## Remove database.
+remove:
+	rm -r sql/mysql-data/*
+
 ## Test.
 test:
 	mvn test

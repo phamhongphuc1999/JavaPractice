@@ -20,6 +20,6 @@ public class CommonController {
   @Operation(summary = "Hello world", description = "Hello world")
   @GetMapping("/hello")
   public ResponseEntity<Responder> hello() {
-    return ResponseEntity.ok().body(new OkResponder("Welcome to Spring boot!"));
+    return ResponseEntity.ok().body(new OkResponder("Welcome to SimpleApp!"));
   }
 }

@@ -47,6 +47,7 @@ public class UserController {
   @Autowired
   private JwtTokenUtil jwtTokenUtil;
 
+  @Operation(summary = "getByFilter", description = "Get user by filter")
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Integer id,
       @RequestParam(required = false) String displayName,
@@ -60,6 +61,7 @@ public class UserController {
     }
   }
 
+  @Operation(summary = "createNewUser", description = "Create a new user")
   @PostMapping("")
   public ResponseEntity<Responder> save(@RequestBody NewUser entity) {
     try {
