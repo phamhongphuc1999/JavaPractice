@@ -1,0 +1,27 @@
+{
+    "title": "oregon",
+    "pairs": [
+        { "en": "influx", "vi": "sự tràn vào" },
+        { "en": "inflow", "vi": "dòng chảy vào" },
+        { "en": "ignite", "vi": "bùng cháy, bắt lửa" },
+        { "en": "intemperate", "vi": "không có chừng mực (adj)" },
+        { "en": "shrill", "vi": "chói tai, gay gắt" },
+        { "en": "originate", "vi": "bắt nguồn từ" },
+        { "en": "boundary", "vi": "ranh giới" },
+        { "en": "vaguely", "vi": "mơ hồ (adv)" },
+        { "en": "impasse", "vi": "sự bế tắc" },
+        { "en": "manifest destiny", "vi": "vận mệnh hiển nhiên" },
+        { "en": "potential political forces", "vi": "các thế lực chính trị tiềm năng" },
+        { "en": "religious fervor", "vi": "sự nhiệt thành tôn giáo" },
+        { "en": "urgent", "vi": "thúc giục, khẩn cấp (verb)" },
+        { "en": "urgency", "vi": "khẩn cấp (noun)" },
+        { "en": "rifle", "vi": "súng trường" },
+        { "en": "effective negotiator", "vi": "người đàm phán hiệu quả" },
+        { "en": "negotiation", "vi": "sự đàm phán, cuộc đàm phán" },
+        { "en": "negotiate", "vi": "đàm phán (verb)" },
+        { "en": "moderate", "vi": "trung bình, vừa phải" },
+        { "en": "ardent", "vi": "nhiệt huyết, nồng nhiệt" },
+        { "en": "enthusiastic", "vi": "nhiệt huyết" },
+        { "en": "fast-dying fur trade", "vi": "việc buôn bán lông thú đang chết nhanh" }
+    ]
+}

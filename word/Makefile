@@ -3,7 +3,6 @@ include ../Makefile.mk
 ## Remove database.
 remove:
 	rm -rf sql/mysql-data
-	mkdir sql/mysql-data
 
 ## Test.
 test:

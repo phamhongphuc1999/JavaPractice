@@ -29,7 +29,6 @@ import com.word.word.entity.dto_utils.SavedResultCategory;
 import com.word.word.entity.dto_utils.UpdatedCategory;
 import com.word.word.service.CategoryService;
 import com.word.word.service.UserService;
-import com.word.word.utils.EncodingFixer;
 import com.word.word.utils.JwtTokenUtil;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -75,9 +74,6 @@ public class CategoryController {
       String username = jwtTokenUtil.getUsernameFromToken(realAuthorization);
       ResultUser user = userService.getByUsername(username);
       List<PairDto> result = categoryService.getPairByCategoryId(user.getId(), categoryId);
-      System.out.println(result.get(0).getVi());
-      System.out.println("123");
-      System.out.println(EncodingFixer.fixText(result.get(0).getVi()));
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
