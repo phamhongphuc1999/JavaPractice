@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.entity.common.FailResponder;
 import com.example.entity.common.OkResponder;
 import com.example.entity.common.Responder;
+import com.word.word.entity.commons.PageableEntity;
+import com.word.word.entity.commons.PaginationResult;
 import com.word.word.entity.dto.CategoryDto;
 import com.word.word.entity.dto.PairDto;
 import com.word.word.entity.dto_utils.FilteredCategory;
@@ -51,29 +53,18 @@ public class CategoryController {
   @Operation(summary = "getCategory", description = "Get your categories by filter")
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(
-      @RequestHeader(value = "Authorization", required = true) String authorizationHeader) {
-    try {
-      String realAuthorization = authorizationHeader.replace("Bearer ", "");
-      String username = jwtTokenUtil.getUsernameFromToken(realAuthorization);
-      ResultUser user = userService.getByUsername(username);
-      FilteredCategory filteredCategory = new FilteredCategory(null, null, user.getId());
-      List<ResultCategory> result = categoryService.getByFilter(filteredCategory);
-      return ResponseEntity.ok().body(new OkResponder(result));
-    } catch (Exception exception) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
-    }
-  }
-
-  @Operation(summary = "getPairs", description = "Get pairs by categoryId")
-  @GetMapping(value = "/pairs", produces = "application/json; charset=UTF-8")
-  public ResponseEntity<Responder> getPairsByCategoryId(
       @RequestHeader(value = "Authorization", required = true) String authorizationHeader,
-      @RequestParam(required = true) Integer categoryId) {
+      @RequestParam(required = false) Integer id,
+      @RequestParam(required = false) String title,
+      @RequestParam(required = false) Integer pageNumber,
+      @RequestParam(required = false) Integer pageSize) {
     try {
       String realAuthorization = authorizationHeader.replace("Bearer ", "");
       String username = jwtTokenUtil.getUsernameFromToken(realAuthorization);
       ResultUser user = userService.getByUsername(username);
-      List<PairDto> result = categoryService.getPairByCategoryId(user.getId(), categoryId);
+      FilteredCategory filteredCategory = new FilteredCategory(id, title, user.getId());
+      PaginationResult<ResultCategory> result = categoryService.getByFilter(filteredCategory,
+          new PageableEntity(pageNumber, pageSize));
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));

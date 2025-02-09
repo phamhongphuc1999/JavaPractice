@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.word.word.entity.commons.PageableEntity;
+import com.word.word.entity.commons.PaginationResult;
 import com.word.word.entity.dto.CategoryDto;
 import com.word.word.entity.dto.PairDto;
 import com.word.word.entity.dto_utils.FilteredCategory;
@@ -24,8 +27,10 @@ public class CategoryService {
   @Autowired
   private PairRepository pairRepository;
 
-  public List<ResultCategory> getByFilter(FilteredCategory filteredCategory) {
-    return categoryRepository.getByFilter(filteredCategory);
+  public PaginationResult<ResultCategory> getByFilter(FilteredCategory filteredCategory, PageableEntity pageable) {
+    List<ResultCategory> items = categoryRepository.getByFilter(filteredCategory, pageable.getPageable());
+    Integer total = categoryRepository.getTotalResultByFilter(filteredCategory);
+    return new PaginationResult<>(total, items);
   }
 
   public List<PairDto> getPairByCategoryId(Integer userId, Integer categoryId) {
@@ -64,7 +69,7 @@ public class CategoryService {
   public boolean delete(Integer userId, Integer categoryId) {
     try {
       FilteredCategory filteredCategory = new FilteredCategory(categoryId, null, userId);
-      List<ResultCategory> categories = categoryRepository.getByFilter(filteredCategory);
+      List<ResultCategory> categories = categoryRepository.getByFilter(filteredCategory, PageRequest.of(0, 10));
       if (categories.size() > 0) {
         categoryRepository.deleteById(categoryId);
       }
