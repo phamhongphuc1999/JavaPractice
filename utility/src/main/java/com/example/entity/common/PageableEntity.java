@@ -1,4 +1,4 @@
-package com.word.word.entity.commons;
+package com.example.entity.common;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

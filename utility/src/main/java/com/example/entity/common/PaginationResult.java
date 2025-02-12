@@ -1,4 +1,4 @@
-package com.word.word.entity.commons;
+package com.example.entity.common;
 
 import java.util.List;
 

@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.common.FailResponder;
 import com.example.entity.common.OkResponder;
+import com.example.entity.common.PageableEntity;
+import com.example.entity.common.PaginationResult;
 import com.example.entity.common.Responder;
-import com.word.word.entity.commons.PageableEntity;
-import com.word.word.entity.commons.PaginationResult;
 import com.word.word.entity.dto.CategoryDto;
 import com.word.word.entity.dto.PairDto;
 import com.word.word.entity.dto_utils.FilteredCategory;
@@ -50,7 +50,7 @@ public class CategoryController {
   @Autowired
   private CategoryService categoryService;
 
-  @Operation(summary = "getCategory", description = "Get your categories by filter")
+  @Operation(summary = "Get your categories by filter", description = "Get your categories by filter")
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(
       @RequestHeader(value = "Authorization", required = true) String authorizationHeader,
@@ -71,7 +71,7 @@ public class CategoryController {
     }
   }
 
-  @Operation(summary = "createCategory", description = "Create category")
+  @Operation(summary = "Create category", description = "Create category")
   @PostMapping("")
   public ResponseEntity<Responder> save(
       @RequestHeader(value = "Authorization", required = true) String authorizationHeader,
@@ -88,7 +88,7 @@ public class CategoryController {
     }
   }
 
-  @Operation(summary = "updateCategory", description = "Update category")
+  @Operation(summary = "Update category", description = "Update category")
   @PutMapping("")
   public ResponseEntity<Responder> updateCategory(
       @RequestHeader(value = "Authorization", required = true) String authorizationHeader,
@@ -105,7 +105,7 @@ public class CategoryController {
     }
   }
 
-  @Operation(summary = "deleteCategory", description = "Delete category")
+  @Operation(summary = "Delete category", description = "Delete category")
   @DeleteMapping("")
   public ResponseEntity<Responder> deleteCategory(
       @RequestHeader(value = "Authorization", required = true) String authorizationHeader,

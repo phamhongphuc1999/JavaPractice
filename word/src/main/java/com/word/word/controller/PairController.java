@@ -38,8 +38,8 @@ public class PairController {
   @Autowired
   private CategoryService categoryService;
 
-  @Operation(summary = "getAllPairs", description = "Get all pairs by categoryId")
-  @GetMapping(value = "/pairs/all", produces = "application/json; charset=UTF-8")
+  @Operation(summary = "Get all pairs by categoryId", description = "Get all pairs by categoryId")
+  @GetMapping(value = "/all", produces = "application/json; charset=UTF-8")
   public ResponseEntity<Responder> getPairsByCategoryId(
       @RequestHeader(value = "Authorization", required = true) String authorizationHeader,
       @RequestParam(required = true) Integer categoryId) {

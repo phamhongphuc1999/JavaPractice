@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.word.word.entity.commons.PageableEntity;
-import com.word.word.entity.commons.PaginationResult;
+import com.example.entity.common.PageableEntity;
+import com.example.entity.common.PaginationResult;
 import com.word.word.entity.dto.CategoryDto;
 import com.word.word.entity.dto.PairDto;
 import com.word.word.entity.dto_utils.FilteredCategory;
@@ -71,6 +71,7 @@ public class CategoryService {
       FilteredCategory filteredCategory = new FilteredCategory(categoryId, null, userId);
       List<ResultCategory> categories = categoryRepository.getByFilter(filteredCategory, PageRequest.of(0, 10));
       if (categories.size() > 0) {
+        pairRepository.deleteByCategoryId(userId, categoryId);
         categoryRepository.deleteById(categoryId);
       }
       return true;

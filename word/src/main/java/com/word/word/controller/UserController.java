@@ -49,7 +49,7 @@ public class UserController {
   @Autowired
   private JwtTokenUtil jwtTokenUtil;
 
-  @Operation(summary = "getUserByFilter", description = "Get user list by filter")
+  @Operation(summary = "Get users by filter", description = "Get users by filter")
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Integer id,
       @RequestParam(required = false, name = "display name") String displayName,
@@ -99,7 +99,7 @@ public class UserController {
     }
   }
 
-  @Operation(summary = "checkTokenExpire", description = "Check token expire")
+  @Operation(summary = "Check token expire", description = "Check token expire")
   @GetMapping("/login/expire")
   public ResponseEntity<Responder> expireLogin(
       @RequestHeader(value = "Authorization", required = true) String authorizationHeader) {
@@ -112,7 +112,7 @@ public class UserController {
     }
   }
 
-  @Operation(summary = "delete", description = "Delete user by user id")
+  @Operation(summary = "Delete user by user id", description = "Delete user by user id")
   @DeleteMapping("")
   public ResponseEntity<Responder> delete(@RequestParam(required = true) Integer id) {
     try {
