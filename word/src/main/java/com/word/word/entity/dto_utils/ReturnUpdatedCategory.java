@@ -2,7 +2,9 @@ package com.word.word.entity.dto_utils;
 
 import java.util.List;
 
-public class UpdatedCategory {
+import com.word.word.entity.dto.PairDto;
+
+public class ReturnUpdatedCategory {
   private String title;
 
   public String getTitle() {
@@ -13,13 +15,13 @@ public class UpdatedCategory {
     this.title = title;
   }
 
-  private List<NewPair> newPairs;
+  private List<PairDto> newPairs;
 
-  public List<NewPair> getNewPairs() {
+  public List<PairDto> getNewPairs() {
     return this.newPairs;
   }
 
-  public void setNewPairs(List<NewPair> newPairs) {
+  public void setNewPairs(List<PairDto> newPairs) {
     this.newPairs = newPairs;
   }
 
@@ -33,7 +35,10 @@ public class UpdatedCategory {
     this.removedIds = removedIds;
   }
 
-  public UpdatedCategory(String title, List<NewPair> newPairs, List<Integer> removedIds) {
+  public ReturnUpdatedCategory() {
+  }
+
+  public ReturnUpdatedCategory(String title, List<PairDto> newPairs, List<Integer> removedIds) {
     this.title = title;
     this.newPairs = newPairs;
     this.removedIds = removedIds;

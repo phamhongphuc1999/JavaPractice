@@ -1,7 +1,5 @@
 package com.word.word.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
@@ -22,11 +20,11 @@ import com.example.entity.common.PageableEntity;
 import com.example.entity.common.PaginationResult;
 import com.example.entity.common.Responder;
 import com.word.word.entity.dto.CategoryDto;
-import com.word.word.entity.dto.PairDto;
 import com.word.word.entity.dto_utils.FilteredCategory;
 import com.word.word.entity.dto_utils.NewCategory;
 import com.word.word.entity.dto_utils.ResultCategory;
 import com.word.word.entity.dto_utils.ResultUser;
+import com.word.word.entity.dto_utils.ReturnUpdatedCategory;
 import com.word.word.entity.dto_utils.SavedResultCategory;
 import com.word.word.entity.dto_utils.UpdatedCategory;
 import com.word.word.service.CategoryService;
@@ -98,7 +96,7 @@ public class CategoryController {
       String realAuthorization = authorizationHeader.replace("Bearer ", "");
       String username = jwtTokenUtil.getUsernameFromToken(realAuthorization);
       ResultUser user = userService.getByUsername(username);
-      List<PairDto> result = categoryService.update(user.getId(), categoryId, entity);
+      ReturnUpdatedCategory result = categoryService.update(user.getId(), categoryId, entity);
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));

@@ -14,6 +14,7 @@ import com.word.word.entity.dto.PairDto;
 import com.word.word.entity.dto_utils.FilteredCategory;
 import com.word.word.entity.dto_utils.NewPair;
 import com.word.word.entity.dto_utils.ResultCategory;
+import com.word.word.entity.dto_utils.ReturnUpdatedCategory;
 import com.word.word.entity.dto_utils.SavedResultCategory;
 import com.word.word.entity.dto_utils.UpdatedCategory;
 import com.word.word.repository.CategoryRepository;
@@ -50,20 +51,31 @@ public class CategoryService {
     return new SavedResultCategory(savedCategory, _pairs);
   }
 
-  public List<PairDto> update(Integer userId, Integer categoryId, UpdatedCategory entity) {
-    categoryRepository.updateCategory(userId, categoryId, entity.getTitle());
+  public ReturnUpdatedCategory update(Integer userId, Integer categoryId, UpdatedCategory entity) {
+    System.out.println(userId);
+    ReturnUpdatedCategory result = new ReturnUpdatedCategory();
+    if (entity.getTitle() != null) {
+      categoryRepository.updateCategory(userId, categoryId, entity.getTitle());
+      result.setTitle(entity.getTitle());
+    }
     List<PairDto> newPairs = new ArrayList<>();
-    for (NewPair newPair : entity.getPairs()) {
-      newPairs.add(new PairDto(categoryId, newPair));
+    if (entity.getNewPairs() != null) {
+      for (NewPair newPair : entity.getNewPairs()) {
+        System.out.println(newPair.getEn());
+        newPairs.add(new PairDto(categoryId, newPair));
+      }
     }
     if (newPairs.size() > 0) {
       List<PairDto> savedPairs = pairRepository.saveAll(newPairs);
-      return savedPairs;
+      result.setNewPairs(savedPairs);
     }
-    if (entity.getRemovedIds().size() > 0) {
-      pairRepository.deleteAllByIdInBatch(entity.getRemovedIds());
+    if (entity.getRemovedIds() != null) {
+      if (entity.getRemovedIds().size() > 0) {
+        pairRepository.deleteAllByIdInBatch(entity.getRemovedIds());
+        result.setRemovedIds(entity.getRemovedIds());
+      }
     }
-    return newPairs;
+    return result;
   }
 
   public boolean delete(Integer userId, Integer categoryId) {
