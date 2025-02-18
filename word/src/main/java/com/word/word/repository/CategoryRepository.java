@@ -1,5 +1,6 @@
 package com.word.word.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
@@ -17,10 +18,14 @@ import jakarta.transaction.Transactional;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<CategoryDto, Integer> {
-	@Query("SELECT new com.word.word.entity.dto_utils.ResultCategory(c.id, c.title, c.userId, u.displayName, u.username) FROM CategoryDto c LEFT JOIN UserDto u ON u.id=c.userId WHERE "
+	@Query("SELECT new com.word.word.entity.dto_utils.ResultCategory(c.id, c.title, c.userId, u.displayName, u.username, c.createAt, c.updateAt) FROM CategoryDto c LEFT JOIN UserDto u ON u.id=c.userId WHERE "
 			+ "(:#{#filteredCategory.id} IS NULL OR c.id=:#{#filteredCategory.id}) AND " +
 			"(:#{#filteredCategory.title} IS NULL OR c.title LIKE :#{#filteredCategory.title}) AND " +
-			"(:#{#filteredCategory.userId} IS NULL OR c.userId=:#{#filteredCategory.userId})")
+			"(:#{#filteredCategory.userId} IS NULL OR c.userId=:#{#filteredCategory.userId}) AND " +
+			"(:#{#filteredCategory.fromCreateAt} IS NULL OR c.createAt >= :#{#filteredCategory.fromCreateAt}) AND " +
+			"(:#{#filteredCategory.toCreateAt} IS NULL OR c.createAt <= :#{#filteredCategory.toCreateAt}) AND " +
+			"(:#{#filteredCategory.fromUpdateAt} IS NULL OR c.updateAt <= :#{#filteredCategory.fromUpdateAt}) AND " +
+			"(:#{#filteredCategory.toUpdateAt} IS NULL OR c.updateAt <= :#{#filteredCategory.toUpdateAt})")
 	List<ResultCategory> getByFilter(@Param("filteredCategory") FilteredCategory filteredCategory, Pageable pageable);
 
 	@Query("SELECT COUNT(c) FROM CategoryDto c LEFT JOIN UserDto u ON u.id=c.userId WHERE "
@@ -31,7 +36,7 @@ public interface CategoryRepository extends JpaRepository<CategoryDto, Integer> 
 
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE category SET title = :title WHERE id = :categoryId AND user_id = :userId", nativeQuery = true)
+	@Query(value = "UPDATE category SET title = :categoryTitle AND updateAt = :updateAt WHERE id = :categoryId AND user_id = :userId", nativeQuery = true)
 	void updateCategory(@Param("userId") Integer userId, @Param("categoryId") Integer categoryId,
-			@Param("title") String title);
+			@Param("categoryTitle") String categoryTitle, @Param("updateAt") Date updateAt);
 }

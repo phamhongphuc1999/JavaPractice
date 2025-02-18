@@ -1,6 +1,7 @@
 package com.word.word.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.word.word.entity.dto_utils.NewPair;
 import com.word.word.entity.dto_utils.ResultCategory;
 import com.word.word.entity.dto_utils.ReturnUpdatedCategory;
 import com.word.word.entity.dto_utils.SavedResultCategory;
+import com.word.word.entity.dto_utils.UpdatePair;
 import com.word.word.entity.dto_utils.UpdatedCategory;
 import com.word.word.repository.CategoryRepository;
 import com.word.word.repository.PairRepository;
@@ -52,22 +54,25 @@ public class CategoryService {
   }
 
   public ReturnUpdatedCategory update(Integer userId, Integer categoryId, UpdatedCategory entity) {
-    System.out.println(userId);
     ReturnUpdatedCategory result = new ReturnUpdatedCategory();
     if (entity.getTitle() != null) {
-      categoryRepository.updateCategory(userId, categoryId, entity.getTitle());
+      categoryRepository.updateCategory(userId, categoryId, entity.getTitle(), new Date());
       result.setTitle(entity.getTitle());
     }
     List<PairDto> newPairs = new ArrayList<>();
     if (entity.getNewPairs() != null) {
       for (NewPair newPair : entity.getNewPairs()) {
-        System.out.println(newPair.getEn());
         newPairs.add(new PairDto(categoryId, newPair));
       }
     }
     if (newPairs.size() > 0) {
       List<PairDto> savedPairs = pairRepository.saveAll(newPairs);
       result.setNewPairs(savedPairs);
+    }
+    if (entity.getModifiedPairs() != null) {
+      for (UpdatePair _pair : entity.getModifiedPairs()) {
+        pairRepository.updatePair(_pair);
+      }
     }
     if (entity.getRemovedIds() != null) {
       if (entity.getRemovedIds().size() > 0) {

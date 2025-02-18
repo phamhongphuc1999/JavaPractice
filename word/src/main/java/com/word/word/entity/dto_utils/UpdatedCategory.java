@@ -23,6 +23,16 @@ public class UpdatedCategory {
     this.newPairs = newPairs;
   }
 
+  private List<UpdatePair> modifiedPairs;
+
+  public List<UpdatePair> getModifiedPairs() {
+    return this.modifiedPairs;
+  }
+
+  public void setModifiedPairs(List<UpdatePair> modifiedPairs) {
+    this.modifiedPairs = modifiedPairs;
+  }
+
   private List<Integer> removedIds;
 
   public List<Integer> getRemovedIds() {
@@ -33,9 +43,11 @@ public class UpdatedCategory {
     this.removedIds = removedIds;
   }
 
-  public UpdatedCategory(String title, List<NewPair> newPairs, List<Integer> removedIds) {
+  public UpdatedCategory(String title, List<NewPair> newPairs, List<UpdatePair> modifiedPairs,
+      List<Integer> removedIds) {
     this.title = title;
     this.newPairs = newPairs;
+    this.modifiedPairs = modifiedPairs;
     this.removedIds = removedIds;
   }
 }

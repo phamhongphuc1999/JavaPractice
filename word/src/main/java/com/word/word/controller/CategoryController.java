@@ -1,5 +1,7 @@
 package com.word.word.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
@@ -54,13 +56,18 @@ public class CategoryController {
       @RequestHeader(value = "Authorization", required = true) String authorizationHeader,
       @RequestParam(required = false) Integer id,
       @RequestParam(required = false) String title,
+      @RequestParam(required = false) Date fromCreateAt,
+      @RequestParam(required = false) Date toCreateAt,
+      @RequestParam(required = false) Date fromUpdateAt,
+      @RequestParam(required = false) Date toUpdateAt,
       @RequestParam(required = false) Integer pageNumber,
       @RequestParam(required = false) Integer pageSize) {
     try {
       String realAuthorization = authorizationHeader.replace("Bearer ", "");
       String username = jwtTokenUtil.getUsernameFromToken(realAuthorization);
       ResultUser user = userService.getByUsername(username);
-      FilteredCategory filteredCategory = new FilteredCategory(id, title, user.getId());
+      FilteredCategory filteredCategory = new FilteredCategory(id, title, user.getId(), fromCreateAt, toCreateAt,
+          fromUpdateAt, toUpdateAt);
       PaginationResult<ResultCategory> result = categoryService.getByFilter(filteredCategory,
           new PageableEntity(pageNumber, pageSize));
       return ResponseEntity.ok().body(new OkResponder(result));

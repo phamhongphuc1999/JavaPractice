@@ -25,6 +25,16 @@ public class ReturnUpdatedCategory {
     this.newPairs = newPairs;
   }
 
+  private List<PairDto> modifiedPairs;
+
+  public List<PairDto> getModifiedPairs() {
+    return this.modifiedPairs;
+  }
+
+  public void setModifiedPairs(List<PairDto> modifiedPairs) {
+    this.modifiedPairs = modifiedPairs;
+  }
+
   private List<Integer> removedIds;
 
   public List<Integer> getRemovedIds() {
@@ -38,9 +48,11 @@ public class ReturnUpdatedCategory {
   public ReturnUpdatedCategory() {
   }
 
-  public ReturnUpdatedCategory(String title, List<PairDto> newPairs, List<Integer> removedIds) {
+  public ReturnUpdatedCategory(String title, List<PairDto> newPairs, List<PairDto> modifiedPairs,
+      List<Integer> removedIds) {
     this.title = title;
     this.newPairs = newPairs;
+    this.modifiedPairs = modifiedPairs;
     this.removedIds = removedIds;
   }
 }

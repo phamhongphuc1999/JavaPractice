@@ -1,0 +1,26 @@
+{
+    "title": "solar system",
+    "pairs": [
+        { "en": "aid", "vi": "hỗ trợ" },
+        { "en": "unaided eye", "vi": "mắt thường (không có hỗ trợ quang học)" },
+        { "en": "unmanned probe", "vi": "tàu thăm dò không kiểm soát" },
+        { "en": "atmosphere", "vi": "bầu khí quyển" },
+        { "en": "explode", "vi": "nổ (verb)" },
+        { "en": "composition", "vi": "thành phần (n)" },
+        { "en": "make-up", "vi": "thành phần (từ ghép)" },
+        { "en": "condense", "vi": "ngưng tụ" },
+        { "en": "dust", "vi": "bụi" },
+        { "en": "metal", "vi": "kim loại" },
+        { "en": "collide with", "vi": "va đập với" },
+        { "en": "widely-held opinion", "vi": "ý kiến được chấp nhận rộng rãi" },
+        { "en": "satellite", "vi": "vệ tinh" },
+        { "en": "centrifugal", "vi": "li tâm (adj)" },
+        { "en": "centrifuge", "vi": "máy li tâm (n)" },
+        { "en": "comet", "vi": "sao chổi" },
+        { "en": "unveil", "vi": "tiết lộ (verb)" },
+        { "en": "reveal", "vi": "tiết lộ (verb - r)" },
+        { "en": "partial solar eclipse", "vi": "nhật thực một phần" },
+        { "en": "annular solar eclipse", "vi": "nhật thực hình khuyên" },
+        { "en": "total solar eclipse", "vi": "nhật thực toàn phần" }
+    ]
+}

@@ -1,5 +1,7 @@
 package com.word.word.entity.dto_utils;
 
+import java.util.Date;
+
 import com.word.word.entity.dto.CategoryDto;
 
 public class ResultCategory extends CategoryDto {
@@ -23,11 +25,14 @@ public class ResultCategory extends CategoryDto {
     this.username = username;
   }
 
-  public ResultCategory(Integer id, String title, Integer userId, String displayName, String username) {
+  public ResultCategory(Integer id, String title, Integer userId, String displayName, String username, Date createAt,
+      Date updateAt) {
     this.setId(id);
     this.setTitle(title);
     this.setUserId(userId);
     this.setDisplayName(displayName);
     this.setUsername(username);
+    this.setCreateAt(createAt);
+    this.setUpdateAt(updateAt);
   }
 }

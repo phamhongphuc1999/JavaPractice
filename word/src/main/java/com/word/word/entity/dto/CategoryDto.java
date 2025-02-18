@@ -1,5 +1,9 @@
 package com.word.word.entity.dto;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.word.word.entity.dto_utils.NewCategory;
 
 import jakarta.persistence.Column;
@@ -45,11 +49,37 @@ public class CategoryDto {
     this.userId = userId;
   }
 
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+  @Column(name = "create_at")
+  private Date createAt;
+
+  public Date getCreateAt() {
+    return this.createAt;
+  }
+
+  public void setCreateAt(Date createAt) {
+    this.createAt = createAt;
+  }
+
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+  @Column(name = "update_at")
+  private Date updateAt;
+
+  public Date getUpdateAt() {
+    return this.updateAt;
+  }
+
+  public void setUpdateAt(Date updateAt) {
+    this.updateAt = updateAt;
+  }
+
   public CategoryDto() {
   }
 
   public CategoryDto(Integer userId, NewCategory entity) {
     this.userId = userId;
     this.title = entity.getTitle();
+    this.createAt = new Date();
+    this.updateAt = new Date();
   }
 }

@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.word.word.entity.dto.PairDto;
+import com.word.word.entity.dto_utils.UpdatePair;
 
 import jakarta.transaction.Transactional;
 
@@ -16,6 +17,11 @@ import jakarta.transaction.Transactional;
 public interface PairRepository extends JpaRepository<PairDto, Integer> {
   @Query("SELECT new com.word.word.entity.dto.PairDto(p.id, p.en, p.vi, p.categoryId) FROM PairDto p LEFT JOIN CategoryDto c ON c.id=:categoryId WHERE p.categoryId=:categoryId AND c.userId=:userId")
   List<PairDto> getByCategoryId(@Param("userId") Integer userId, @Param("categoryId") Integer categoryId);
+
+  @Modifying
+  @Transactional
+  @Query(value = "UPDATE pair p SET (:updatePair.en IS NULL OR p.en=:updatePair.en) AND (:updatePair.vi IS NULL OR p.vi=:updatePair.vi) WHERE p.id=:updatePair.id", nativeQuery = true)
+  void updatePair(@Param("updatePair") UpdatePair updatePair);
 
   @Modifying
   @Transactional
