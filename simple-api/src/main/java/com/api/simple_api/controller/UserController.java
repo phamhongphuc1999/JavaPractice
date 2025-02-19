@@ -11,9 +11,11 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,9 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.simple_api.entity.common.FailResponder;
 import com.api.simple_api.entity.common.OkResponder;
 import com.api.simple_api.entity.common.Responder;
+import com.api.simple_api.entity.common.TokenEntity;
 import com.api.simple_api.entity.dto.UserDto;
 import com.api.simple_api.entity.dto_utils.FilteredUser;
-import com.api.simple_api.entity.dto_utils.JwtResponseUser;
 import com.api.simple_api.entity.dto_utils.JwtUser;
 import com.api.simple_api.entity.dto_utils.NewUser;
 import com.api.simple_api.entity.dto_utils.ResultUser;
@@ -51,10 +53,11 @@ public class UserController {
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Integer id,
       @RequestParam(required = false) String displayName,
+      @RequestParam(required = false) String username,
       @RequestParam(required = false) String password,
       @RequestParam(required = false) Integer roleId) {
     try {
-      List<ResultUser> result = userService.getByFilter(new FilteredUser(id, displayName, password, roleId));
+      List<ResultUser> result = userService.getByFilter(new FilteredUser(id, displayName, username, password, roleId));
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
@@ -62,7 +65,7 @@ public class UserController {
   }
 
   @Operation(summary = "createNewUser", description = "Create a new user")
-  @PostMapping("")
+  @PostMapping("/register")
   public ResponseEntity<Responder> save(@RequestBody NewUser entity) {
     try {
       UserDto result = userService.save(new UserDto(entity));
@@ -79,8 +82,8 @@ public class UserController {
       authenticate(jwtUser.getUsername(), jwtUser.getPassword());
       UserDetails userDetails = userService
           .loadUserByUsername(jwtUser.getUsername());
-      String token = jwtTokenUtil.generateToken(userDetails);
-      return ResponseEntity.ok(new OkResponder(new JwtResponseUser(token)));
+      TokenEntity token = jwtTokenUtil.generateToken(userDetails);
+      return ResponseEntity.ok(new OkResponder(token));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
@@ -92,7 +95,31 @@ public class UserController {
     } catch (DisabledException e) {
       throw new Exception("USER_DISABLED", e);
     } catch (BadCredentialsException e) {
-      throw new Exception("INVALID_CREDENTIALS", e);
+      throw new Exception(e);
+    }
+  }
+
+  @Operation(summary = "Check token expire", description = "Check token expire")
+  @GetMapping("/login/expire")
+  public ResponseEntity<Responder> expireLogin(
+      @RequestHeader(value = "Authorization", required = true) String authorizationHeader) {
+    try {
+      String realAuthorization = authorizationHeader.replace("Bearer ", "");
+      Boolean isExpire = jwtTokenUtil.isTokenExpired(realAuthorization);
+      return ResponseEntity.ok(new OkResponder(isExpire));
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
+    }
+  }
+
+  @Operation(summary = "Delete user by user id", description = "Delete user by user id")
+  @DeleteMapping("")
+  public ResponseEntity<Responder> delete(@RequestParam(required = true) Integer id) {
+    try {
+      boolean result = userService.deleteUser(id);
+      return ResponseEntity.ok().body(new OkResponder(result));
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));
     }
   }
 }

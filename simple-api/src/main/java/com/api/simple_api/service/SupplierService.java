@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.api.simple_api.entity.common.PageableEntity;
+import com.api.simple_api.entity.common.PaginationResult;
 import com.api.simple_api.entity.dto.Supplier;
 import com.api.simple_api.entity.dto_utils.FilteredSupplier;
 import com.api.simple_api.repository.SupplierRepository;
@@ -14,8 +16,10 @@ public class SupplierService {
   @Autowired
   private SupplierRepository supplierRepository;
 
-  public List<Supplier> getByFilter(FilteredSupplier supplier) {
-    return supplierRepository.getByFilter(supplier);
+  public PaginationResult<Supplier> getByFilter(FilteredSupplier filteredSupplier, PageableEntity pageable) {
+    Integer total = supplierRepository.getTotalResultByFilter(filteredSupplier);
+    List<Supplier> items = supplierRepository.getByFilter(filteredSupplier, pageable.getPageable());
+    return new PaginationResult<>(total, items);
   }
 
   public Supplier save(Supplier entity) {

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.api.simple_api.entity.common.TokenEntity;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -46,24 +48,29 @@ public class JwtTokenUtil implements Serializable {
 				.getBody();
 	}
 
-	private Boolean isTokenExpired(String token) {
+	public Boolean isTokenExpired(String token) {
 		final Date expiration = getExpirationDateFromToken(token);
 		return expiration.before(new Date());
 	}
 
-	public String generateToken(UserDetails userDetails) {
+	public TokenEntity generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("role", "admin");
 		return doGenerateToken(claims, userDetails.getUsername());
 	}
 
-	private String doGenerateToken(Map<String, Object> claims, String subject) {
+	private TokenEntity doGenerateToken(Map<String, Object> claims, String subject) {
 		long timestamp = System.currentTimeMillis();
 		Date currentDate = new Date(timestamp);
 		Date expireDate = new Date(timestamp + JWT_TOKEN_VALIDITY * 1000);
 		SecretKey key = Keys.hmacShaKeyFor(secret.getBytes());
-		return Jwts.builder().claims(claims).subject(subject).issuedAt(currentDate).expiration(expireDate)
-				.signWith(key, Jwts.SIG.HS512).compact();
+		String token = Jwts.builder().claims(claims)
+				.subject(subject)
+				.issuedAt(currentDate)
+				.expiration(expireDate)
+				.signWith(key, Jwts.SIG.HS512)
+				.compact();
+		return new TokenEntity(token, expireDate);
 	}
 
 	public Boolean validateToken(String token, UserDetails userDetails) {

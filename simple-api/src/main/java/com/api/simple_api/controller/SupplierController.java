@@ -1,7 +1,6 @@
 package com.api.simple_api.controller;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.simple_api.entity.common.FailResponder;
 import com.api.simple_api.entity.common.OkResponder;
+import com.api.simple_api.entity.common.PageableEntity;
+import com.api.simple_api.entity.common.PaginationResult;
 import com.api.simple_api.entity.common.Responder;
 import com.api.simple_api.entity.dto.Supplier;
 import com.api.simple_api.entity.dto_utils.FilteredSupplier;
@@ -41,10 +42,14 @@ public class SupplierController {
       @RequestParam(required = false) String email,
       @RequestParam(required = false) String moreInfo,
       @RequestParam(required = false) Date fromContractDate,
-      @RequestParam(required = false) Date toContractDate) {
+      @RequestParam(required = false) Date toContractDate,
+      @RequestParam(required = false) Integer pageNumber,
+      @RequestParam(required = false) Integer pageSize) {
     try {
-      List<Supplier> suppliers = supplierService.getByFilter(
-          new FilteredSupplier(id, displayName, address, phone, email, moreInfo, fromContractDate, toContractDate));
+      FilteredSupplier filteredSupplier = new FilteredSupplier(id, displayName, address, phone, email, moreInfo,
+          fromContractDate, toContractDate);
+      PaginationResult<Supplier> suppliers = supplierService.getByFilter(filteredSupplier,
+          new PageableEntity(pageNumber, pageSize));
       return ResponseEntity.ok().body(new OkResponder(suppliers));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));

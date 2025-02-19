@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.api.simple_api.entity.common.PageableEntity;
+import com.api.simple_api.entity.common.PaginationResult;
 import com.api.simple_api.entity.dto.Unit;
 import com.api.simple_api.repository.UnitRepository;
 
@@ -13,8 +15,10 @@ public class UnitService {
   @Autowired
   private UnitRepository unitRepository;
 
-  public List<Unit> getByFilter(Unit filteredUnit) {
-    return unitRepository.getByFilter(filteredUnit);
+  public PaginationResult<Unit> getByFilter(Unit filteredUnit, PageableEntity pageable) {
+    Integer total = unitRepository.getTotalResultByFilter(filteredUnit);
+    List<Unit> items = unitRepository.getByFilter(filteredUnit, pageable.getPageable());
+    return new PaginationResult<>(total, items);
   }
 
   public Unit save(Unit entity) {

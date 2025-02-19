@@ -57,3 +57,7 @@ SHOW TABLES;
 ```shell
 SELECT COLUMNS FROM table_name;
 ```
+
+## User
+
+-   default password: 123456

@@ -51,9 +51,10 @@ public class FilteredUser {
     this.roleId = roleId;
   }
 
-  public FilteredUser(Integer id, String displayName, String password, Integer roleId) {
+  public FilteredUser(Integer id, String displayName, String username, String password, Integer roleId) {
     this.id = id;
     this.displayName = displayName;
+    this.username = username;
     this.password = password;
     this.roleId = roleId;
   }

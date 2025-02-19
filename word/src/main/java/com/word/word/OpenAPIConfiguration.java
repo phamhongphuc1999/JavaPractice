@@ -14,14 +14,14 @@ public class OpenAPIConfiguration {
   public OpenAPI defineOpenApi() {
     Server server = new Server();
     server.setUrl("http://localhost:9090");
-    server.setDescription("Simple Spring Boot API");
+    server.setDescription("Word App API");
 
     Contact myContact = new Contact();
     myContact.setName("Peter Present");
     myContact.setEmail("peterpresent");
 
     Info information = new Info()
-        .title("Symple API")
+        .title("Word App API")
         .version("1.0")
         .description("")
         .contact(myContact);

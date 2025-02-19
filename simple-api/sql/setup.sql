@@ -137,6 +137,6 @@ VALUES ("user"),
         ("root");
 
 INSERT INTO user (display_name, username, password, role_id)
-VALUES ("user1", "username1", "$2a$10$dyBaBpKlQpEkjx06.SqNceta6JruZNMrI1m.rcPchF0hHLPSZen16", 1),
-        ("user2", "username2", "$2a$10$dyBaBpKlQpEkjx06.SqNceta6JruZNMrI1m.rcPchF0hHLPSZen16", 2),
-        ("user3", "username3", "$2a$10$dyBaBpKlQpEkjx06.SqNceta6JruZNMrI1m.rcPchF0hHLPSZen16", 3);
+VALUES ("user1", "username1", "$2a$10$7ZJFlhzuXBCbtwcKLz0NXuaceURItpjjcof0kbfUKnOT6aeL81gK6", 1),
+        ("user2", "username2", "$2a$10$7ZJFlhzuXBCbtwcKLz0NXuaceURItpjjcof0kbfUKnOT6aeL81gK6", 2),
+        ("user3", "username3", "$2a$10$7ZJFlhzuXBCbtwcKLz0NXuaceURItpjjcof0kbfUKnOT6aeL81gK6", 3);

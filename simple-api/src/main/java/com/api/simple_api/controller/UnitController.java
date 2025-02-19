@@ -1,7 +1,5 @@
 package com.api.simple_api.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
@@ -15,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.simple_api.entity.common.FailResponder;
 import com.api.simple_api.entity.common.OkResponder;
+import com.api.simple_api.entity.common.PageableEntity;
+import com.api.simple_api.entity.common.PaginationResult;
 import com.api.simple_api.entity.common.Responder;
 import com.api.simple_api.entity.dto.Unit;
 import com.api.simple_api.entity.dto_utils.NewUnit;
@@ -32,9 +32,12 @@ public class UnitController {
 
   @GetMapping("")
   public ResponseEntity<Responder> getByFilter(@RequestParam(required = false) Integer id,
-      @RequestParam(required = false) String displayName) {
+      @RequestParam(required = false) String displayName,
+      @RequestParam(required = false) Integer pageNumber,
+      @RequestParam(required = false) Integer pageSize) {
     try {
-      List<Unit> units = unitService.getByFilter(new Unit(id, displayName));
+      PaginationResult<Unit> units = unitService.getByFilter(new Unit(id, displayName),
+          new PageableEntity(pageNumber, pageSize));
       return ResponseEntity.ok().body(new OkResponder(units));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));

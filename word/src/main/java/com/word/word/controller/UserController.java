@@ -64,7 +64,7 @@ public class UserController {
   }
 
   @Operation(summary = "Create a new user", description = "Create a new user")
-  @PostMapping("")
+  @PostMapping("/register")
   public ResponseEntity<Responder> save(@RequestBody NewUser entity) {
     try {
       UserDto newUser = new UserDto(entity);

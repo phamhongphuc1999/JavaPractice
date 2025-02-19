@@ -3,6 +3,7 @@ package com.api.simple_api.repository;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -25,7 +26,18 @@ public interface ObjectRepository extends JpaRepository<ObjectDto, UUID> {
       "(:#{#filteredObject.supplierId} IS NULL OR o.supplier.id=:#{#filteredObject.supplierId}) AND " +
       "(:#{#filteredObject.qrCode} IS NULL OR o.qrCode LIKE %:#{#filteredObject.qrCode}%) AND " +
       "(:#{#filteredObject.barCode} IS NULL OR o.barCode LIKE %:#{#filteredObject.barCode}%)")
-  List<ObjectDto> getByFilter(@Param("filteredObject") FilteredObjectDto filteredObject);
+  List<ObjectDto> getByFilter(@Param("filteredObject") FilteredObjectDto filteredObject, Pageable pageable);
+
+  @Query("SELECT COUNT(o) FROM ObjectDto o " +
+      "LEFT JOIN Unit u ON o.unit.id=u.id " +
+      "LEFT JOIN Supplier s ON o.supplier.id=s.id WHERE " +
+      "(:#{#filteredObject.id} IS NULL OR o.id=:#{#filteredObject.id}) AND " +
+      "(:#{#filteredObject.displayName} IS NULL OR o.displayName LIKE %:#{#filteredObject.displayName}%) AND " +
+      "(:#{#filteredObject.unitId} IS NULL OR o.unit.id=:#{#filteredObject.unitId}) AND " +
+      "(:#{#filteredObject.supplierId} IS NULL OR o.supplier.id=:#{#filteredObject.supplierId}) AND " +
+      "(:#{#filteredObject.qrCode} IS NULL OR o.qrCode LIKE %:#{#filteredObject.qrCode}%) AND " +
+      "(:#{#filteredObject.barCode} IS NULL OR o.barCode LIKE %:#{#filteredObject.barCode}%)")
+  Integer getTotalResultByFilter(@Param("filteredObject") FilteredObjectDto filteredObject);
 
   @Modifying
   @Transactional
