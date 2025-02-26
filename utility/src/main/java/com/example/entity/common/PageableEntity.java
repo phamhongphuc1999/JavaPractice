@@ -2,6 +2,7 @@ package com.example.entity.common;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 public class PageableEntity {
   private Integer pageNumber;
@@ -33,7 +34,7 @@ public class PageableEntity {
   public PageableEntity() {
     this.pageNumber = 0;
     this.pageSize = 10;
-    this.pageable = PageRequest.of(this.pageNumber, this.pageSize);
+    this.pageable = PageRequest.of(this.pageNumber, this.pageSize, Sort.by("createAt").descending());
   }
 
   public PageableEntity(Integer pageNumber, Integer pageSize) {

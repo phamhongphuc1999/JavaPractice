@@ -3,6 +3,7 @@ package com.word.word.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +13,7 @@ import com.example.entity.common.PageableEntity;
 import com.example.entity.common.PaginationResult;
 import com.word.word.entity.dto.CategoryDto;
 import com.word.word.entity.dto.PairDto;
+import com.word.word.entity.dto_utils.AllPairResult;
 import com.word.word.entity.dto_utils.FilteredCategory;
 import com.word.word.entity.dto_utils.NewPair;
 import com.word.word.entity.dto_utils.ResultCategory;
@@ -36,8 +38,10 @@ public class CategoryService {
     return new PaginationResult<>(total, items);
   }
 
-  public List<PairDto> getPairByCategoryId(Integer userId, Integer categoryId) {
-    return pairRepository.getByCategoryId(userId, categoryId);
+  public AllPairResult getPairByCategoryId(Integer userId, Integer categoryId) {
+    List<PairDto> pairs = pairRepository.getByCategoryId(userId, categoryId);
+    Optional<CategoryDto> category = categoryRepository.findById(categoryId);
+    return new AllPairResult(categoryId, category.get().getTitle(), pairs);
   }
 
   public SavedResultCategory save(CategoryDto entity, List<NewPair> pairs) {

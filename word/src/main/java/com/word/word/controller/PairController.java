@@ -1,7 +1,5 @@
 package com.word.word.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
@@ -15,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.entity.common.FailResponder;
 import com.example.entity.common.OkResponder;
 import com.example.entity.common.Responder;
-import com.word.word.entity.dto.PairDto;
+import com.word.word.entity.dto_utils.AllPairResult;
 import com.word.word.entity.dto_utils.ResultUser;
 import com.word.word.service.CategoryService;
 import com.word.word.service.UserService;
@@ -47,7 +45,7 @@ public class PairController {
       String realAuthorization = authorizationHeader.replace("Bearer ", "");
       String username = jwtTokenUtil.getUsernameFromToken(realAuthorization);
       ResultUser user = userService.getByUsername(username);
-      List<PairDto> result = categoryService.getPairByCategoryId(user.getId(), categoryId);
+      AllPairResult result = categoryService.getPairByCategoryId(user.getId(), categoryId);
       return ResponseEntity.ok().body(new OkResponder(result));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FailResponder(exception.getMessage()));

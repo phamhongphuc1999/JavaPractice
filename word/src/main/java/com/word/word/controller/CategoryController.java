@@ -61,7 +61,9 @@ public class CategoryController {
       @RequestParam(required = false) Date fromUpdateAt,
       @RequestParam(required = false) Date toUpdateAt,
       @RequestParam(required = false) Integer pageNumber,
-      @RequestParam(required = false) Integer pageSize) {
+      @RequestParam(required = false) Integer pageSize,
+      @RequestParam(required = false) String sortBy,
+      @RequestParam(required = false) String sortDirection) {
     try {
       String realAuthorization = authorizationHeader.replace("Bearer ", "");
       String username = jwtTokenUtil.getUsernameFromToken(realAuthorization);

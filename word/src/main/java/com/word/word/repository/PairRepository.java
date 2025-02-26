@@ -25,6 +25,6 @@ public interface PairRepository extends JpaRepository<PairDto, Integer> {
 
   @Modifying
   @Transactional
-  @Query(value = "DELETE FROM pair p LEFT JOIN category c ON c.id=:categoryId WHERE p.categoryId=:categoryId AND c.userId=:userId", nativeQuery = true)
+  @Query(value = "DELETE FROM pair p LEFT JOIN category c ON c.id=:categoryId WHERE p.category_id=:categoryId AND c.user_id=:userId", nativeQuery = true)
   void deleteByCategoryId(@Param("userId") Integer userId, @Param("categoryId") Integer categoryId);
 }
