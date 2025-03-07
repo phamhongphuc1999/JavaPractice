@@ -1,5 +1,3 @@
-include ../Makefile.mk
-
 ## Run. | Executed command line
 run:
 	java -cp target/code-1.0-SNAPSHOT.jar com.code.Main
