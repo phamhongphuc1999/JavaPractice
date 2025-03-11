@@ -155,4 +155,67 @@ public class DeepFirstSearch {
       pointer = list.get(i);
     }
   }
+
+  // problem 144
+  static List<Integer> preorderTraversal(TreeNode root) {
+    Stack<TreeNode> leftStack = new Stack<>();
+    Stack<TreeNode> rightStack = new Stack<>();
+    List<Integer> result = new ArrayList<>();
+    if (root == null)
+      return result;
+    leftStack.push(root);
+    while (!leftStack.isEmpty() || !rightStack.isEmpty()) {
+      if (leftStack.isEmpty()) {
+        if (!rightStack.isEmpty()) {
+          TreeNode node = rightStack.pop();
+          result.add(node.val);
+          if (node.left != null)
+            leftStack.push(node.left);
+          if (node.right != null)
+            rightStack.push(node.right);
+        }
+      } else {
+        TreeNode node = leftStack.pop();
+        result.add(node.val);
+        if (node.left != null)
+          leftStack.push(node.left);
+        if (node.right != null)
+          rightStack.push(node.right);
+      }
+    }
+    return result;
+  }
+
+  // problem 145
+  static List<Integer> postorderTraversal(TreeNode root) {
+    Stack<TreeNode> stack = new Stack<>();
+    TreeNode preNode = root;
+    List<Integer> result = new ArrayList<>();
+    if (root == null)
+      return result;
+    stack.push(root);
+    while (!stack.isEmpty()) {
+      TreeNode topNode = stack.peek();
+      TreeNode leftNode = topNode.left;
+      TreeNode rightNode = topNode.right;
+      boolean check1 = leftNode == preNode && rightNode == null;
+      boolean check2 = rightNode == preNode;
+      if (check1 || check2) {
+        result.add(topNode.val);
+        preNode = topNode;
+        stack.pop();
+      } else {
+        if (rightNode != null)
+          stack.push(rightNode);
+        if (leftNode != null)
+          stack.push(leftNode);
+        if (leftNode == null && rightNode == null) {
+          result.add(topNode.val);
+          preNode = topNode;
+          stack.pop();
+        }
+      }
+    }
+    return result;
+  }
 }
