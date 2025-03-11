@@ -1,12 +1,11 @@
 package com.code;
 
-import com.code.utilities.TreeNode;
-import com.code.utilities.TreeNodeUtility;
-
 public class Main {
 	public static void main(String[] args) {
-		TreeNode p = TreeNodeUtility.convertArrayToTree(new Integer[] { 1, null, 2 });
-		int result = DeepFirstSearch.maxDepth(p);
-		System.err.println(result);
+		int[] result = Simple.nextGreaterElement(new int[] { 4, 1, 2 }, new int[] { 1, 2, 3, 4 });
+		for (int i : result) {
+			System.out.print(i + " ");
+		}
+		System.out.println();
 	}
 }

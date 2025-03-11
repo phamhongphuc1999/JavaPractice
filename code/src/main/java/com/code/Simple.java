@@ -315,4 +315,26 @@ public class Simple {
     }
     return false;
   }
+
+  // problem 496
+  static int[] nextGreaterElement(int[] nums1, int[] nums2) {
+    int[] result = new int[nums1.length];
+    for (int i = 0; i < result.length; i++)
+      result[i] = -1;
+    HashMap<Integer, Integer> cache = new HashMap<>();
+    int counter = 0;
+    for (int i : nums1) {
+      cache.put(i, counter);
+      counter++;
+    }
+    Stack<Integer> stack = new Stack<>();
+    for (int i : nums2) {
+      while (!stack.isEmpty() && stack.peek() < i) {
+        result[cache.get(stack.pop())] = i;
+      }
+      if (cache.containsKey(i))
+        stack.add(i);
+    }
+    return result;
+  }
 }
