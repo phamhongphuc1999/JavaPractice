@@ -1,8 +1,15 @@
 package com.code;
 
+import java.util.List;
+
 public class Main {
 	public static void main(String[] args) {
-		int result = StackProblem.findUnsortedSubarray(new int[] { 1, 2, 3, 4 });
-		System.out.println(result);
+		List<List<Integer>> result = BackTracing.permute(new int[] { 1, 1, 2 });
+		for (List<Integer> list : result) {
+			for (Integer i : list) {
+				System.out.print(i + " ");
+			}
+			System.out.println();
+		}
 	}
 }
