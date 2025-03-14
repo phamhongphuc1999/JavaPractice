@@ -337,4 +337,27 @@ public class Simple {
     }
     return result;
   }
+
+  // problem 268
+  static int missingNumber(int[] nums) {
+    Arrays.sort(nums);
+    int right = nums.length;
+    int left = 0;
+    while (left < right) {
+      int mid = (right + left) / 2;
+      if (nums[mid] > mid)
+        right = mid;
+      else
+        left = mid + 1;
+    }
+    return left;
+  }
+
+  // problem 283
+  static int missingNumber1(int[] nums) {
+    long total = (nums.length * (nums.length + 1)) / 2;
+    for (int i : nums)
+      total -= i;
+    return (int) total;
+  }
 }

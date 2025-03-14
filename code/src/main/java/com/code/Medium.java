@@ -99,4 +99,31 @@ public class Medium {
     else
       return temp;
   }
+
+  private static boolean dividable(int[] candies, long k, int candiesPerPerson) {
+    long people = 0;
+    for (int i = 0; i < candies.length; i++) {
+      people += candies[i] / candiesPerPerson;
+      if (people >= k)
+        return true;
+    }
+    return false;
+  }
+
+  // problem 2226
+  static int maximumCandies(int[] candies, long k) {
+    int end = 0;
+    for (int i = 0; i < candies.length; i++) {
+      end = Math.max(end, candies[i]);
+    }
+    int begin = 0;
+    while (begin < end) {
+      int mid = (begin + end + 1) / 2;
+      if (dividable(candies, k, mid))
+        begin = mid;
+      else
+        end = mid - 1;
+    }
+    return begin;
+  }
 }
