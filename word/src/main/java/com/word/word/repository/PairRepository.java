@@ -9,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.word.word.entity.dto.PairDto;
-import com.word.word.entity.dto_utils.UpdatePair;
 
 import jakarta.transaction.Transactional;
 
@@ -20,11 +19,13 @@ public interface PairRepository extends JpaRepository<PairDto, Integer> {
 
   @Modifying
   @Transactional
-  @Query(value = "UPDATE pair p SET (:updatePair.en IS NULL OR p.en=:updatePair.en) AND (:updatePair.vi IS NULL OR p.vi=:updatePair.vi) WHERE p.id=:updatePair.id", nativeQuery = true)
-  void updatePair(@Param("updatePair") UpdatePair updatePair);
+  @Query(value = "UPDATE pair p SET p.en = CASE WHEN :en IS NOT NULL THEN :en ELSE p.en END, p.vi = CASE WHEN :vi IS NOT NULL THEN :vi ELSE p.vi END WHERE p.id=:id", nativeQuery = true)
+  void updatePair(@Param("en") String en, @Param("vi") String vi, @Param("id") Integer id);
 
   @Modifying
   @Transactional
-  @Query(value = "DELETE FROM pair p LEFT JOIN category c ON c.id=:categoryId WHERE p.category_id=:categoryId AND c.user_id=:userId", nativeQuery = true)
+  @Query(value = "DELETE FROM pair \n" + //
+      "WHERE category_id = :categoryId \n" + //
+      "AND category_id IN (SELECT id FROM category WHERE id = :categoryId AND user_id = :userId)", nativeQuery = true)
   void deleteByCategoryId(@Param("userId") Integer userId, @Param("categoryId") Integer categoryId);
 }

@@ -36,7 +36,7 @@ public interface CategoryRepository extends JpaRepository<CategoryDto, Integer> 
 
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE category SET title = :categoryTitle AND updateAt = :updateAt WHERE id = :categoryId AND user_id = :userId", nativeQuery = true)
+	@Query(value = "UPDATE category SET title = :categoryTitle, update_at = :updateAt WHERE id = :categoryId AND user_id = :userId", nativeQuery = true)
 	void updateCategory(@Param("userId") Integer userId, @Param("categoryId") Integer categoryId,
 			@Param("categoryTitle") String categoryTitle, @Param("updateAt") Date updateAt);
 }

@@ -74,9 +74,13 @@ public class CategoryService {
       result.setNewPairs(savedPairs);
     }
     if (entity.getModifiedPairs() != null) {
+      List<PairDto> modifiedList = new ArrayList<>();
       for (UpdatePair _pair : entity.getModifiedPairs()) {
-        pairRepository.updatePair(_pair);
+        pairRepository.updatePair(_pair.getEn(), _pair.getVi(), _pair.getId());
+        PairDto modifiedPair = pairRepository.findById(_pair.getId()).get();
+        modifiedList.add(modifiedPair);
       }
+      result.setModifiedPairs(modifiedList);
     }
     if (entity.getRemovedIds() != null) {
       if (entity.getRemovedIds().size() > 0) {
@@ -88,16 +92,12 @@ public class CategoryService {
   }
 
   public boolean delete(Integer userId, Integer categoryId) {
-    try {
-      FilteredCategory filteredCategory = new FilteredCategory(categoryId, null, userId);
-      List<ResultCategory> categories = categoryRepository.getByFilter(filteredCategory, PageRequest.of(0, 10));
-      if (categories.size() > 0) {
-        pairRepository.deleteByCategoryId(userId, categoryId);
-        categoryRepository.deleteById(categoryId);
-      }
-      return true;
-    } catch (Exception exception) {
-      return false;
+    FilteredCategory filteredCategory = new FilteredCategory(categoryId, null, userId);
+    List<ResultCategory> categories = categoryRepository.getByFilter(filteredCategory, PageRequest.of(0, 10));
+    if (categories.size() > 0) {
+      pairRepository.deleteByCategoryId(userId, categoryId);
+      categoryRepository.deleteById(categoryId);
     }
+    return true;
   }
 }
